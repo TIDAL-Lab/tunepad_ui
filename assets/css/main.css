@@ -1,6 +1,5 @@
 body {
     margin: 80px;
-    background-color: #444;
 }
 
 range-dial {
@@ -8,4 +7,11 @@ range-dial {
     display: inline-block;
     width: 80px;
     height: 80px;
+}
+
+.rack {
+    background-color: #444;
+    display: inline-block;
+    border: #222;
+    border-radius: 5px;
 }
