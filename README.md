@@ -4,11 +4,17 @@
 * You should also have a Code Editor like **Visual Studio Code**.
 * Finally, make sure you can access your terminal or command line.
 
-# Initialize the Project
+# STEP 1: Clone this repo
+
+# STEP 2:
+
+# Original Instructions to Create this Project
+
+## Initialize the Project
 From the command line, create a new project directory:
 ```sh
-mkdir example_project
-cd example_project
+mkdir tunepad_ui
+cd tunepad_ui
 mkdir src
 mkdir src/components
 mkdir assets/images
@@ -23,9 +29,9 @@ npm init
 This will create the `package.json`. Update your `package.json` to look like this:
 ```json
 {
-  "name": "dial_example",
+  "name": "tunepad_ui",
   "version": "0.0.1",
-  "description": "Typescript Rollup Example",
+  "description": "Widgets, dials, menus, sliders for TunePad UI",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -97,6 +103,7 @@ import typescript from '@rollup/plugin-typescript'
 import {cssModules} from 'rollup-plugin-css-modules'
 import html from 'rollup-plugin-html'
 import serve from 'rollup-plugin-serve'
+import terser from '@rollup/plugin-terser'
 
 export default {
     input: 'src/index.ts',
@@ -105,7 +112,8 @@ export default {
             file : 'assets/js/example.min.js',
             format : 'iife',
             name : 'example',
-            sourcemap : true
+            sourcemap : true,
+            plugins : [ terser() ]
         }
     ],
     plugins: [
