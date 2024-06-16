@@ -1,0 +1,29 @@
+#ring {
+    fill: #3e3e3c;
+    stroke: none;
+}
+.track {
+    fill: #181818;
+    stroke: black;
+    stroke-width: 1.5;
+}
+#arc {
+    stroke: #7ff;
+    stroke-width: 7;
+    fill: none;
+}
+.active #arc {
+    stroke: white;
+}
+#pointer {
+    stroke: #ddd;
+    stroke-width: 4;
+    pointer-events: none;
+}
+#container {
+    max-width: 100px;
+    user-select: none;
+}
+.tick {
+    fill: #999;
+}
