@@ -4,11 +4,10 @@
 * You should also have a Code Editor like **Visual Studio Code**.
 * Finally, make sure you can access your terminal or command line.
 
-# STEP 1: Clone this repo
-
-# STEP 2:
 
 # Original Instructions to Create this Project
+
+**For instruction only** to really use this project, clone the repo and run the `npm install` commands listed below.
 
 ## Initialize the Project
 From the command line, create a new project directory:
