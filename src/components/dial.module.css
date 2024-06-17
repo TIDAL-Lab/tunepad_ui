@@ -17,7 +17,7 @@
 }
 #pointer {
     stroke: #ddd;
-    stroke-width: 4;
+    stroke-width: 6;
     pointer-events: none;
 }
 #container {
@@ -26,4 +26,10 @@
 }
 .tick {
     fill: #999;
+}
+.cover {
+    fill: #fff2;
+    stroke: #fff1;
+    stroke-width: 4;
+    pointer-events: none;
 }
