@@ -5,8 +5,8 @@ body {
 range-dial {
     margin: 1rem;
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
 }
 
 .rack {
@@ -14,4 +14,9 @@ range-dial {
     display: inline-block;
     border: #222;
     border-radius: 5px;
+    margin-bottom: 1rem;
+}
+piano-keyboard {
+    display: block;
+    max-width: 700px;
 }
