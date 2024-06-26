@@ -1,0 +1,18 @@
+.controls {
+    display: flex;
+}
+
+.controls range-dial {
+    width: 45px;
+    height: 45px;
+    margin: 0 1rem;
+}
+
+.controls button {
+    width: 75px;
+    margin: 0 1rem;
+}
+
+button.hidden {
+    display: none;
+}
