@@ -99,14 +99,14 @@ export class Dial extends HTMLElement {
                 downY = e.clientY;
                 this._value = Math.max(0, Math.min(1.0, this._value + deltaY / 100.0));
                 this._redraw();
-                this.emitEvent('dial-adjusted');
+                this.emitEvent('adjusted');
             }
         });
         document.addEventListener('pointerup', (e) => {
             if (down) {
                 down = false;
                 this.container.classList.remove('active');
-                this.emitEvent('dial-changed');
+                this.emitEvent('changed');
             }
         });
     }
@@ -145,7 +145,7 @@ export class Dial extends HTMLElement {
             new CustomEvent(name, { 
                 bubbles: true,
                 composed: true,
-                detail: { 
+                detail: {
                     origin : this,
                     value : this.value
                 }
