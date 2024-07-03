@@ -15,6 +15,11 @@ export default {
             name : 'example',
             sourcemap : true,
             plugins : [terser ()]
+        },
+        {
+            dir : 'dist',
+            format: 'es',
+            sourcemap: true
         }
     ],
     plugins: [
