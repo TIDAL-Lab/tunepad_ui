@@ -1,0 +1,94 @@
+/*
+@keyframes fade-out {
+    0% {
+        opacity: 1.0;
+    }
+
+    100% {
+        opacity: 0.0;
+    }
+}
+*/
+.instrument {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    background-color: #222;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.instrument.armed {
+    outline: 1px solid gold;
+}
+
+.naturals, .accidentals {
+    width: 100%;
+    display: flex;
+}
+.accidentals {
+    height: 50px;
+    position: relative;
+    top: 10px;
+    left: -20px;
+}
+.marimba-key, .spacer {
+    border: 2px solid #fff2;
+    flex: 1;
+    margin: 3px;
+    box-sizing: border-box;
+    min-width: 34px;
+}
+
+.marimba-key {
+    background-color: burlywood;
+    background-image: url('/assets/images/marimba-key.png');
+    background-position: center;
+    background-size: cover;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 160px;
+    font-size: 12px;
+    padding-top: 20px;
+    color: #fff9;
+    user-select: none;
+    box-shadow: 0 0 6px #000b;
+}
+
+.spacer {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.marimba-key.accidental {
+    height: 70px;
+    padding-top: 10px;
+    position: relative;
+    top: -20px;
+}
+
+.accidental .note-name { display: none; }
+
+.marimba-key:hover {
+    border: 2px solid #fff7;
+    color: white;
+}
+
+.marimba-key.pressed {
+    border: 2px solid white;
+}
+/*
+.marimba-key.white.pressed.step-0 { fill: rgb(229, 76, 78); }
+.marimba-key.white.pressed.step-2 { fill: rgb(228, 171, 81); }
+.marimba-key.white.pressed.step-4 { fill: rgb(223, 228, 78); }
+.marimba-key.white.pressed.step-5 { fill: rgb(174, 215, 71); }
+.marimba-key.white.pressed.step-7 { fill: rgb(63, 169, 180); }
+.marimba-key.white.pressed.step-9 { fill: rgb(78, 69, 179); }
+.marimba-key.white.pressed.step-11 { fill: rgb(202, 69, 147); }
+*/
+
+.note-name { flex: 1; }
+.key-hint { margin-bottom: 1rem; display: none; }
+.armed .key-hint { display: block; }
