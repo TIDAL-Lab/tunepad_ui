@@ -1,3 +1,19 @@
+# Introduction 
+What this module is
+
+# Examples
+```typescript
+import { PianoKeyboard } from "./instruments";
+customElements.define(PianoKeyboard.ELEMENT, PianoKeyboard);
+```
+
+# List of Components
+* Piano keyboard (instruments/keyboard)
+
+# Install
+
+
+
 # Example TypeScript + Rollup + Custom Web Components
 
 * To get started, you'll need to install **Node.js** on your computer.
