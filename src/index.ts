@@ -1,6 +1,10 @@
-import { Dial, PianoKeyboard } from "./components";
-import { FilterExample } from "./examples/filter";
+//import { Dial } from "./components";
+//import { PianoKeyboard } from "./instruments";
+//import { FilterExample } from "./examples/filter";
 
-customElements.define(Dial.ELEMENT, Dial);
-customElements.define(PianoKeyboard.ELEMENT, PianoKeyboard);
-customElements.define(FilterExample.ELEMENT, FilterExample);
+export * from './components';
+export * from './instruments';
+
+//customElements.define(Dial.ELEMENT, Dial);
+//customElements.define(PianoKeyboard.ELEMENT, PianoKeyboard);
+//customElements.define(FilterExample.ELEMENT, FilterExample);
