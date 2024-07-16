@@ -1,0 +1,83 @@
+
+.drop-menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #0001;
+    border-radius: 8px;
+    padding: 8px 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    box-shadow: 0px 3px 5px #0005;
+    -webkit-touch-callout: none;
+    user-select: none;
+    margin: 0;
+}
+.drop-menu.hidden { display: none; }
+.drop-menu:hover { cursor: pointer; }
+.drop-menu.terminal {
+    max-height: 70vh;
+    overflow-y: auto !important;
+}
+.menu-item {
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: normal;
+    color: #3C4E60;
+    outline: none;
+    border: none;
+    padding: 5px 20px 5px 10px;
+    white-space: nowrap;
+    position: relative;
+    text-align: left;
+}
+.menu-item:hover { background: rgba(0, 0, 0, 0.15); }
+.menu-item:not(:has(.drop-menu)):active { background: rgba(0, 0, 0, 0.2); }
+.menu-item.highlight { background: rgba(0, 0, 0, 0.085); }
+.menu-item.disabled { color: #aaa; }
+.menu-item.disabled:hover { background-color: transparent; }
+.menu-item.disabled:active { background-color: transparent; }
+.menu-item.disabled .icon { opacity: 0.3; }
+.menu-item.hidden { display: none; }
+
+.menu-item:hover > .drop-menu {
+  display: flex;
+  left: 88%;
+  top: -10px;
+}
+
+.menu-item .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0 0.85rem 0 0.5rem;
+    text-align: center;
+    opacity: 0.6;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.menu-item .expand {
+  text-align: right;
+  position: relative;
+  left: 5px;
+  font-size: 90%;
+  width: 2em;
+  flex: 1;
+}
+.menu-item .name {
+  flex: 1;
+}
+.menu-item .expand::before {
+  content: "▸";
+  font-size: 17px;
+  color: rgba(0,0,0,0.6);
+  font-weight: 600;
+}
+.menu-separator {
+    border-top: 1px solid #0005;
+    margin: 10px;
+    height: 2px;
+}
