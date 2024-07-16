@@ -1,2 +1,2 @@
 export * from './dial';
-export * from './keyboard';
+export * from './menu';
