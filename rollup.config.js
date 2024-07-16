@@ -10,22 +10,24 @@ export default {
     input: 'src/index.ts',
     output: [
         {
-            file : 'assets/js/tunepad-ui.min.js',
-            format : 'iife',
-            name : 'example',
-            sourcemap : true,
-            plugins : [terser ()]
-        },
-        {
             dir : 'dist',
             format: 'es',
-            sourcemap: true
+            sourcemap: true,
         }
+/*        ,
+        {
+            file : '/dist/tunepad-ui.min.js',
+            format : 'iife',
+            name : 'TunePadUI',
+            sourcemap : true,
+            plugins : [terser ()]
+        }
+    */
     ],
     plugins: [
         html({include: ['**/*.module.html', '**/*.svg' ]}),
         cssModules(),
-        serve('.'),
+        //serve('.'),
         typescript({ sourceMap: true }),
         nodeResolve()
     ]
