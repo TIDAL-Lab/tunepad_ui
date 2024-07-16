@@ -1,5 +1,5 @@
 {
-  "name": "tunepad_ui",
+  "name": "@tunepad/ui",
   "version": "0.0.1",
   "description": "Widgets, dials, menus, sliders for TunePad UI",
   "main": "dist/index",
