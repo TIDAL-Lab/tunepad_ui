@@ -9,7 +9,12 @@
     }
 }
 */
+.wrapper {
+    display: flex;
+}
+
 .instrument {
+    flex: 1;
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -105,3 +110,21 @@
 .mini-piano.show {
     opacity: 1.0;
 }
+
+.octave-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fffc;
+    font-size: 14px;
+    user-select: none;
+    width: 12px;
+    padding: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+.octave-button:hover { color: #fff; }
+.octave-button:active { color: rgb(121, 216, 245); }
+#down-octave { left: 0; }
+#up-octave { right: 0; }

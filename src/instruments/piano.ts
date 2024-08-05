@@ -92,7 +92,8 @@ export class Piano extends HTMLElement implements Instrument {
   
     /// mapping from computer keys to piano keys
     readonly key_map = "awsedftgyhujkolp;']";
-  
+
+
   
     constructor() {
         super();
@@ -120,6 +121,14 @@ export class Piano extends HTMLElement implements Instrument {
         // listen to keyboard events
         document.addEventListener("keydown", e => this.onKeyDown(e));
         document.addEventListener("keyup", e => this.onKeyUp(e));
+
+        this.root.querySelector('#down-octave')?.addEventListener('click', (e) => {
+            this.setFocusOctave(this.props.focusOctave - 1);
+        });
+
+        this.root.querySelector('#up-octave')?.addEventListener('click', (e) => {
+            this.setFocusOctave(this.props.focusOctave + 1);
+        });
     }
 
     disconnectedCallback() {
@@ -262,6 +271,9 @@ export class Piano extends HTMLElement implements Instrument {
         const ki = this.key_map.indexOf(char.toLowerCase());
         return (ki >= 0 && ki + fi < this.keys.length) ? this.keys[ki + fi] : null;
     }
+
+
+    setPatch(patch : any) {  }
 
 
     /**
@@ -604,7 +616,7 @@ class PianoKey {
     isPressed() : boolean {
         return this.el.classList.contains("pressed");
     }
-  
+
   
     autoRelease() {
         if (this._down) {

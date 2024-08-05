@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+}
+
+.instrument {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.instrument.armed {
+    /*outline: 1px solid gold;*/
+}
+
+.wrapper {
+    margin: 0 3px 3px 0;
+    color: white;
+    flex: 1;
+    border-radius: 4px;
+    border: 2px solid #fff1;
+    box-shadow: 3px 3px 3px #0002;
+}
+
+.drum-pad {
+    min-width: 58px;
+    height: 72px;
+    text-align: center;
+    border-radius: 1px;
+    background-color: #fff2;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fff5;
+    position: relative;
+}
+.drum-pad:hover { 
+    background-color: #fff5;
+    border: 1px solid #fff7;
+}
+.drum-pad.pressed {
+    background-color: #fff7;
+    border: 1px solid #fff7;
+}
+.drum-name {
+    color: #fffa;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 10px;
+    user-select: none;
+    flex: 1;
+    align-content: center;
+}
+.drum-pad:hover .drum-name { color: white; }
+
+.pad-name, .key-hint {
+    font-size: 10px;
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    bottom: 3px;
+    color: #fff6;
+}
+.pad-name {
+    font-weight: bold;
+    color: #fffd;
+    left: 3px;
+}
+.key-hint { right: 3px; }
+
+.wrapper:has(.drum-pad.pressed[data-note="0"]) {
+    background-color: hsl(0 90 50);
+    box-shadow: 0px 0px 5px hsl(0 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="1"]) {
+    background-color: hsl(22 90 50);
+    box-shadow: 0px 0px 5px hsl(22 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="2"]) {
+    background-color: hsl(44 90 50);
+    box-shadow: 0px 0px 5px hsl(44 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="3"]) {
+    background-color: hsl(66 90 50);
+    box-shadow: 0px 0px 5px hsl(66 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="4"]) {
+    background-color: hsl(88 90 50);
+    box-shadow: 0px 0px 5px hsl(88 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="5"]) {
+    background-color: hsl(110 90 50);
+    box-shadow: 0px 0px 5px hsl(110 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="6"]) {
+    background-color: hsl(132 90 50);
+    box-shadow: 0px 0px 5px hsl(132 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="7"]) {
+    background-color: hsl(154 90 50);
+    box-shadow: 0px 0px 5px hsl(154 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="8"]) {
+    background-color: hsl(176 90 50);
+    box-shadow: 0px 0px 5px hsl(176 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="9"]) {
+    background-color: hsl(198 90 50);
+    box-shadow: 0px 0px 5px hsl(198 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="10"]) {
+    background-color: hsl(220 90 50);
+    box-shadow: 0px 0px 5px hsl(220 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="11"]) {
+    background-color: hsl(242 90 50);
+    box-shadow: 0px 0px 5px hsl(242 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="12"]) {
+    background-color: hsl(264 90 50);
+    box-shadow: 0px 0px 5px hsl(264 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="13"]) {
+    background-color: hsl(286 90 50);
+    box-shadow: 0px 0px 5px hsl(286 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="14"]) {
+    background-color: hsl(308 90 50);
+    box-shadow: 0px 0px 5px hsl(308 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="15"]) {
+    background-color: hsl(330 90 50);
+    box-shadow: 0px 0px 5px hsl(330 90 50);
+}
+
+@media screen and (max-width: 650px) {
+    .instrument {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

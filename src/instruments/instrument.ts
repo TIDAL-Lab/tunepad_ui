@@ -28,4 +28,7 @@ export default interface Instrument {
     disarmKeyboard() : void;
 
     get isKeyboardArmed() : boolean;
+
+    /** Instruments like drum pads use the patch data to help configure the UI */
+    setPatch(patch : any) : void;
 }

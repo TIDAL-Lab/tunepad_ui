@@ -263,6 +263,7 @@ export class Marimba extends HTMLElement implements Instrument {
         return this.root.querySelector(`.marimba-key[data-trigger="${char}"]`);
     }
 
+    setPatch(patch : any) {  }
 
     /**
      * Process a computer key down event ... possibly play a note
