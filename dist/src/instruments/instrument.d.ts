@@ -9,5 +9,7 @@ export default interface Instrument {
     armKeyboard(): void;
     disarmKeyboard(): void;
     get isKeyboardArmed(): boolean;
+    /** Instruments like drum pads use the patch data to help configure the UI */
+    setPatch(patch: any): void;
 }
 //# sourceMappingURL=instrument.d.ts.map

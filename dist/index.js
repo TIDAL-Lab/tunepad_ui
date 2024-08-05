@@ -1,5 +1,5 @@
-const stylesheet$3 = new CSSStyleSheet();
-stylesheet$3.replaceSync(`#ring {
+const stylesheet$4 = new CSSStyleSheet();
+stylesheet$4.replaceSync(`#ring {
     fill: #3e3e3c;
     stroke: none;
 }
@@ -35,7 +35,7 @@ stylesheet$3.replaceSync(`#ring {
     pointer-events: none;
 }`);
 
-var html$2 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
+var html$3 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
 
 /*
  * TunePad
@@ -81,8 +81,8 @@ class Dial extends HTMLElement {
         this._value = 0.0;
         this._startVal = 0.0;
         this.root = this.attachShadow({ mode: 'open' });
-        this.root.adoptedStyleSheets.push(stylesheet$3);
-        this.root.innerHTML = html$2;
+        this.root.adoptedStyleSheets.push(stylesheet$4);
+        this.root.innerHTML = html$3;
         this.container = this.root.querySelector('#container');
         this.ring = this.root.querySelector('#ring');
         this.line = this.root.querySelector('#pointer');
@@ -180,8 +180,8 @@ Dial.observedAttributes = [
     'value'
 ];
 
-const stylesheet$2 = new CSSStyleSheet();
-stylesheet$2.replaceSync(`
+const stylesheet$3 = new CSSStyleSheet();
+stylesheet$3.replaceSync(`
 .drop-menu {
     position: absolute;
     background-color: white;
@@ -297,7 +297,7 @@ stylesheet$2.replaceSync(`
  * </context-menu>
  * ```
  */
-const ContextMenuStyles = stylesheet$2;
+const ContextMenuStyles = stylesheet$3;
 class ContextMenu extends HTMLElement {
     constructor() {
         super();
@@ -428,6 +428,362 @@ class ContextMenuItem extends HTMLElement {
 }
 ContextMenuItem.ELEMENT = "context-menu-item";
 ContextMenuItem.observedAttributes = ["name", "icon", "action", "disabled", "checked"];
+
+const stylesheet$2 = new CSSStyleSheet();
+stylesheet$2.replaceSync(`* {
+    box-sizing: border-box;
+}
+
+.instrument {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.instrument.armed {
+    /*outline: 1px solid gold;*/
+}
+
+.wrapper {
+    margin: 0 3px 3px 0;
+    color: white;
+    flex: 1;
+    border-radius: 4px;
+    border: 2px solid #fff1;
+    box-shadow: 3px 3px 3px #0002;
+}
+
+.drum-pad {
+    min-width: 58px;
+    height: 72px;
+    text-align: center;
+    border-radius: 1px;
+    background-color: #fff2;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fff5;
+    position: relative;
+}
+.drum-pad:hover { 
+    background-color: #fff5;
+    border: 1px solid #fff7;
+}
+.drum-pad.pressed {
+    background-color: #fff7;
+    border: 1px solid #fff7;
+}
+.drum-name {
+    color: #fffa;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 10px;
+    user-select: none;
+    flex: 1;
+    align-content: center;
+}
+.drum-pad:hover .drum-name { color: white; }
+
+.pad-name, .key-hint {
+    font-size: 10px;
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    bottom: 3px;
+    color: #fff6;
+}
+.pad-name {
+    font-weight: bold;
+    color: #fffd;
+    left: 3px;
+}
+.key-hint { right: 3px; }
+
+.wrapper:has(.drum-pad.pressed[data-note="0"]) {
+    background-color: hsl(0 90 50);
+    box-shadow: 0px 0px 5px hsl(0 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="1"]) {
+    background-color: hsl(22 90 50);
+    box-shadow: 0px 0px 5px hsl(22 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="2"]) {
+    background-color: hsl(44 90 50);
+    box-shadow: 0px 0px 5px hsl(44 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="3"]) {
+    background-color: hsl(66 90 50);
+    box-shadow: 0px 0px 5px hsl(66 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="4"]) {
+    background-color: hsl(88 90 50);
+    box-shadow: 0px 0px 5px hsl(88 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="5"]) {
+    background-color: hsl(110 90 50);
+    box-shadow: 0px 0px 5px hsl(110 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="6"]) {
+    background-color: hsl(132 90 50);
+    box-shadow: 0px 0px 5px hsl(132 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="7"]) {
+    background-color: hsl(154 90 50);
+    box-shadow: 0px 0px 5px hsl(154 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="8"]) {
+    background-color: hsl(176 90 50);
+    box-shadow: 0px 0px 5px hsl(176 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="9"]) {
+    background-color: hsl(198 90 50);
+    box-shadow: 0px 0px 5px hsl(198 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="10"]) {
+    background-color: hsl(220 90 50);
+    box-shadow: 0px 0px 5px hsl(220 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="11"]) {
+    background-color: hsl(242 90 50);
+    box-shadow: 0px 0px 5px hsl(242 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="12"]) {
+    background-color: hsl(264 90 50);
+    box-shadow: 0px 0px 5px hsl(264 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="13"]) {
+    background-color: hsl(286 90 50);
+    box-shadow: 0px 0px 5px hsl(286 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="14"]) {
+    background-color: hsl(308 90 50);
+    box-shadow: 0px 0px 5px hsl(308 90 50);
+}
+.wrapper:has(.drum-pad.pressed[data-note="15"]) {
+    background-color: hsl(330 90 50);
+    box-shadow: 0px 0px 5px hsl(330 90 50);
+}
+
+@media screen and (max-width: 650px) {
+    .instrument {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}`);
+
+var html$2 = "<div class=\"instrument\"></div>\n";
+
+/*
+ * TunePad
+ *
+ * Michael S. Horn
+ * Northwestern University
+ * michael-horn@northwestern.edu
+ *
+ * This project was funded by the National Science Foundation (grant DRL-1612619).
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the National Science Foundation (NSF).
+ */
+/**
+ * MPC-style drum pad interface
+ *
+ *       <drums-instrument armed = "false"></drums-instrument>
+ *
+ * Generates custom events "note-on", "note-off", "pitch-bend"
+ */
+class DrumPad extends HTMLElement {
+    constructor() {
+        super();
+        this.armed = false;
+        this.keys = 'qwertyuiasdfghjk';
+        this.root = this.attachShadow({ mode: 'open' });
+        this.root.adoptedStyleSheets.push(stylesheet$2);
+        this.root.innerHTML = html$2;
+    }
+    connectedCallback() {
+        document.addEventListener("keydown", e => this.onKeyDown(e));
+        document.addEventListener("keyup", e => this.onKeyUp(e));
+        for (let i = 0; i < 16; i++) {
+            const pad = document.createElement('div');
+            pad.classList.add('wrapper');
+            pad.innerHTML = `
+                <div class="drum-pad" data-hint="${this.keys[i]}" data-note="${i}">
+                    <div class="drum-name"></div>
+                    <div class="key-hint">${this.keys[i]}</div>
+                    <div class="pad-name">${i}</div>
+                </div>`;
+            this.root.querySelector('.instrument')?.append(pad);
+        }
+        this.root.querySelectorAll('.drum-pad').forEach((p) => {
+            let down = false;
+            p.addEventListener('pointerdown', (e) => {
+                p.classList.add('pressed');
+                this.emitNoteOn(this.getPadNote(p), "pointer");
+                down = true;
+            });
+            p.addEventListener('pointerup', (e) => {
+                if (down) {
+                    p.classList.remove('pressed');
+                    this.emitNoteOff(this.getPadNote(p), "pointer");
+                    down = false;
+                }
+            });
+            p.addEventListener('pointerenter', (e) => {
+                if (e.buttons > 0) {
+                    p.classList.add('pressed');
+                    this.emitNoteOn(this.getPadNote(p), "pointer");
+                    down = true;
+                }
+            });
+            p.addEventListener('pointerleave', (e) => {
+                p.classList.remove('pressed');
+                this.emitNoteOff(this.getPadNote(p), "pointer");
+                down = true;
+            });
+        });
+    }
+    disconnectedCallback() { }
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'armed' && newValue !== oldValue) {
+            (newValue === 'true') ? this.armKeyboard() : this.disarmKeyboard();
+        }
+    }
+    emitNoteOn(note, source, velocity = 90) {
+        if (note < 0)
+            return;
+        const e = new CustomEvent('note-on', {
+            bubbles: true,
+            composed: true,
+            detail: {
+                note: note,
+                source: source,
+                velocity: velocity
+            }
+        });
+        this.dispatchEvent(e);
+    }
+    emitNoteOff(note, source) {
+        if (note < 0)
+            return;
+        const e = new CustomEvent('note-off', {
+            bubbles: true,
+            composed: true,
+            detail: {
+                note: note,
+                source: source,
+                velocity: 0
+            }
+        });
+        this.dispatchEvent(e);
+    }
+    emitPitchBend(value, source) {
+        const e = new CustomEvent('pitch-bend', {
+            bubbles: true,
+            composed: true,
+            detail: {
+                source: source,
+                value: value
+            }
+        });
+        this.dispatchEvent(e);
+    }
+    /**
+     * Show note being played
+     */
+    noteOn(note, velocity = 90) {
+        this.root.querySelector(`.drum-pad[data-note="${note}"]`)?.classList.add('pressed');
+    }
+    /**
+     * Hide note being played
+     */
+    noteOff(note) {
+        this.root.querySelector(`.drum-pad[data-note="${note}"]`)?.classList.remove('pressed');
+    }
+    allNotesOff() {
+        this.root.querySelectorAll('.drum-pad')?.forEach(p => p.classList.remove('pressed'));
+    }
+    /**
+     * Is note currently pressed?
+     */
+    isNoteOn(note) {
+        const pad = this.root.querySelector(`.drum-pad[data-note="${note}"]`);
+        return (pad !== null && pad.classList.contains('pressed'));
+    }
+    /**
+     * Should the piano respond to keyboard events?
+     */
+    armKeyboard() {
+        this.armed = true;
+        this.setAttribute('armed', 'true');
+        this.root.querySelector(".instrument")?.classList.add('armed');
+    }
+    disarmKeyboard() {
+        this.armed = false;
+        this.setAttribute('armed', 'false');
+        this.root.querySelector(".instrument")?.classList.remove('armed');
+    }
+    get isKeyboardArmed() { return this.armed; }
+    /**
+     * Set the names of the drum pads
+     */
+    setPatch(patch) {
+        if (Array.isArray(patch.nodes)) {
+            for (let node of patch.nodes) {
+                if (node.type === 'drums' && Array.isArray(node.samples)) {
+                    for (let samp of node.samples) {
+                        if (typeof samp.step === 'number' && typeof samp.name === 'string') {
+                            const name = this.root.querySelector(`.drum-pad[data-note="${samp.step}"] .drum-name`);
+                            if (name)
+                                name.innerHTML = samp.name;
+                        }
+                    }
+                    return;
+                }
+            }
+        }
+    }
+    /**
+     * Process a computer key down event ... possibly play a note
+     */
+    onKeyDown(e) {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.repeat == true)
+            return;
+        if (this.isKeyboardArmed) {
+            const key = e.key.toLowerCase();
+            console.log(key);
+            console.log(this.root.querySelector(`.drum-pad[data-hint="${key}"]`));
+            this.root.querySelector(`.drum-pad[data-hint="${key}"]`)?.classList.add('pressed');
+            const note = this.keys.indexOf(key);
+            if (note >= 0) {
+                this.emitNoteOn(note, "keyboard");
+            }
+            else if (e.key == "ArrowDown") {
+                this.emitPitchBend(-200, "keyboard");
+            }
+            else if (e.key == "ArrowUp") {
+                this.emitPitchBend(200, "keyboard");
+            }
+        }
+    }
+    /**
+     * Process a computer key up event ... possibly release a note
+     */
+    onKeyUp(e) {
+        if (e.key == "ArrowUp" || e.key == "ArrowDown") {
+            this.emitPitchBend(0, "keyboard");
+        }
+        else {
+            const key = e.key.toLowerCase();
+            this.root.querySelector(`.drum-pad[data-hint="${key}"]`)?.classList.remove('pressed');
+            const note = this.keys.indexOf(key);
+            if (note >= 0)
+                this.emitNoteOff(note, "keyboard");
+        }
+    }
+    getPadNote(pad) {
+        return parseInt(pad?.getAttribute('data-note') ?? '-1');
+    }
+}
+DrumPad.observedAttributes = ["armed"];
+DrumPad.ELEMENT = "drums-instrument";
 
 const stylesheet$1 = new CSSStyleSheet();
 stylesheet$1.replaceSync(`/*
@@ -741,6 +1097,7 @@ class Marimba extends HTMLElement {
     getArmedKey(char) {
         return this.root.querySelector(`.marimba-key[data-trigger="${char}"]`);
     }
+    setPatch(patch) { }
     /**
      * Process a computer key down event ... possibly play a note
      */
@@ -800,7 +1157,12 @@ stylesheet.replaceSync(`/*
     }
 }
 */
+.wrapper {
+    display: flex;
+}
+
 .instrument {
+    flex: 1;
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -896,9 +1258,26 @@ stylesheet.replaceSync(`/*
 .mini-piano.show {
     opacity: 1.0;
 }
-`);
 
-var html = "<div class=\"instrument\"><svg class=\"container\" version=\"1.1\"></svg></div>";
+.octave-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fffc;
+    font-size: 14px;
+    user-select: none;
+    width: 12px;
+    padding: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+.octave-button:hover { color: #fff; }
+.octave-button:active { color: rgb(121, 216, 245); }
+#down-octave { left: 0; }
+#up-octave { right: 0; }`);
+
+var html = "<div classs=\"wrapper\">\n    <button id=\"down-octave\" class=\"octave-button\" title=\"Lower Octave\">❮</button>\n    <div class=\"instrument\"><svg class=\"container\" version=\"1.1\"></svg></div>\n    <button id=\"up-octave\" class=\"octave-button\" title=\"Higher Octave\">❯</button>\n</div>";
 
 /*
  * TunePad
@@ -960,6 +1339,12 @@ class Piano extends HTMLElement {
         // listen to keyboard events
         document.addEventListener("keydown", e => this.onKeyDown(e));
         document.addEventListener("keyup", e => this.onKeyUp(e));
+        this.root.querySelector('#down-octave')?.addEventListener('click', (e) => {
+            this.setFocusOctave(this.props.focusOctave - 1);
+        });
+        this.root.querySelector('#up-octave')?.addEventListener('click', (e) => {
+            this.setFocusOctave(this.props.focusOctave + 1);
+        });
     }
     disconnectedCallback() {
         //console.log("Custom element removed from page.");
@@ -1095,6 +1480,7 @@ class Piano extends HTMLElement {
         const ki = this.key_map.indexOf(char.toLowerCase());
         return (ki >= 0 && ki + fi < this.keys.length) ? this.keys[ki + fi] : null;
     }
+    setPatch(patch) { }
     /**
      * Process a computer key down event ... possibly play a note
      */
@@ -1394,5 +1780,5 @@ PianoKey.NOTES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", 
 /// pixel width of white key (in SVG coords system)
 PianoKey.width = 45;
 
-export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, Marimba, Piano };
+export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano };
 //# sourceMappingURL=index.js.map

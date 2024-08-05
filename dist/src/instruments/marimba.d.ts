@@ -52,6 +52,7 @@ export declare class Marimba extends HTMLElement implements Instrument {
     disarmKeyboard(): void;
     get isKeyboardArmed(): boolean;
     private getArmedKey;
+    setPatch(patch: any): void;
     /**
      * Process a computer key down event ... possibly play a note
      */

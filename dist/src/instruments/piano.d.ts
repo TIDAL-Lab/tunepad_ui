@@ -2,7 +2,7 @@ import Instrument from './instrument';
 /**
  * Piano keyboard custom element
  *
- * <piano-keyboard
+ * <piano-instrument
  *      note-hints = "true"   // show note names on keys
  *      midi-hints = "true"   // show midi note numbers on keys
  *      armed = "false"       // listen for keyboard events
@@ -10,7 +10,7 @@ import Instrument from './instrument';
  *      max-octave = "7"      // highest octave available
  *      key-range = "28"      // how many keys to show at one time
  *      focus-octave = "2">   // focus (left-most) octave showing
- * </piano-keyboard>
+ * </piano-instrument>
  *
  * The piano generates custom events "note-on", "note-off", "pitch-bend"
  */
@@ -73,6 +73,7 @@ export declare class Piano extends HTMLElement implements Instrument {
     disarmKeyboard(): void;
     get isKeyboardArmed(): boolean;
     private getArmedKey;
+    setPatch(patch: any): void;
     /**
      * Process a computer key down event ... possibly play a note
      */
