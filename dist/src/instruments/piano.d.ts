@@ -8,6 +8,8 @@ import Instrument from './instrument';
  *      armed = "false"       // listen for keyboard events
  *      min-octave = "0"      // lowest octave available
  *      max-octave = "7"      // highest octave available
+ *      min-note = "21"       // (optional) overrides min-octave
+ *      max-note = "108"      // (optional) overrides max-octave
  *      key-range = "28"      // how many keys to show at one time
  *      focus-octave = "2">   // focus (left-most) octave showing
  * </piano-instrument>
@@ -18,8 +20,8 @@ interface PianoKeyboardProps {
     noteHints: boolean;
     midiHints: boolean;
     armed: boolean;
-    minOctave: number;
-    maxOctave: number;
+    minNote: number;
+    maxNote: number;
     keyRange: number;
     focusOctave: number;
 }
@@ -36,6 +38,8 @@ export declare class Piano extends HTMLElement implements Instrument {
     height: number;
     get minKey(): number;
     get maxKey(): number;
+    get minOctave(): number;
+    get maxOctave(): number;
     readonly key_map = "awsedftgyhujkolp;']";
     constructor();
     connectedCallback(): void;
@@ -66,6 +70,8 @@ export declare class Piano extends HTMLElement implements Instrument {
     setKeyRange(count: number): void;
     setMinOctave(octave: number): void;
     setMaxOctave(octave: number): void;
+    setMinNote(note: number): void;
+    setMaxNote(note: number): void;
     /**
      * Should the piano respond to keyboard events?
      */
@@ -129,5 +135,6 @@ declare class PianoKey {
     setKeymap(k: string): void;
     clearKeymap(): void;
 }
+import './instrument';
 export {};
 //# sourceMappingURL=piano.d.ts.map

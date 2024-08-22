@@ -1292,8 +1292,10 @@ var html = "<div classs=\"wrapper\">\n    <button id=\"down-octave\" class=\"oct
  * of the National Science Foundation (NSF).
  */
 class Piano extends HTMLElement {
-    get minKey() { return this.props.minOctave * 12 + 12; }
-    get maxKey() { return this.props.maxOctave * 12 + 23; }
+    get minKey() { return this.props.minNote; }
+    get maxKey() { return this.props.maxNote; }
+    get minOctave() { return Math.floor(this.minKey / 12) - 1; }
+    get maxOctave() { return Math.floor(this.maxKey / 12) - 1; }
     constructor() {
         super();
         /// attribute set
@@ -1301,9 +1303,9 @@ class Piano extends HTMLElement {
             noteHints: true,
             midiHints: true,
             armed: false,
-            minOctave: 0,
-            maxOctave: 7,
-            keyRange: 24,
+            minNote: 12,
+            maxNote: 107,
+            keyRange: 17,
             focusOctave: 2
         };
         /// <svg> tag that contains the instrument
@@ -1352,13 +1354,13 @@ class Piano extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         switch (name) {
             case 'note-hints':
-                this.setNoteHints(newValue != "false");
+                this.setNoteHints(newValue == "true");
                 break;
             case 'midi-hints':
-                this.setMidiHints(newValue != "false");
+                this.setMidiHints(newValue == "true");
                 break;
             case 'armed':
-                (newValue == "false") ? this.disarmKeyboard() : this.armKeyboard();
+                (newValue == "true") ? this.armKeyboard() : this.disarmKeyboard();
                 break;
             case 'key-range':
                 this.setKeyRange(parseInt(newValue));
@@ -1368,6 +1370,12 @@ class Piano extends HTMLElement {
                 break;
             case 'max-octave':
                 this.setMaxOctave(parseInt(newValue));
+                break;
+            case 'min-note':
+                this.setMinNote(parseInt(newValue));
+                break;
+            case 'max-note':
+                this.setMaxNote(parseInt(newValue));
                 break;
             case 'focus-octave':
                 this.setFocusOctave(parseInt(newValue));
@@ -1416,7 +1424,7 @@ class Piano extends HTMLElement {
      * Show note being played
      */
     noteOn(note, velocity = 90) {
-        let key = this._noteToKey(note);
+        const key = this._noteToKey(note);
         key?.press();
     }
     /**
@@ -1433,7 +1441,7 @@ class Piano extends HTMLElement {
      * Is note currently pressed?
     */
     isNoteOn(note) {
-        let key = this._noteToKey(note);
+        const key = this._noteToKey(note);
         return (key != null && key.isPressed());
     }
     /**
@@ -1446,20 +1454,28 @@ class Piano extends HTMLElement {
         }
     }
     setMinOctave(octave) {
-        if (isNaN(octave))
+        if (!isNaN(octave))
+            this.setMinNote(octave * 12 + 12);
+    }
+    setMaxOctave(octave) {
+        if (!isNaN(octave))
+            this.setMaxNote(octave * 12 + 23);
+    }
+    setMinNote(note) {
+        if (isNaN(note))
             return;
-        octave = Math.max(0, Math.min(6, octave));
-        if (octave != this.props.minOctave) {
-            this.props.minOctave = octave;
+        note = Math.max(0, Math.min(96, note));
+        if (note != this.props.minNote) {
+            this.props.minNote = note;
             this.render();
         }
     }
-    setMaxOctave(octave) {
-        if (isNaN(octave))
+    setMaxNote(note) {
+        if (isNaN(note))
             return;
-        octave = Math.max(1, Math.min(7, octave));
-        if (octave != this.props.maxOctave) {
-            this.props.maxOctave = octave;
+        note = Math.max(12, Math.min(108, note));
+        if (note != this.props.maxNote) {
+            this.props.maxNote = note;
             this.render();
         }
     }
@@ -1476,9 +1492,12 @@ class Piano extends HTMLElement {
     }
     get isKeyboardArmed() { return this.props.armed; }
     getArmedKey(char) {
-        const fi = (this.props.focusOctave - this.props.minOctave) * 12;
+        let focusNote = this.props.focusOctave * 12 + 12;
+        if (focusNote < this.props.minNote) {
+            focusNote += 12;
+        }
         const ki = this.key_map.indexOf(char.toLowerCase());
-        return (ki >= 0 && ki + fi < this.keys.length) ? this.keys[ki + fi] : null;
+        return (ki >= 0) ? this._noteToKey(focusNote + ki) : null;
     }
     setPatch(patch) { }
     /**
@@ -1583,21 +1602,25 @@ class Piano extends HTMLElement {
         //this.parent.append(mini.el);
     }
     setFocusOctave(octave) {
-        this.props.focusOctave = Math.max(this.props.minOctave, Math.min(this.props.maxOctave, octave));
-        const focusIndex = (this.props.focusOctave - this.props.minOctave) * 12;
         if (isNaN(octave) || this.container == null)
             return;
+        this.props.focusOctave = Math.max(this.minOctave, Math.min(this.maxOctave, octave));
+        let focusNote = this.props.focusOctave * 12 + 12;
+        let focusKey = this._noteToKey(focusNote);
+        if (focusNote < this.props.minNote) {
+            focusKey = this._noteToKey(this.props.minNote);
+            focusNote += 12;
+        }
         this.keys.forEach((key) => key.autoRelease());
-        if (focusIndex >= 0 && focusIndex < this.keys.length) {
-            const dx = this.keys[focusIndex].x;
+        if (focusKey) {
+            const dx = focusKey.x;
             this.allKeys.style.transform = `translateX(${-dx}px)`;
             // update keyboard hints
             this.keys.forEach((key) => key.clearKeymap());
             for (let i = 0; i < this.key_map.length; i++) {
-                const index = focusIndex + i;
-                if (index >= 0 && index < this.keys.length) {
-                    this.keys[index].setKeymap(this.key_map[i]);
-                }
+                const key = this._noteToKey(focusNote + i);
+                if (key)
+                    key.setKeymap(this.key_map[i]);
             }
             //this.mini.show();
             //this.mini.slide(dx);
@@ -1626,6 +1649,8 @@ Piano.observedAttributes = [
     "armed", // accepts keyboard input ("true" | "false")
     "min-octave", // lowest octave (0)
     "max-octave", // highest octave (7)
+    "min-note", // lowest note available (21 optional overrides min-octave)
+    "max-note", // highest note available (108 optional overrides min-octave)
     "key-range", // how many keys to show at one time
     "focus-octave" // left-most octave showing
 ];
@@ -1642,7 +1667,7 @@ class PianoKey {
     get name() { return `${PianoKey.NOTES[this.step]}`; }
     /// index x-coordinate on the keyboard
     get offset() {
-        const oct = this.octave - this.piano.props.minOctave;
+        const oct = this.octave - this.piano.minOctave;
         return oct * 7 + this._key_offsets[this.step];
     }
     /// pixel x-coordinate on the keyboard
