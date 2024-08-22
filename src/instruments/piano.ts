@@ -23,6 +23,8 @@ import Instrument from './instrument';
  *      armed = "false"       // listen for keyboard events
  *      min-octave = "0"      // lowest octave available
  *      max-octave = "7"      // highest octave available
+ *      min-note = "21"       // (optional) overrides min-octave
+ *      max-note = "108"      // (optional) overrides max-octave
  *      key-range = "28"      // how many keys to show at one time
  *      focus-octave = "2">   // focus (left-most) octave showing 
  * </piano-instrument>
@@ -34,8 +36,8 @@ interface PianoKeyboardProps {
     noteHints : boolean,
     midiHints : boolean,
     armed : boolean,
-    minOctave : number,
-    maxOctave : number,
+    minNote : number,
+    maxNote : number,
     keyRange : number,
     focusOctave : number
 }
@@ -48,6 +50,8 @@ export class Piano extends HTMLElement implements Instrument {
         "armed",       // accepts keyboard input ("true" | "false")
         "min-octave",  // lowest octave (0)
         "max-octave",  // highest octave (7)
+        "min-note",    // lowest note available (21 optional overrides min-octave)
+        "max-note",    // highest note available (108 optional overrides min-octave)
         "key-range",   // how many keys to show at one time
         "focus-octave" // left-most octave showing
     ];
@@ -59,9 +63,9 @@ export class Piano extends HTMLElement implements Instrument {
         noteHints: true,
         midiHints: true,
         armed: false,
-        minOctave: 0,
-        maxOctave: 7,
-        keyRange: 24,
+        minNote: 12,
+        maxNote: 107,
+        keyRange: 17,
         focusOctave: 2
     };
 
@@ -84,8 +88,11 @@ export class Piano extends HTMLElement implements Instrument {
     width : number = 700;
     height : number = 190;
 
-    get minKey() { return this.props.minOctave * 12 + 12; }
-    get maxKey() { return this.props.maxOctave * 12 + 23; }
+    get minKey() { return this.props.minNote; }
+    get maxKey() { return this.props.maxNote; }
+
+    get minOctave() { return Math.floor(this.minKey / 12) - 1; }
+    get maxOctave() { return Math.floor(this.maxKey / 12) - 1; }
 
     /// mini piano that shows where we are left-to-right
     //late MiniPiano mini;
@@ -138,17 +145,21 @@ export class Piano extends HTMLElement implements Instrument {
     attributeChangedCallback(name : string, oldValue : string, newValue : string) {
 
         switch (name) {
-            case 'note-hints': this.setNoteHints(newValue != "false"); break;
+            case 'note-hints': this.setNoteHints(newValue == "true"); break;
 
-            case 'midi-hints': this.setMidiHints(newValue != "false"); break;
+            case 'midi-hints': this.setMidiHints(newValue == "true"); break;
 
-            case 'armed': (newValue == "false") ? this.disarmKeyboard() : this.armKeyboard(); break;
+            case 'armed': (newValue == "true") ? this.armKeyboard() : this.disarmKeyboard(); break;
 
             case 'key-range': this.setKeyRange(parseInt(newValue)); break;
 
             case 'min-octave': this.setMinOctave(parseInt(newValue)); break;
 
             case 'max-octave': this.setMaxOctave(parseInt(newValue)); break;
+
+            case 'min-note': this.setMinNote(parseInt(newValue)); break;
+
+            case 'max-note': this.setMaxNote(parseInt(newValue)); break;
 
             case 'focus-octave': this.setFocusOctave(parseInt(newValue)); break;
         }
@@ -200,16 +211,16 @@ export class Piano extends HTMLElement implements Instrument {
      * Show note being played
      */
     noteOn(note : number, velocity = 90) {
-      let key = this._noteToKey(note);
-      key?.press();
+        const key = this._noteToKey(note);
+        key?.press();
     }
   
     /**
      * Hide note being played
      */
     noteOff(note : number) {
-      let key = this._noteToKey(note);
-      key?.release();
+        let key = this._noteToKey(note);
+        key?.release();
     }
 
     allNotesOff() {
@@ -220,7 +231,7 @@ export class Piano extends HTMLElement implements Instrument {
      * Is note currently pressed?
     */
     isNoteOn(note : number) : boolean {
-        let key = this._noteToKey(note);
+        const key = this._noteToKey(note);
         return (key != null && key.isPressed());
     }
 
@@ -236,23 +247,30 @@ export class Piano extends HTMLElement implements Instrument {
     }
 
     setMinOctave(octave : number) {
-        if (isNaN(octave)) return;
-        octave = Math.max(0, Math.min(6, octave));
-        if (octave != this.props.minOctave) {
-            this.props.minOctave = octave;
-            this.render();
-        }
+        if (!isNaN(octave)) this.setMinNote(octave * 12 + 12);
     }
 
     setMaxOctave(octave : number) {
-        if (isNaN(octave)) return;
-        octave = Math.max(1, Math.min(7, octave));
-        if (octave != this.props.maxOctave) {
-            this.props.maxOctave = octave;
+        if (!isNaN(octave)) this.setMaxNote(octave * 12 + 23);
+    }
+
+    setMinNote(note : number) {
+        if (isNaN(note)) return;
+        note = Math.max(0, Math.min(96, note));
+        if (note != this.props.minNote) {
+            this.props.minNote = note;
             this.render();
         }
     }
 
+    setMaxNote(note : number) {
+        if (isNaN(note)) return;
+        note = Math.max(12, Math.min(108, note));
+        if (note != this.props.maxNote) {
+            this.props.maxNote = note;
+            this.render();
+        }
+    }
 
     /**
      * Should the piano respond to keyboard events?
@@ -261,15 +279,21 @@ export class Piano extends HTMLElement implements Instrument {
         this.props.armed = true;
         this.root.querySelectorAll(".key-hint").forEach(e => { e.classList.add("show"); });
     }
+
     disarmKeyboard() {
         this.props.armed = false;
         this.root.querySelectorAll(".key-hint").forEach(e => { e.classList.remove("show"); });
     }
+
     get isKeyboardArmed() : boolean { return this.props.armed; }
+
     private getArmedKey(char : string) : PianoKey | null {
-        const fi = (this.props.focusOctave - this.props.minOctave) * 12;
+        let focusNote = this.props.focusOctave * 12 + 12;
+        if (focusNote < this.props.minNote) {
+            focusNote += 12;
+        }
         const ki = this.key_map.indexOf(char.toLowerCase());
-        return (ki >= 0 && ki + fi < this.keys.length) ? this.keys[ki + fi] : null;
+        return (ki >= 0) ? this._noteToKey(focusNote + ki) : null;
     }
 
 
@@ -389,22 +413,26 @@ export class Piano extends HTMLElement implements Instrument {
   
   
     setFocusOctave(octave : number) {
-        this.props.focusOctave = Math.max(this.props.minOctave, Math.min(this.props.maxOctave, octave));
-        const focusIndex = (this.props.focusOctave - this.props.minOctave) * 12;
         if (isNaN(octave) || this.container == null) return;
+        this.props.focusOctave = Math.max(this.minOctave, Math.min(this.maxOctave, octave));
+        let focusNote = this.props.focusOctave * 12 + 12;
+        let focusKey = this._noteToKey(focusNote);
+        if (focusNote < this.props.minNote) {
+            focusKey = this._noteToKey(this.props.minNote);
+            focusNote += 12;
+        }
 
         this.keys.forEach((key) => key.autoRelease());
-        if (focusIndex >= 0 && focusIndex < this.keys.length) {
-            const dx = this.keys[focusIndex].x;
+
+        if (focusKey) {
+            const dx = focusKey.x;
             this.allKeys.style.transform = `translateX(${-dx}px)`;
 
             // update keyboard hints
             this.keys.forEach((key) => key.clearKeymap());
             for (let i = 0; i<this.key_map.length; i++) {
-                const index = focusIndex + i;
-                if (index >= 0 && index < this.keys.length) {
-                    this.keys[index].setKeymap(this.key_map[i]);
-                }
+                const key = this._noteToKey(focusNote + i);
+                if (key) key.setKeymap(this.key_map[i]);
             }
             //this.mini.show();
             //this.mini.slide(dx);
@@ -476,7 +504,7 @@ class PianoKey {
   
     /// index x-coordinate on the keyboard
     get offset() : number {
-        const oct = this.octave - this.piano.props.minOctave;
+        const oct = this.octave - this.piano.minOctave;
         return oct * 7 + this._key_offsets[this.step]; 
     }
   
@@ -636,3 +664,5 @@ class PianoKey {
         this.keyHint.innerHTML = "";
     }
 }
+
+import './instrument';
