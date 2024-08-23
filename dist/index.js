@@ -1113,7 +1113,7 @@ class Marimba extends HTMLElement {
         else if (this.isKeyboardArmed) {
             const key = this.getArmedKey(e.key.toLowerCase());
             key?.classList.add('pressed');
-            const note = toInt(key?.getAttribute('data-note'), -1);
+            const note = toInt$1(key?.getAttribute('data-note'), -1);
             if (note > 0)
                 this.emitNoteOn(note, "keyboard");
         }
@@ -1128,7 +1128,7 @@ class Marimba extends HTMLElement {
         else {
             const key = this.getArmedKey(e.key.toLowerCase());
             key?.classList.remove('pressed');
-            const note = toInt(key?.getAttribute('data-note'), -1);
+            const note = toInt$1(key?.getAttribute('data-note'), -1);
             if (note > 0)
                 this.emitNoteOff(note, "keyboard");
         }
@@ -1140,7 +1140,7 @@ Marimba.observedAttributes = [
     "armed", // accepts keyboard input ("true" | "false")
 ];
 Marimba.ELEMENT = "marimba-instrument";
-function toInt(d, defaultValue = 0) {
+function toInt$1(d, defaultValue = 0) {
     const n = parseInt(d);
     return isNaN(n) ? defaultValue : n;
 }
@@ -1295,7 +1295,11 @@ class Piano extends HTMLElement {
     get minKey() { return this.props.minNote; }
     get maxKey() { return this.props.maxNote; }
     get minOctave() { return Math.floor(this.minKey / 12) - 1; }
-    get maxOctave() { return Math.floor(this.maxKey / 12) - 1; }
+    get maxOctave() {
+        const maxOctave = Math.floor(this.maxKey / 12) - 1;
+        const focusNote = maxOctave * 12 + 12;
+        return (this.maxKey - focusNote < this.key_map.length) ? maxOctave - 1 : maxOctave;
+    }
     constructor() {
         super();
         /// attribute set
@@ -1499,7 +1503,20 @@ class Piano extends HTMLElement {
         const ki = this.key_map.indexOf(char.toLowerCase());
         return (ki >= 0) ? this._noteToKey(focusNote + ki) : null;
     }
-    setPatch(patch) { }
+    setPatch(patch) {
+        if ('min-note' in patch) {
+            this.setMinNote(toInt(patch['min-note'], this.props.minNote));
+        }
+        if ('max-note' in patch) {
+            this.setMaxNote(toInt(patch['max-note'], this.props.maxNote));
+        }
+        if ('key-range' in patch) {
+            this.setKeyRange(toInt(patch['key-range'], this.props.keyRange));
+        }
+        if ('focus-octave' in patch) {
+            this.setFocusOctave(toInt(patch['focus-octave'], this.props.focusOctave));
+        }
+    }
     /**
      * Process a computer key down event ... possibly play a note
      */
@@ -1575,6 +1592,7 @@ class Piano extends HTMLElement {
                 whiteKeys.append(key.el);
             }
         }
+        this.allKeys.innerHTML = '';
         this.allKeys.append(whiteKeys);
         this.allKeys.append(blackKeys);
         this.parent.append(this.allKeys);
@@ -1606,11 +1624,10 @@ class Piano extends HTMLElement {
             return;
         this.props.focusOctave = Math.max(this.minOctave, Math.min(this.maxOctave, octave));
         let focusNote = this.props.focusOctave * 12 + 12;
-        let focusKey = this._noteToKey(focusNote);
         if (focusNote < this.props.minNote) {
-            focusKey = this._noteToKey(this.props.minNote);
             focusNote += 12;
         }
+        const focusKey = this._noteToKey(focusNote);
         this.keys.forEach((key) => key.autoRelease());
         if (focusKey) {
             const dx = focusKey.x;
@@ -1804,6 +1821,26 @@ class PianoKey {
 PianoKey.NOTES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
 /// pixel width of white key (in SVG coords system)
 PianoKey.width = 45;
+/**
+ * Parses an int from an object (usually a string)
+ * @param d - The input value to be parsed
+ * @param defaultValue - The default value to return if the parsing fails
+ * @returns The parsed integer value
+ */
+function toInt(d, defaultValue = 0) {
+    const n = parseInt(d);
+    return isNaN(n) ? defaultValue : n;
+}
+/**
+ * Parses a number from an object (usually a string)
+ * @param d - The input value to be parsed
+ * @param defaultValue - The default value to return if the parsing fails
+ * @returns The parsed number value
+ */
+function toNum(d, defaultValue = 0) {
+    const n = parseFloat(d);
+    return isNaN(n) ? defaultValue : n;
+}
 
-export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano };
+export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, toInt, toNum };
 //# sourceMappingURL=index.js.map

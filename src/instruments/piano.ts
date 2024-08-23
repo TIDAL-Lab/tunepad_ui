@@ -92,7 +92,11 @@ export class Piano extends HTMLElement implements Instrument {
     get maxKey() { return this.props.maxNote; }
 
     get minOctave() { return Math.floor(this.minKey / 12) - 1; }
-    get maxOctave() { return Math.floor(this.maxKey / 12) - 1; }
+    get maxOctave() {
+        const maxOctave = Math.floor(this.maxKey / 12) - 1;
+        const focusNote = maxOctave * 12 + 12;
+        return (this.maxKey - focusNote < this.key_map.length) ? maxOctave - 1 : maxOctave;
+    }
 
     /// mini piano that shows where we are left-to-right
     //late MiniPiano mini;
@@ -297,7 +301,20 @@ export class Piano extends HTMLElement implements Instrument {
     }
 
 
-    setPatch(patch : any) {  }
+    setPatch(patch : any) {
+        if ('min-note' in patch) {
+            this.setMinNote(toInt(patch['min-note'], this.props.minNote));
+        }
+        if ('max-note' in patch) {
+            this.setMaxNote(toInt(patch['max-note'], this.props.maxNote));
+        }
+        if ('key-range' in patch) {
+            this.setKeyRange(toInt(patch['key-range'], this.props.keyRange));
+        }
+        if ('focus-octave' in patch) {
+            this.setFocusOctave(toInt(patch['focus-octave'], this.props.focusOctave));
+        }
+    }
 
 
     /**
@@ -381,6 +398,7 @@ export class Piano extends HTMLElement implements Instrument {
                 whiteKeys.append(key.el);
             }
         }
+        this.allKeys.innerHTML = '';
         this.allKeys.append(whiteKeys);
         this.allKeys.append(blackKeys);
         this.parent.append(this.allKeys);
@@ -416,11 +434,10 @@ export class Piano extends HTMLElement implements Instrument {
         if (isNaN(octave) || this.container == null) return;
         this.props.focusOctave = Math.max(this.minOctave, Math.min(this.maxOctave, octave));
         let focusNote = this.props.focusOctave * 12 + 12;
-        let focusKey = this._noteToKey(focusNote);
         if (focusNote < this.props.minNote) {
-            focusKey = this._noteToKey(this.props.minNote);
             focusNote += 12;
         }
+        const focusKey = this._noteToKey(focusNote);
 
         this.keys.forEach((key) => key.autoRelease());
 
@@ -663,6 +680,28 @@ class PianoKey {
     clearKeymap() {
         this.keyHint.innerHTML = "";
     }
+}
+
+/**
+ * Parses an int from an object (usually a string)
+ * @param d - The input value to be parsed
+ * @param defaultValue - The default value to return if the parsing fails
+ * @returns The parsed integer value
+ */
+export function toInt(d: any, defaultValue: number = 0): number {
+    const n = parseInt(d);
+    return isNaN(n) ? defaultValue : n;
+}
+
+/**
+ * Parses a number from an object (usually a string)
+ * @param d - The input value to be parsed
+ * @param defaultValue - The default value to return if the parsing fails
+ * @returns The parsed number value
+ */
+export function toNum(d: any, defaultValue: number = 0): number {
+    const n = parseFloat(d);
+    return isNaN(n) ? defaultValue : n;
 }
 
 import './instrument';

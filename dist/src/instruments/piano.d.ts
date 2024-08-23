@@ -10,7 +10,7 @@ import Instrument from './instrument';
  *      max-octave = "7"      // highest octave available
  *      min-note = "21"       // (optional) overrides min-octave
  *      max-note = "108"      // (optional) overrides max-octave
- *      key-range = "28"      // how many keys to show at one time
+ *      key-range = "17"      // how many white keys to show at one time
  *      focus-octave = "2">   // focus (left-most) octave showing
  * </piano-instrument>
  *
@@ -135,6 +135,20 @@ declare class PianoKey {
     setKeymap(k: string): void;
     clearKeymap(): void;
 }
+/**
+ * Parses an int from an object (usually a string)
+ * @param d - The input value to be parsed
+ * @param defaultValue - The default value to return if the parsing fails
+ * @returns The parsed integer value
+ */
+export declare function toInt(d: any, defaultValue?: number): number;
+/**
+ * Parses a number from an object (usually a string)
+ * @param d - The input value to be parsed
+ * @param defaultValue - The default value to return if the parsing fails
+ * @returns The parsed number value
+ */
+export declare function toNum(d: any, defaultValue?: number): number;
 import './instrument';
 export {};
 //# sourceMappingURL=piano.d.ts.map
