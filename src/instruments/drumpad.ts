@@ -209,8 +209,6 @@ export class DrumPad extends HTMLElement implements Instrument {
   
         if (this.isKeyboardArmed) {
             const key = e.key!.toLowerCase();
-            console.log(key);
-            console.log(this.root.querySelector(`.drum-pad[data-hint="${key}"]`))
             this.root.querySelector(`.drum-pad[data-hint="${key}"]`)?.classList.add('pressed');
             const note = this.keys.indexOf(key);
             if (note >= 0) {
