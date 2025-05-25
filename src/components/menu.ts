@@ -129,7 +129,7 @@ export class ContextMenuItem extends HTMLElement {
             this.name.innerHTML = newValue;
         }
         else if (name === 'icon') {
-            this.icon.style.backgroundImage = `url(${newValue})`;
+            this.icon.innerHTML = `<tunepad-icon icon="${newValue}"></tunepad-icon>`;
         }
         else if (name === 'disabled') {
             this.disabled = (newValue === 'true');
