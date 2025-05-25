@@ -35,7 +35,7 @@ stylesheet$4.replaceSync(`#ring {
     pointer-events: none;
 }`);
 
-var html$3 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
+var html$4 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
 
 /*
  * TunePad
@@ -82,7 +82,7 @@ class Dial extends HTMLElement {
         this._startVal = 0.0;
         this.root = this.attachShadow({ mode: 'open' });
         this.root.adoptedStyleSheets.push(stylesheet$4);
-        this.root.innerHTML = html$3;
+        this.root.innerHTML = html$4;
         this.container = this.root.querySelector('#container');
         this.ring = this.root.querySelector('#ring');
         this.line = this.root.querySelector('#pointer');
@@ -369,7 +369,7 @@ class ContextMenuItem extends HTMLElement {
             this.name.innerHTML = newValue;
         }
         else if (name === 'icon') {
-            this.icon.style.backgroundImage = `url(${newValue})`;
+            this.icon.innerHTML = `<tunepad-icon icon="${newValue}"></tunepad-icon>`;
         }
         else if (name === 'disabled') {
             this.disabled = (newValue === 'true');
@@ -568,7 +568,7 @@ stylesheet$2.replaceSync(`* {
     }
 }`);
 
-var html$2 = "<div class=\"instrument\"></div>\n";
+var html$3 = "<div class=\"instrument\"></div>\n";
 
 /*
  * TunePad
@@ -596,7 +596,7 @@ class DrumPad extends HTMLElement {
         this.keys = 'qwertyuiasdfghjk';
         this.root = this.attachShadow({ mode: 'open' });
         this.root.adoptedStyleSheets.push(stylesheet$2);
-        this.root.innerHTML = html$2;
+        this.root.innerHTML = html$3;
     }
     connectedCallback() {
         document.addEventListener("keydown", e => this.onKeyDown(e));
@@ -880,7 +880,7 @@ stylesheet$1.replaceSync(`/*
 .armed .key-hint { display: block; }
 `);
 
-var html$1 = "<div class=\"instrument\"></div>";
+var html$2 = "<div class=\"instrument\"></div>";
 
 /*
  * TunePad
@@ -912,7 +912,7 @@ class Marimba extends HTMLElement {
         this.key_map = "awsedftgyhujkolp;']";
         this.root = this.attachShadow({ mode: 'open' });
         this.root.adoptedStyleSheets.push(stylesheet$1);
-        this.root.innerHTML = html$1;
+        this.root.innerHTML = html$2;
         this.container = this.root.querySelector('.instrument');
     }
     connectedCallback() {
@@ -1275,7 +1275,7 @@ stylesheet.replaceSync(`/*
 #down-octave { left: 0; }
 #up-octave { right: 0; }`);
 
-var html = "<div classs=\"wrapper\">\n    <button id=\"down-octave\" class=\"octave-button\" title=\"Lower Octave\">❮</button>\n    <div class=\"instrument\"><svg class=\"container\" version=\"1.1\"></svg></div>\n    <button id=\"up-octave\" class=\"octave-button\" title=\"Higher Octave\">❯</button>\n</div>";
+var html$1 = "<div classs=\"wrapper\">\n    <button id=\"down-octave\" class=\"octave-button\" title=\"Lower Octave\">❮</button>\n    <div class=\"instrument\"><svg class=\"container\" version=\"1.1\"></svg></div>\n    <button id=\"up-octave\" class=\"octave-button\" title=\"Higher Octave\">❯</button>\n</div>";
 
 /*
  * TunePad
@@ -1331,7 +1331,7 @@ class Piano extends HTMLElement {
     }
     connectedCallback() {
         const template = document.createElement('template');
-        template.innerHTML = html;
+        template.innerHTML = html$1;
         // Create a shadow root
         this.root.appendChild(template.content.cloneNode(true));
         // load the container <svg> element from the shadow dom
@@ -1840,5 +1840,79 @@ function toNum(d, defaultValue = 0) {
     return isNaN(n) ? defaultValue : n;
 }
 
-export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, toInt, toNum };
+var html = "<div class=\"icon\"></div>";
+
+var iconCopy = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M409.86,329.93h-177.43c-8.13,0-14.79-6.65-14.79-14.79V78.57c0-8.13,6.65-14.79,14.79-14.79h129.47l62.75,62.75v188.61c0,8.13-6.65,14.79-14.79,14.79ZM232.43,374.29h177.43c32.62,0,59.14-26.52,59.14-59.14V126.53c0-11.74-4.71-23.01-13.03-31.33l-62.65-62.75c-8.32-8.32-19.59-13.03-31.33-13.03h-129.56c-32.62,0-59.14,26.52-59.14,59.14v236.57c0,32.62,26.52,59.14,59.14,59.14ZM114.14,137.71c-32.62,0-59.14,26.52-59.14,59.14v236.57c0,32.62,26.52,59.14,59.14,59.14h177.43c32.62,0,59.14-26.52,59.14-59.14v-29.57h-44.36v29.57c0,8.13-6.65,14.79-14.79,14.79H114.14c-8.13,0-14.79-6.65-14.79-14.79v-236.57c0-8.13,6.65-14.79,14.79-14.79h29.57v-44.36h-29.57Z\"/>\n</svg>";
+
+var iconError = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <circle cx=\"256\" cy=\"256\" r=\"250\" fill=\"white\"/>\n    <path d=\"M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z\"/>\n</svg>";
+
+var iconLock = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M180.11,149.75v45.54h151.79v-45.54c0-41.93-33.96-75.89-75.89-75.89s-75.89,33.96-75.89,75.89ZM119.39,195.29v-45.54c0-75.42,61.19-136.61,136.61-136.61s136.61,61.19,136.61,136.61v45.54h15.18c33.49,0,60.71,27.23,60.71,60.71v182.14c0,33.49-27.23,60.71-60.71,60.71H104.21c-33.49,0-60.71-27.23-60.71-60.71v-182.14c0-33.49,27.23-60.71,60.71-60.71h15.18Z\"/>\n</svg>";
+
+var iconPlay = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M142,39c-14.8-9.1-33.4-9.4-48.5-.9-15.1,8.5-24.5,24.5-24.5,41.9v352c0,17.4,9.4,33.4,24.5,41.9,15.1,8.5,33.7,8.1,48.5-.9l288-176c14.3-8.7,23-24.2,23-41s-8.7-32.2-23-41L142,39Z\"/>\n</svg>";
+
+var iconRecompile = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <path d=\"M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z\"/>\n</svg>";
+
+var iconTrash = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M174.93,38.44l-6.57,13.06h-87.64c-16.16,0-29.21,13.06-29.21,29.21s13.06,29.21,29.21,29.21h350.57c16.16,0,29.21-13.06,29.21-29.21s-13.06-29.21-29.21-29.21h-87.64l-6.57-13.06c-4.93-9.95-15.06-16.16-26.11-16.16h-109.92c-11.05,0-21.18,6.21-26.11,16.16ZM431.29,139.14H80.71l19.35,309.49c1.46,23.1,20.63,41.08,43.73,41.08h224.4c23.1,0,42.27-17.99,43.73-41.08l19.35-309.49Z\"/>\n</svg>";
+
+/*
+ * TunePad
+ *
+ * Michael S. Horn
+ * Northwestern University
+ * michael-horn@northwestern.edu
+ *
+ * This project was funded by the National Science Foundation (grant DRL-1612619).
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the National Science Foundation (NSF).
+ */
+/**
+ * ```html
+ * <tunepad-icon icon="trash"></tunepad-icon>
+ * ```
+ * ### Available Icons
+ * * copy
+ * * error
+ * * lock
+ * * play
+ * * recompile
+ * * trash
+ */
+class TunePadIcon extends HTMLElement {
+    constructor() {
+        super();
+        this.innerHTML = html;
+        this.div = this.querySelector('div.icon');
+    }
+    connectedCallback() { }
+    disconnectedCallback() { }
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'icon' && newValue != oldValue) {
+            switch (newValue) {
+                case 'copy':
+                    this.div.innerHTML = iconCopy;
+                    break;
+                case 'error':
+                    this.div.innerHTML = iconError;
+                    break;
+                case 'lock':
+                    this.div.innerHTML = iconLock;
+                    break;
+                case 'play':
+                    this.div.innerHTML = iconPlay;
+                    break;
+                case 'recompile':
+                    this.div.innerHTML = iconRecompile;
+                    break;
+                case 'trash':
+                    this.div.innerHTML = iconTrash;
+                    break;
+            }
+        }
+    }
+}
+TunePadIcon.observedAttributes = ["icon"];
+TunePadIcon.ELEMENT = "tunepad-icon";
+
+export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, TunePadIcon, toInt, toNum };
 //# sourceMappingURL=index.js.map
