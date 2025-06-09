@@ -1,10 +1,10 @@
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript'
-import {cssModules} from 'rollup-plugin-css-modules'
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import css from 'rollup-plugin-import-css';
 import html from 'rollup-plugin-html'
 import serve from 'rollup-plugin-serve'
 import terser from '@rollup/plugin-terser'
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
     input: 'src/index.ts',
@@ -26,7 +26,7 @@ export default {
     ],
     plugins: [
         html({include: ['**/*.module.html', '**/*.svg' ]}),
-        cssModules(),
+        css(),
         //serve('.'),
         typescript({ sourceMap: true }),
         nodeResolve()
