@@ -32,6 +32,7 @@
  * ```
  */
 import styles from './menu.module.css' with { type : 'css' }
+import iconCheck from '../icons/icon-check.svg';
 
 export const ContextMenuStyles = styles;
 
@@ -80,9 +81,12 @@ export class ContextMenuItem extends HTMLElement {
     private name : HTMLElement;
     private icon : HTMLElement;
     private expand : HTMLElement;
+    private checkmark : HTMLElement;
 
+    private get checked() { return this.getAttribute('checked') === 'true'; }
     private disabled = false;
-    private checked? : boolean;
+    private get action() { return this.getAttribute('action'); }
+
 
     constructor() {
         super();
@@ -93,7 +97,10 @@ export class ContextMenuItem extends HTMLElement {
         this.icon.classList.add('icon');
         this.expand = document.createElement('div');
         this.expand.classList.add('expand');
+        this.checkmark = document.createElement('div');
+        this.checkmark.classList.add('checkmark');
     }
+
 
     private emitEvent(name : string) {
         this.dispatchEvent(
@@ -102,18 +109,24 @@ export class ContextMenuItem extends HTMLElement {
                 composed: true,
                 detail: { 
                     origin : this,
-                    action : this.getAttribute('action'),
+                    action : this.action,
                     checked : this.checked
                 }
             })
         );
     }
 
+
     async connectedCallback() {
         this.appendChild(this.icon);
         this.appendChild(this.name);
         const submenu = this.querySelector('context-menu');
-        if (submenu) this.appendChild(this.expand);
+        if (submenu) {
+            this.appendChild(this.expand);
+        } else {
+            this.appendChild(this.checkmark);
+            this.checkmark.innerHTML = iconCheck;
+        }
 
         this.addEventListener('pointerdown', (e) => e.stopPropagation());
         this.addEventListener('pointerup', (e) => {
@@ -135,36 +148,11 @@ export class ContextMenuItem extends HTMLElement {
             this.disabled = (newValue === 'true');
             this.classList.toggle('disabled', this.disabled);
         }
-        else if (name === 'checked') {
-            if (this.hasAttribute('radio-group') && newValue === 'true') {
-                this.toggleChecked();
-            } else {
-                this.setChecked(newValue === 'true');
-            }
+        else if (name === 'checked' && newValue === 'true') {
+            this.setChecked();
         }
     }
 
-    private toggleChecked() {
-
-        if (this.hasAttribute('radio-group')) {
-            const grp = this.getAttribute('radio-group')!;
-            this.uncheckSiblings(grp);
-            this.setChecked(true);
-
-            let ancestor = this.parentElement;
-            while (ancestor instanceof ContextMenu || ancestor instanceof ContextMenuItem) {
-                if (ancestor instanceof ContextMenuItem) {
-                    if (ancestor.getAttribute('radio-group') === grp) {
-                        (ancestor as ContextMenuItem).setChecked(true);
-                    }
-                }
-                ancestor = ancestor.parentElement;
-            }
-        }
-        else if (this.checked !== undefined) {
-            this.setChecked(!this.checked);
-        }
-    }
 
     /**
      * Recursively uncheck any context menu item with the same radio-group attribute
@@ -178,15 +166,25 @@ export class ContextMenuItem extends HTMLElement {
         }
         ancestor?.querySelectorAll(`.menu-item[radio-group=${radioGroup}]`)
             .forEach(item => {
-                if (item instanceof ContextMenuItem) {
-                    (item as ContextMenuItem).setChecked(false);
+                if (item instanceof ContextMenuItem && item !== this) {
+                    (item as ContextMenuItem).setAttribute('checked', 'false');
                 }
             }
         );
     }
 
-    protected setChecked(checked : boolean) {
-        this.checked = checked;
-        this.icon.style.backgroundImage = this.checked ? 'url(/assets/images/check-icon.svg)' : 'none';
+
+    private setChecked() {
+        if (this.hasAttribute('radio-group')) {
+            const grp = this.getAttribute('radio-group')!;
+            this.uncheckSiblings(grp);
+        }
+    }
+
+
+    private toggleChecked() {
+        if (this.hasAttribute('checked')) {
+            this.setAttribute('checked', `${!this.checked}`);
+        }
     }
 }
