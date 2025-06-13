@@ -11,17 +11,19 @@ export declare class ContextMenuItem extends HTMLElement {
     private name;
     private icon;
     private expand;
+    private checkmark;
+    private get checked();
     private disabled;
-    private checked?;
+    private get action();
     constructor();
     private emitEvent;
     connectedCallback(): Promise<void>;
     attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
-    private toggleChecked;
     /**
      * Recursively uncheck any context menu item with the same radio-group attribute
      */
     private uncheckSiblings;
-    protected setChecked(checked: boolean): void;
+    private setChecked;
+    private toggleChecked;
 }
 //# sourceMappingURL=menu.d.ts.map

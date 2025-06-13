@@ -3,12 +3,18 @@
  * <tunepad-icon icon="trash"></tunepad-icon>
  * ```
  * ### Available Icons
+ * * checkmark
  * * copy
  * * error
  * * lock
+ * * midi
+ * * midiroll
+ * * music
  * * play
  * * recompile
+ * * score
  * * trash
+ * * waveform
  */
 export declare class TunePadIcon extends HTMLElement {
     static observedAttributes: string[];
