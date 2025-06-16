@@ -18,6 +18,7 @@ import iconError from './icon-error.svg';
 import iconLock from './icon-lock.svg';
 import iconMidiRoll from './icon-midiroll.svg'
 import iconMusic from './icon-music.svg';
+import iconPiano from './icon-piano.svg';
 import iconPlay from './icon-play.svg';
 import iconRecompile from './icon-recompile.svg';
 import iconTrash from './icon-trash.svg';
@@ -35,6 +36,7 @@ import iconWaveform from './icon-waveform.svg';
  * * midi
  * * midiroll
  * * music
+ * * piano
  * * play
  * * recompile
  * * score
@@ -69,6 +71,7 @@ export class TunePadIcon extends HTMLElement {
                 case 'midi': this.div.innerHTML = iconMidiRoll; break;
                 case 'midiroll': this.div.innerHTML = iconMidiRoll; break;
                 case 'music': this.div.innerHTML = iconMusic; break;
+                case 'piano' : this.div.innerHTML = iconPiano; break;
                 case 'play': this.div.innerHTML = iconPlay; break;
                 case 'recompile': this.div.innerHTML = iconRecompile; break;
                 case 'score': this.div.innerHTML = iconMusic; break;
