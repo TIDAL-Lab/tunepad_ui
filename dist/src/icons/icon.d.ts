@@ -10,6 +10,7 @@
  * * midi
  * * midiroll
  * * music
+ * * piano
  * * play
  * * recompile
  * * score
