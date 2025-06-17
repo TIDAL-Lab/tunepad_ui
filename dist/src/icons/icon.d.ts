@@ -9,6 +9,7 @@
  * * lock
  * * midi
  * * midiroll
+ * * minus
  * * music
  * * piano
  * * play

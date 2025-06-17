@@ -1364,6 +1364,8 @@ var iconLock = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" 
 
 var iconMidiRoll = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M412,223\"/>\n  <rect y=\"8\" width=\"510.85\" height=\"68.04\"/>\n  <rect y=\"150.42\" width=\"398.17\" height=\"68.04\"/>\n  <rect x=\"212.7\" y=\"292.84\" width=\"298.15\" height=\"68.04\"/>\n  <rect y=\"435.26\" width=\"510.85\" height=\"68.04\"/>\n</svg>";
 
+var iconMinus = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\">\n<path d=\"M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z\"/>\n</svg>";
+
 var iconMusic = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->\n    <path d=\"M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z\"/>\n</svg>";
 
 var iconPiano = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"svg2\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" version=\"1.1\" viewBox=\"0 0 100 100\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <defs>\n    <style>\n      .st0 {\n        fill: #fff;\n      }\n\n      .st1 {\n        display: none;\n      }\n    </style>\n  </defs>\n  <sodipodi:namedview id=\"namedview12\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg2\" inkscape:cx=\"57.141381\" inkscape:cy=\"50\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"770\" inkscape:window-x=\"43\" inkscape:window-y=\"1\" inkscape:zoom=\"2.6457812\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"/>\n  <g id=\"g4\" class=\"st1\">\n    <rect id=\"rect6\" x=\"-728\" y=\"-227\" width=\"1158\" height=\"397\"/>\n  </g>\n  <path id=\"path4506\" class=\"st0\" d=\"M93.4,94h0V5.55h-18.43v52.87h-7.16v35.59h25.59ZM64.64,94v-35.59h-8.29V5.55h-11.23v52.87h-7.2v35.59h26.73ZM34.78,94h0v-35.59h-8.29V5.55H8.06v88.45h26.72Z\" inkscape:connector-curvature=\"0\" sodipodi:nodetypes=\"ccccccccccccccccccccccccc\"/>\n</svg>";
@@ -1399,6 +1401,7 @@ var iconWaveform = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_
  * * lock
  * * midi
  * * midiroll
+ * * minus
  * * music
  * * piano
  * * play
@@ -1435,6 +1438,9 @@ class TunePadIcon extends HTMLElement {
                     break;
                 case 'midiroll':
                     this.div.innerHTML = iconMidiRoll;
+                    break;
+                case 'minus':
+                    this.div.innerHTML = iconMinus;
                     break;
                 case 'music':
                     this.div.innerHTML = iconMusic;
