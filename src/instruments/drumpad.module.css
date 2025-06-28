@@ -7,10 +7,6 @@
     grid-template-columns: repeat(8, 1fr);
 }
 
-.instrument.armed {
-    /*outline: 1px solid gold;*/
-}
-
 .wrapper {
     margin: 0 3px 3px 0;
     color: white;
@@ -63,7 +59,13 @@
     color: #fffd;
     left: 3px;
 }
-.key-hint { right: 3px; }
+.key-hint { 
+    right: 3px;
+    display: none;
+}
+.key-hint.show {
+    display: block;
+}
 
 .wrapper:has(.drum-pad.pressed[data-note="0"]) {
     background-color: hsl(0 90 50);

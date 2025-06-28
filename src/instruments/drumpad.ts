@@ -172,12 +172,12 @@ export class DrumPad extends HTMLElement implements Instrument {
     armKeyboard() { 
         this.armed = true;
         this.setAttribute('armed', 'true');
-        this.root.querySelector(".instrument")?.classList.add('armed');
+        this.root.querySelectorAll(".key-hint").forEach(e => { e.classList.add("show"); });
     }
     disarmKeyboard() {
         this.armed = false;
         this.setAttribute('armed', 'false');
-        this.root.querySelector(".instrument")?.classList.remove('armed');
+        this.root.querySelectorAll(".key-hint").forEach(e => { e.classList.remove("show"); });
     }
 
     get isKeyboardArmed() : boolean { return this.armed; }

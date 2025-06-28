@@ -19,6 +19,9 @@
     box-sizing: border-box;
     display: flex;
 }
+.instrument:focus-within {
+    outline: 2px solid gold;
+}
 
 .backdrop {
     fill: #30303f;
