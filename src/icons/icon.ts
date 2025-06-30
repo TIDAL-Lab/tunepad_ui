@@ -14,7 +14,9 @@ import html from './icon.module.html';
 
 import iconCheck from './icon-check.svg';
 import iconCopy from './icon-copy.svg';
+import iconCrossCircle from './icon-cross-circle.svg'
 import iconError from './icon-error.svg';
+import iconHistory from './icon-history.svg';
 import iconLock from './icon-lock.svg';
 import iconMidiRoll from './icon-midiroll.svg'
 import iconMinus from './icon-minus.svg';
@@ -32,7 +34,9 @@ import iconWaveform from './icon-waveform.svg';
  * ### Available Icons
  * * checkmark
  * * copy
+ * * cross-circle
  * * error
+ * * history
  * * lock
  * * midi
  * * midiroll
@@ -68,7 +72,9 @@ export class TunePadIcon extends HTMLElement {
             switch (newValue) {
                 case 'checkmark': this.div.innerHTML = iconCheck; break;
                 case 'copy': this.div.innerHTML = iconCopy; break;
+                case 'cross-circle': this.div.innerHTML = iconCrossCircle; break;
                 case 'error': this.div.innerHTML = iconError; break;
+                case 'history': this.div.innerHTML = iconHistory; break;
                 case 'lock': this.div.innerHTML = iconLock; break;
                 case 'midi': this.div.innerHTML = iconMidiRoll; break;
                 case 'midiroll': this.div.innerHTML = iconMidiRoll; break;
