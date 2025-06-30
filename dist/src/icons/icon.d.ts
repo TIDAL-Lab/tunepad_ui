@@ -5,7 +5,9 @@
  * ### Available Icons
  * * checkmark
  * * copy
+ * * cross-circle
  * * error
+ * * history
  * * lock
  * * midi
  * * midiroll
