@@ -53,7 +53,6 @@ class Dial extends HTMLElement {
         this.line = this.root.querySelector('#pointer');
         this.arc = this.root.querySelector('#arc');
         this._value = 1;
-        console.log(this._describeArc(55));
     }
     connectedCallback() {
         this.value = this._startVal;
@@ -82,8 +81,7 @@ class Dial extends HTMLElement {
             }
         });
     }
-    disconnectedCallback() {
-    }
+    disconnectedCallback() { }
     /**
      * When an attribute is changed on our custom component, this gets fired...
      */
@@ -1482,6 +1480,8 @@ class TunePadIcon extends HTMLElement {
 }
 TunePadIcon.observedAttributes = ["icon"];
 TunePadIcon.ELEMENT = "tunepad-icon";
+
+customElements.define(Dial.ELEMENT, Dial);
 
 export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, TunePadIcon, toInt, toNum };
 //# sourceMappingURL=index.js.map
