@@ -143,7 +143,7 @@ Dial.observedAttributes = [
     'value'
 ];
 
-const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync("\n.drop-menu {\n    position: absolute;\n    background-color: white;\n    border: 1px solid #0001;\n    border-radius: 8px;\n    padding: 8px 0;\n    z-index: 100;\n    display: flex;\n    flex-direction: column;\n    min-width: 200px;\n    box-shadow: 0px 3px 5px #0005;\n    -webkit-touch-callout: none;\n    user-select: none;\n    margin: 0;\n}\n.drop-menu.hidden { display: none; }\n.drop-menu:hover { cursor: pointer; }\n.drop-menu.terminal {\n    max-height: 70vh;\n    overflow-y: auto !important;\n}\n.menu-item {\n    line-height: 140%;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    font-weight: normal;\n    color: #3C4E60;\n    outline: none;\n    border: none;\n    padding: 5px 20px 5px 10px;\n    white-space: nowrap;\n    position: relative;\n    text-align: left;\n}\n.menu-item:hover { background: rgba(0, 0, 0, 0.15); }\n.menu-item:not(:has(.drop-menu)):active { background: rgba(0, 0, 0, 0.2); }\n.menu-item.highlight { background: rgba(0, 0, 0, 0.085); }\n.menu-item.disabled { color: #aaa; }\n.menu-item.disabled:hover { background-color: transparent; }\n.menu-item.disabled:active { background-color: transparent; }\n.menu-item.disabled .icon { opacity: 0.3; }\n.menu-item.hidden { display: none; }\n\n.menu-item:hover > .drop-menu {\n  display: flex;\n  left: 88%;\n  top: -10px;\n}\n\n.menu-item .icon {\n    width: 1.1rem;\n    height: 1.1rem;\n    margin: 0 1rem 0 0.1rem;\n    opacity: 1.0;\n}\n.menu-item .expand {\n  text-align: right;\n  position: relative;\n  left: 5px;\n  font-size: 90%;\n  width: 2em;\n  flex: 1;\n}\n.menu-item .checkmark {\n  width: 1.1rem;\n  height: 1.1rem;\n  margin: 0;\n  display: none;\n}\n.menu-item[checked=\"true\"] .checkmark {\n  display: block;\n}\n.menu-item:has(.menu-item[checked=\"true\"]) {\n  background-color: #0002;\n}\n.menu-item .name {\n  flex: 1;\n}\n.menu-item .expand::before {\n  content: \"▸\";\n  font-size: 17px;\n  color: rgba(0,0,0,0.6);\n  font-weight: 600;\n}\n.menu-separator {\n    border-top: 1px solid #0005;\n    margin: 10px;\n    height: 2px;\n}");
+const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync(".menu-container {\n  position: relative;\n}\n\ncontext-menu {\n    position: absolute;\n    background-color: white;\n    border: 1px solid #0001;\n    border-radius: 8px;\n    padding: 8px 0;\n    z-index: 100;\n    display: flex;\n    flex-direction: column;\n    min-width: 200px;\n    box-shadow: 0px 3px 5px #0005;\n    -webkit-touch-callout: none;\n    user-select: none;\n    margin: 0;\n}\ncontext-menu.hidden { display: none; }\ncontext-menu:hover { cursor: pointer; }\ncontext-menu.terminal {\n    max-height: 70vh;\n    overflow-y: auto !important;\n}\ncontext-menu.open-up {\n  bottom: 30px;\n}\ncontext-menu-item {\n    line-height: 140%;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    font-weight: normal;\n    color: #3C4E60;\n    outline: none;\n    border: none;\n    padding: 5px 20px 5px 10px;\n    white-space: nowrap;\n    position: relative;\n    text-align: left;\n}\ncontext-menu-item:hover { background: rgba(0, 0, 0, 0.15); }\ncontext-menu-item:active { background: rgba(0, 0, 0, 0.2); }\ncontext-menu-item.highlight { background: rgba(0, 0, 0, 0.085); }\ncontext-menu-item.disabled { color: #aaa; }\ncontext-menu-item.disabled:hover { background-color: transparent; }\ncontext-menu-item.disabled:active { background-color: transparent; }\ncontext-menu-item.disabled .icon { opacity: 0.3; }\ncontext-menu-item.hidden { display: none; }\ncontext-menu-item > context-menu { left: 98%; top: -10px; }\n\ncontext-menu-item .icon {\n    width: 1.1rem;\n    height: 1.1rem;\n    margin: 0 1rem 0 0.1rem;\n    opacity: 1.0;\n}\ncontext-menu-item .expand {\n  text-align: right;\n  position: relative;\n  left: 5px;\n  font-size: 90%;\n  width: 2em;\n  flex: 1;\n}\ncontext-menu-item .checkmark {\n  width: 1.1rem;\n  height: 1.1rem;\n  margin: 0;\n  display: none;\n}\ncontext-menu-item[checked=\"true\"] .checkmark {\n  display: block;\n}\ncontext-menu-item:has(context-menu-item[checked=\"true\"]) {\n  background-color: #0002;\n}\ncontext-menu-item .name {\n  flex: 1;\n}\ncontext-menu-item .expand::before {\n  content: \"▸\";\n  font-size: 17px;\n  color: rgba(0,0,0,0.6);\n  font-weight: 600;\n}\n.menu-separator {\n    border-top: 1px solid #0005;\n    margin: 10px;\n    height: 2px;\n}");
 
 var iconCheck = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z\"/></svg>";
 
@@ -183,7 +183,7 @@ const ContextMenuStyles = sheet$3;
 class ContextMenu extends HTMLElement {
     constructor() {
         super();
-        this.classList.add('drop-menu', 'hidden');
+        this.classList.add('hidden');
     }
     emitEvent(name) {
         this.dispatchEvent(new CustomEvent(name, { bubbles: true, composed: true, detail: { origin: this } }));
@@ -215,7 +215,6 @@ class ContextMenuItem extends HTMLElement {
     constructor() {
         super();
         this.disabled = false;
-        this.classList.add('menu-item');
         this.name = document.createElement('div');
         this.name.classList.add('name');
         this.icon = document.createElement('div');
@@ -247,9 +246,13 @@ class ContextMenuItem extends HTMLElement {
             this.appendChild(this.checkmark);
             this.checkmark.innerHTML = iconCheck;
         }
-        this.addEventListener('pointerdown', (e) => e.stopPropagation());
+        this.addEventListener('pointerdown', (e) => e.stopImmediatePropagation());
         this.addEventListener('pointerup', (e) => {
-            if (!this.disabled && !submenu) {
+            if (submenu) {
+                this.parentElement?.querySelectorAll('context-menu').forEach(menu => menu.classList.add('hidden'));
+                submenu.classList.remove('hidden');
+            }
+            else if (!this.disabled && !submenu) {
                 this.toggleChecked();
                 setTimeout(() => this.emitEvent('context-menu-action'), 100);
             }
