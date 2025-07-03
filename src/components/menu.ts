@@ -42,7 +42,7 @@ export class ContextMenu extends HTMLElement {
 
     constructor() {
         super();
-        this.classList.add('drop-menu', 'hidden');
+        this.classList.add('hidden');
     }
 
     private emitEvent(name : string) {
@@ -90,7 +90,6 @@ export class ContextMenuItem extends HTMLElement {
 
     constructor() {
         super();
-        this.classList.add('menu-item');
         this.name = document.createElement('div');
         this.name.classList.add('name');
         this.icon = document.createElement('div');
@@ -128,9 +127,13 @@ export class ContextMenuItem extends HTMLElement {
             this.checkmark.innerHTML = iconCheck;
         }
 
-        this.addEventListener('pointerdown', (e) => e.stopPropagation());
+        this.addEventListener('pointerdown', (e) => e.stopImmediatePropagation());
         this.addEventListener('pointerup', (e) => {
-            if (!this.disabled && !submenu) {
+            if (submenu) {
+                this.parentElement?.querySelectorAll('context-menu').forEach(menu => menu.classList.add('hidden'));
+                submenu.classList.remove('hidden');
+            }
+            else if (!this.disabled && !submenu) {
                 this.toggleChecked();
                 setTimeout(() => this.emitEvent('context-menu-action'), 100);
             }

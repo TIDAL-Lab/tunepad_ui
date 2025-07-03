@@ -1,5 +1,8 @@
+.menu-container {
+  position: relative;
+}
 
-.drop-menu {
+context-menu {
     position: absolute;
     background-color: white;
     border: 1px solid #0001;
@@ -14,13 +17,16 @@
     user-select: none;
     margin: 0;
 }
-.drop-menu.hidden { display: none; }
-.drop-menu:hover { cursor: pointer; }
-.drop-menu.terminal {
+context-menu.hidden { display: none; }
+context-menu:hover { cursor: pointer; }
+context-menu.terminal {
     max-height: 70vh;
     overflow-y: auto !important;
 }
-.menu-item {
+context-menu.open-up {
+  bottom: 30px;
+}
+context-menu-item {
     line-height: 140%;
     display: flex;
     align-items: center;
@@ -34,28 +40,23 @@
     position: relative;
     text-align: left;
 }
-.menu-item:hover { background: rgba(0, 0, 0, 0.15); }
-.menu-item:not(:has(.drop-menu)):active { background: rgba(0, 0, 0, 0.2); }
-.menu-item.highlight { background: rgba(0, 0, 0, 0.085); }
-.menu-item.disabled { color: #aaa; }
-.menu-item.disabled:hover { background-color: transparent; }
-.menu-item.disabled:active { background-color: transparent; }
-.menu-item.disabled .icon { opacity: 0.3; }
-.menu-item.hidden { display: none; }
+context-menu-item:hover { background: rgba(0, 0, 0, 0.15); }
+context-menu-item:active { background: rgba(0, 0, 0, 0.2); }
+context-menu-item.highlight { background: rgba(0, 0, 0, 0.085); }
+context-menu-item.disabled { color: #aaa; }
+context-menu-item.disabled:hover { background-color: transparent; }
+context-menu-item.disabled:active { background-color: transparent; }
+context-menu-item.disabled .icon { opacity: 0.3; }
+context-menu-item.hidden { display: none; }
+context-menu-item > context-menu { left: 98%; top: -10px; }
 
-.menu-item:hover > .drop-menu {
-  display: flex;
-  left: 88%;
-  top: -10px;
-}
-
-.menu-item .icon {
+context-menu-item .icon {
     width: 1.1rem;
     height: 1.1rem;
     margin: 0 1rem 0 0.1rem;
     opacity: 1.0;
 }
-.menu-item .expand {
+context-menu-item .expand {
   text-align: right;
   position: relative;
   left: 5px;
@@ -63,22 +64,22 @@
   width: 2em;
   flex: 1;
 }
-.menu-item .checkmark {
+context-menu-item .checkmark {
   width: 1.1rem;
   height: 1.1rem;
   margin: 0;
   display: none;
 }
-.menu-item[checked="true"] .checkmark {
+context-menu-item[checked="true"] .checkmark {
   display: block;
 }
-.menu-item:has(.menu-item[checked="true"]) {
+context-menu-item:has(context-menu-item[checked="true"]) {
   background-color: #0002;
 }
-.menu-item .name {
+context-menu-item .name {
   flex: 1;
 }
-.menu-item .expand::before {
+context-menu-item .expand::before {
   content: "▸";
   font-size: 17px;
   color: rgba(0,0,0,0.6);
