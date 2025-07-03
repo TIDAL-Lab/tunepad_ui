@@ -13,21 +13,19 @@ export default {
             dir : 'dist',
             format: 'es',
             sourcemap: true,
-        }
-/*        ,
+        },
         {
-            file : '/dist/tunepad-ui.min.js',
+            file : 'assets/js/tunepad-ui.min.js',
             format : 'iife',
             name : 'TunePadUI',
             sourcemap : true,
             plugins : [terser ()]
         }
-    */
     ],
     plugins: [
         html({include: ['**/*.module.html', '**/*.svg' ]}),
         css(),
-        //serve('.'),
+        serve('.'),
         typescript({ sourceMap: true }),
         nodeResolve()
     ]
