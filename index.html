@@ -7,23 +7,15 @@
     <script src="/assets/js/tunepad-ui.min.js"></script>
 </head>
 <body>
-    <filter-example></filter-example>
-    <br>
-    <piano-keyboard
-        note-hints="true"
-        midi-hints="true"
-        armed="false"
-        key-range = "14"
-        focus-octave = "2">
-    </piano-keyboard>
+    <range-dial min="0" max="1" value="0.5"></range-dial>
 </body>
 
 <script>
     document.querySelectorAll('range-dial').forEach((dial) => {
-        dial.addEventListener('dial-adjusted', (e) => {
+        dial.addEventListener('adjusted', (e) => {
             console.log(e.currentTarget.id, 'adjusted', e.detail.value);
         });
-        dial.addEventListener('dial-changed', (e) => {
+        dial.addEventListener('changed', (e) => {
             console.log(e.currentTarget.id, 'changed', e.detail.value);
         });
     });
