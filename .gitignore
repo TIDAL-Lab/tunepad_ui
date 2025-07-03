@@ -1,4 +1,2 @@
 node_modules
-*.js.map
-*.min.js
-assets/js/build
+assets/js/dist
