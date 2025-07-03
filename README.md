@@ -105,13 +105,23 @@ customElements.define(Dial.ELEMENT, Dial);
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <title>Example</title>
-    <script src="/assets/js/example.min.js"></script>
+    <title>TunePad UI Example</title>
+    <script src="/assets/js/tunepad-ui.min.js"></script>
 </head>
 <body>
-    Hello There!
-    <example-dial></example-dial>
+    <range-dial min="0" max="1" value="0.5"></range-dial>
 </body>
+
+<script>
+    document.querySelectorAll('range-dial').forEach((dial) => {
+        dial.addEventListener('adjusted', (e) => {
+            console.log(e.currentTarget.id, 'adjusted', e.detail.value);
+        });
+        dial.addEventListener('changed', (e) => {
+            console.log(e.currentTarget.id, 'changed', e.detail.value);
+        });
+    });
+</script>
 </html>
 ```
 
