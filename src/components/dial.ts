@@ -78,7 +78,6 @@ export class Dial extends HTMLElement {
         this.line = this.root.querySelector('#pointer') as SVGLineElement;
         this.arc = this.root.querySelector('#arc') as SVGPathElement;
         this._value = 1;
-        console.log(this._describeArc(55));
     }
 
     connectedCallback() {
@@ -111,8 +110,7 @@ export class Dial extends HTMLElement {
         });
     }
 
-    disconnectedCallback() {
-    }
+    disconnectedCallback() { }
 
     /**
      * When an attribute is changed on our custom component, this gets fired...
