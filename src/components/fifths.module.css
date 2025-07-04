@@ -1,0 +1,77 @@
+:host {
+    width: 370px;
+    height: 370px;
+    display: block;
+}
+
+.container svg {
+    width: 100%;
+    height: auto;
+}
+
+circle {
+    stroke-width: 3;
+    stroke: black;
+    fill: none;
+}
+
+circle.center {
+    fill: white;
+}
+
+circle.major {
+    fill: #eee;
+}
+
+circle.minor {
+    fill: white;
+}
+
+line.arc {
+    stroke-width: 3;
+    stroke: black;
+}
+
+text {
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-family: sans-serif;
+    font-size: 34px;
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+}
+
+text.minor {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+text.selection {
+    font-size: 34px;
+}
+
+.accidental {
+    font-size: 60%;
+}
+
+path {
+    fill: rgba(255, 255, 255, 0);
+    stroke: none;
+}
+
+path:hover {
+    fill: rgba(0, 200, 255, 0.5);
+}
+
+path:active {
+    fill: rgba(0, 200, 255, 1.0);
+}
+
+path.minor:hover {
+    fill: rgba(255, 165, 0, 0.5);    
+}
+
+path.minor:active {
+    fill: orange  
+}
