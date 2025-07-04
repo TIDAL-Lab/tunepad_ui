@@ -284,7 +284,7 @@ class ContextMenuItem extends HTMLElement {
             if (p instanceof ContextMenu)
                 ancestor = p;
         }
-        ancestor?.querySelectorAll(`.menu-item[radio-group=${radioGroup}]`)
+        ancestor?.querySelectorAll(`context-menu-item[radio-group=${radioGroup}]`)
             .forEach(item => {
             if (item instanceof ContextMenuItem && item !== this) {
                 item.setAttribute('checked', 'false');
