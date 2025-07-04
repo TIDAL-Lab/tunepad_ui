@@ -1,6 +1,6 @@
-const sheet$4 = new CSSStyleSheet();sheet$4.replaceSync("#ring {\n    fill: #3e3e3c;\n    stroke: none;\n}\n.track {\n    fill: #181818;\n    stroke: black;\n    stroke-width: 1.5;\n}\n#arc {\n    stroke: #7ff;\n    stroke-width: 7;\n    fill: none;\n}\n.active #arc {\n    stroke: white;\n}\n#pointer {\n    stroke: #ddd;\n    stroke-width: 6;\n    pointer-events: none;\n}\n#container {\n    max-width: 100px;\n    user-select: none;\n}\n.tick {\n    fill: #999;\n}\n.cover {\n    fill: #fff2;\n    stroke: #fff1;\n    stroke-width: 4;\n    pointer-events: none;\n}");
+const sheet$5 = new CSSStyleSheet();sheet$5.replaceSync("#ring {\n    fill: #3e3e3c;\n    stroke: none;\n}\n.track {\n    fill: #181818;\n    stroke: black;\n    stroke-width: 1.5;\n}\n#arc {\n    stroke: #7ff;\n    stroke-width: 7;\n    fill: none;\n}\n.active #arc {\n    stroke: white;\n}\n#pointer {\n    stroke: #ddd;\n    stroke-width: 6;\n    pointer-events: none;\n}\n#container {\n    max-width: 100px;\n    user-select: none;\n}\n.tick {\n    fill: #999;\n}\n.cover {\n    fill: #fff2;\n    stroke: #fff1;\n    stroke-width: 4;\n    pointer-events: none;\n}");
 
-var html$4 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
+var html$5 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
 
 /*
  * TunePad
@@ -46,8 +46,8 @@ class Dial extends HTMLElement {
         this._value = 0.0;
         this._startVal = 0.0;
         this.root = this.attachShadow({ mode: 'open' });
-        this.root.adoptedStyleSheets.push(sheet$4);
-        this.root.innerHTML = html$4;
+        this.root.adoptedStyleSheets.push(sheet$5);
+        this.root.innerHTML = html$5;
         this.container = this.root.querySelector('#container');
         this.ring = this.root.querySelector('#ring');
         this.line = this.root.querySelector('#pointer');
@@ -143,7 +143,7 @@ Dial.observedAttributes = [
     'value'
 ];
 
-const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync(".menu-container {\n  position: relative;\n}\n\ncontext-menu {\n    position: absolute;\n    background-color: white;\n    border: 1px solid #0001;\n    border-radius: 8px;\n    padding: 8px 0;\n    z-index: 100;\n    display: flex;\n    flex-direction: column;\n    min-width: 200px;\n    box-shadow: 0px 3px 5px #0005;\n    -webkit-touch-callout: none;\n    user-select: none;\n    margin: 0;\n}\ncontext-menu.hidden { display: none; }\ncontext-menu:hover { cursor: pointer; }\ncontext-menu.terminal {\n    max-height: 70vh;\n    overflow-y: auto !important;\n}\ncontext-menu.open-up {\n  bottom: 30px;\n}\ncontext-menu-item {\n    line-height: 140%;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    font-weight: normal;\n    color: #3C4E60;\n    outline: none;\n    border: none;\n    padding: 5px 20px 5px 10px;\n    white-space: nowrap;\n    position: relative;\n    text-align: left;\n}\ncontext-menu-item:hover { background: rgba(0, 0, 0, 0.15); }\ncontext-menu-item:active { background: rgba(0, 0, 0, 0.2); }\ncontext-menu-item.highlight { background: rgba(0, 0, 0, 0.085); }\ncontext-menu-item.disabled { color: #aaa; }\ncontext-menu-item.disabled:hover { background-color: transparent; }\ncontext-menu-item.disabled:active { background-color: transparent; }\ncontext-menu-item.disabled .icon { opacity: 0.3; }\ncontext-menu-item.hidden { display: none; }\ncontext-menu-item > context-menu { left: 98%; top: -10px; }\n\ncontext-menu-item .icon {\n    width: 1.1rem;\n    height: 1.1rem;\n    margin: 0 1rem 0 0.1rem;\n    opacity: 1.0;\n}\ncontext-menu-item .expand {\n  text-align: right;\n  position: relative;\n  left: 5px;\n  font-size: 90%;\n  width: 2em;\n  flex: 1;\n}\ncontext-menu-item .checkmark {\n  width: 1.1rem;\n  height: 1.1rem;\n  margin: 0;\n  display: none;\n}\ncontext-menu-item[checked=\"true\"] .checkmark {\n  display: block;\n}\ncontext-menu-item:has(context-menu-item[checked=\"true\"]) {\n  background-color: #0002;\n}\ncontext-menu-item .name {\n  flex: 1;\n}\ncontext-menu-item .expand::before {\n  content: \"▸\";\n  font-size: 17px;\n  color: rgba(0,0,0,0.6);\n  font-weight: 600;\n}\n.menu-separator {\n    border-top: 1px solid #0005;\n    margin: 10px;\n    height: 2px;\n}");
+const sheet$4 = new CSSStyleSheet();sheet$4.replaceSync(".menu-container {\n  position: relative;\n}\n\ncontext-menu {\n    position: absolute;\n    background-color: white;\n    border: 1px solid #0001;\n    border-radius: 8px;\n    padding: 8px 0;\n    z-index: 100;\n    display: flex;\n    flex-direction: column;\n    min-width: 200px;\n    box-shadow: 0px 3px 5px #0005;\n    -webkit-touch-callout: none;\n    user-select: none;\n    margin: 0;\n}\ncontext-menu.hidden { display: none; }\ncontext-menu:hover { cursor: pointer; }\ncontext-menu.terminal {\n    max-height: 70vh;\n    overflow-y: auto !important;\n}\ncontext-menu.open-up {\n  bottom: 30px;\n}\ncontext-menu-item {\n    line-height: 140%;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    font-weight: normal;\n    color: #3C4E60;\n    outline: none;\n    border: none;\n    padding: 5px 20px 5px 10px;\n    white-space: nowrap;\n    position: relative;\n    text-align: left;\n}\ncontext-menu-item:hover { background: rgba(0, 0, 0, 0.15); }\ncontext-menu-item:active { background: rgba(0, 0, 0, 0.2); }\ncontext-menu-item.highlight { background: rgba(0, 0, 0, 0.085); }\ncontext-menu-item.disabled { color: #aaa; }\ncontext-menu-item.disabled:hover { background-color: transparent; }\ncontext-menu-item.disabled:active { background-color: transparent; }\ncontext-menu-item.disabled .icon { opacity: 0.3; }\ncontext-menu-item.hidden { display: none; }\ncontext-menu-item > context-menu { left: 98%; top: -10px; }\n\ncontext-menu-item .icon {\n    width: 1.1rem;\n    height: 1.1rem;\n    margin: 0 1rem 0 0.1rem;\n    opacity: 1.0;\n}\ncontext-menu-item .expand {\n  text-align: right;\n  position: relative;\n  left: 5px;\n  font-size: 90%;\n  width: 2em;\n  flex: 1;\n}\ncontext-menu-item .checkmark {\n  width: 1.1rem;\n  height: 1.1rem;\n  margin: 0;\n  display: none;\n}\ncontext-menu-item[checked=\"true\"] .checkmark {\n  display: block;\n}\ncontext-menu-item:has(context-menu-item[checked=\"true\"]) {\n  background-color: #0002;\n}\ncontext-menu-item .name {\n  flex: 1;\n}\ncontext-menu-item .expand::before {\n  content: \"▸\";\n  font-size: 17px;\n  color: rgba(0,0,0,0.6);\n  font-weight: 600;\n}\n.menu-separator {\n    border-top: 1px solid #0005;\n    margin: 10px;\n    height: 2px;\n}");
 
 var iconCheck = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z\"/></svg>";
 
@@ -179,7 +179,7 @@ var iconCheck = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512
  * </context-menu>
  * ```
  */
-const ContextMenuStyles = sheet$3;
+const ContextMenuStyles = sheet$4;
 class ContextMenu extends HTMLElement {
     constructor() {
         super();
@@ -305,6 +305,172 @@ class ContextMenuItem extends HTMLElement {
 }
 ContextMenuItem.ELEMENT = "context-menu-item";
 ContextMenuItem.observedAttributes = ["name", "icon", "action", "disabled", "checked"];
+
+const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync(":host {\n    width: 370px;\n    height: 370px;\n    display: block;\n}\n\n.container svg {\n    width: 100%;\n    height: auto;\n}\n\ncircle {\n    stroke-width: 3;\n    stroke: black;\n    fill: none;\n}\n\ncircle.center {\n    fill: white;\n}\n\ncircle.major {\n    fill: #eee;\n}\n\ncircle.minor {\n    fill: white;\n}\n\nline.arc {\n    stroke-width: 3;\n    stroke: black;\n}\n\ntext {\n    text-anchor: middle;\n    dominant-baseline: central;\n    font-family: sans-serif;\n    font-size: 34px;\n    font-weight: bold;\n    user-select: none;\n    pointer-events: none;\n}\n\ntext.minor {\n    font-size: 25px;\n    font-weight: bold;\n}\n\ntext.selection {\n    font-size: 34px;\n}\n\n.accidental {\n    font-size: 60%;\n}\n\npath {\n    fill: rgba(255, 255, 255, 0);\n    stroke: none;\n}\n\npath:hover {\n    fill: rgba(0, 200, 255, 0.5);\n}\n\npath:active {\n    fill: rgba(0, 200, 255, 1.0);\n}\n\npath.minor:hover {\n    fill: rgba(255, 165, 0, 0.5);    \n}\n\npath.minor:active {\n    fill: orange  \n}");
+
+var html$4 = "<div class=\"container\">\n    <svg version=\"1.1\" viewBox=\"-250 -250 500 500\" xmlns=\"http://www.w3.org/2000/svg\">\n    </svg>\n</div>\n";
+
+/*
+ * TunePad
+ *
+ * Michael S. Horn
+ * Northwestern University
+ * michael-horn@northwestern.edu
+ *
+ * This project was funded by the National Science Foundation (grant DRL-1612619).
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the National Science Foundation (NSF).
+ */
+/**
+ * Circle of fifths selection component:
+ *
+ * <circle-of-fifths selected="C"></circle-of-fifths>
+ */
+const MAJOR_KEYS = ['C', 'F', 'B♭', 'E♭', 'A♭', 'C♯/D♭', 'F♯/G♭', 'B/C♭', 'E', 'A', 'D', 'G'];
+const MINOR_KEYS = ['A', 'D', 'G', 'C', 'F', 'A♯/B♭', 'D♯/E♭', 'A♭/G♯', 'C♯', 'F♯', 'B', 'E'];
+const R1 = 250 - 5;
+const R2 = 175 - 5;
+const R3 = 100 - 5;
+class CircleOfFifths extends HTMLElement {
+    constructor() {
+        super();
+        this.root = this.attachShadow({ mode: 'open' });
+        this.root.adoptedStyleSheets.push(sheet$3);
+        this.root.innerHTML = html$4;
+        this.svg = this.root.querySelector('svg');
+    }
+    connectedCallback() {
+        this._redraw();
+    }
+    disconnectedCallback() { }
+    /**
+     * When an attribute is changed on our custom component, this gets fired...
+     */
+    attributeChangedCallback(name, oldValue, newValue) {
+    }
+    /**
+     * Fire custom events whenever the value is changed by the user
+     */
+    emitEvent(name, value) {
+        this.dispatchEvent(new CustomEvent(name, {
+            bubbles: true,
+            composed: true,
+            detail: { origin: this, value: value
+            }
+        }));
+    }
+    _redraw() {
+        this.svg.append(this.circle(0, 0, R1, 'major'));
+        this.svg.append(this.circle(0, 0, R2, 'minor'));
+        const selection = this.text(0, 0, '', 'selection');
+        const arc = Math.PI / 6;
+        let theta = Math.PI / -2;
+        for (let i = 0; i < 12; i++) {
+            const majorKey = MAJOR_KEYS[i];
+            const minorKey = MINOR_KEYS[i].split('/')[0];
+            const majSelector = this.arc(theta + arc / 2, theta - arc / 2, R1, R2);
+            const minSelector = this.arc(theta + arc / 2, theta - arc / 2, R2, R3, 'minor');
+            this.svg.append(majSelector);
+            this.svg.append(minSelector);
+            majSelector.addEventListener('click', e => {
+                this.emitEvent('selected', majorKey + " major");
+            });
+            minSelector.addEventListener('click', e => {
+                this.emitEvent('selected', MINOR_KEYS[i] + " minor");
+            });
+            majSelector.addEventListener('pointerenter', e => {
+                selection.innerHTML = majorKey.split('/')[0] + "  Major";
+            });
+            majSelector.addEventListener('pointerleave', e => {
+                selection.innerHTML = '';
+            });
+            minSelector.addEventListener('pointerenter', e => {
+                selection.innerHTML = minorKey + "  minor";
+            });
+            minSelector.addEventListener('pointerleave', e => {
+                selection.innerHTML = '';
+            });
+            this.svg.append(this.text((R1 - 40) * Math.cos(theta), (R1 - 40) * Math.sin(theta), majorKey, 'major'));
+            this.svg.append(this.text((R2 - 40) * Math.cos(theta), (R2 - 40) * Math.sin(theta), minorKey, 'minor'));
+            this.svg.append(this.line(0, 0, R1 * Math.cos(theta + arc / 2), R1 * Math.sin(theta + arc / 2), 'arc'));
+            theta -= arc;
+        }
+        this.svg.append(this.circle(0, 0, R3, 'center'));
+        this.svg.append(selection);
+    }
+    circle(cx, cy, r, className) {
+        const circ = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+        circ.setAttribute('cx', `${cx}`);
+        circ.setAttribute('cy', `${cy}`);
+        circ.setAttribute('r', `${r}`);
+        if (className)
+            circ.classList.add(className);
+        return circ;
+    }
+    line(x1, y1, x2, y2, className) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+        line.setAttribute('x1', `${x1}`);
+        line.setAttribute('y1', `${y1}`);
+        line.setAttribute('x2', `${x2}`);
+        line.setAttribute('y2', `${y2}`);
+        if (className)
+            line.classList.add(className);
+        return line;
+    }
+    text(x, y, s, className) {
+        const text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+        text.setAttribute('x', `${x}`);
+        text.setAttribute('y', `${y}`);
+        const lines = s.split('/');
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            if (line.length > 0) {
+                text.append(this.tspan(0, i * 20, line.substring(0, 1)));
+                text.append(this.tspan(-2, 0, line.substring(1), 'accidental'));
+            }
+            else {
+                text.append(this.tspan(0, i * 20, line));
+            }
+        }
+        if (className)
+            text.classList.add(className);
+        return text;
+    }
+    tspan(dx, dy, s, className) {
+        const span = document.createElementNS("http://www.w3.org/2000/svg", 'tspan');
+        span.setAttribute('dx', `${dx}`);
+        span.setAttribute('dy', `${dy}`);
+        span.innerHTML = s;
+        if (className)
+            span.classList.add(className);
+        return span;
+    }
+    arc(a0, a1, r0, r1, className) {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+        const segs = [
+            'M', r0 * Math.cos(a0), r0 * Math.sin(a0),
+            'A', r0, r0, (a1 - a0), 0, 0, r0 * Math.cos(a1), r0 * Math.sin(a1),
+            'L', r1 * Math.cos(a1), r1 * Math.sin(a1),
+            'A', r1, r1, (a0 - a1), 0, 1, r1 * Math.cos(a0), r1 * Math.sin(a0),
+            'Z'
+        ];
+        path.setAttribute('d', segs.join(' '));
+        if (className)
+            path.classList.add(className);
+        return path;
+    }
+    _describeArc(r, angle) {
+        const sx = r * Math.cos(angle);
+        const sy = r * Math.sin(angle);
+        const ex = r * Math.cos(0);
+        const ey = r * Math.sin(0);
+        const large = (angle >= Math.PI) ? 1 : 0;
+        return ["M", ex, ey, "A", r, r, 0, large, 1, sx, sy].join(" ");
+    }
+}
+CircleOfFifths.ELEMENT = "circle-of-fifths";
+CircleOfFifths.observedAttributes = ["selected"];
 
 const sheet$2 = new CSSStyleSheet();sheet$2.replaceSync("* {\n    box-sizing: border-box;\n}\n\n.instrument {\n    display: grid;\n    grid-template-columns: repeat(8, 1fr);\n}\n\n.wrapper {\n    margin: 0 3px 3px 0;\n    color: white;\n    flex: 1;\n    border-radius: 4px;\n    border: 2px solid #fff1;\n    box-shadow: 3px 3px 3px #0002;\n}\n\n.drum-pad {\n    min-width: 58px;\n    height: 72px;\n    text-align: center;\n    border-radius: 1px;\n    background-color: #fff2;\n    display: flex;\n    flex-direction: column;\n    border: 1px solid #fff5;\n    position: relative;\n}\n.drum-pad:hover { \n    background-color: #fff5;\n    border: 1px solid #fff7;\n}\n.drum-pad.pressed {\n    background-color: #fff7;\n    border: 1px solid #fff7;\n}\n.drum-name {\n    color: #fffa;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-size: 10px;\n    user-select: none;\n    flex: 1;\n    align-content: center;\n}\n.drum-pad:hover .drum-name { color: white; }\n\n.pad-name, .key-hint {\n    font-size: 10px;\n    pointer-events: none;\n    user-select: none;\n    position: absolute;\n    bottom: 3px;\n    color: #fff6;\n}\n.pad-name {\n    font-weight: bold;\n    color: #fffd;\n    left: 3px;\n}\n.key-hint { \n    right: 3px;\n    display: none;\n}\n.key-hint.show {\n    display: block;\n}\n\n.wrapper:has(.drum-pad.pressed[data-note=\"0\"]) {\n    background-color: hsl(0 90 50);\n    box-shadow: 0px 0px 5px hsl(0 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"1\"]) {\n    background-color: hsl(22 90 50);\n    box-shadow: 0px 0px 5px hsl(22 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"2\"]) {\n    background-color: hsl(44 90 50);\n    box-shadow: 0px 0px 5px hsl(44 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"3\"]) {\n    background-color: hsl(66 90 50);\n    box-shadow: 0px 0px 5px hsl(66 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"4\"]) {\n    background-color: hsl(88 90 50);\n    box-shadow: 0px 0px 5px hsl(88 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"5\"]) {\n    background-color: hsl(110 90 50);\n    box-shadow: 0px 0px 5px hsl(110 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"6\"]) {\n    background-color: hsl(132 90 50);\n    box-shadow: 0px 0px 5px hsl(132 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"7\"]) {\n    background-color: hsl(154 90 50);\n    box-shadow: 0px 0px 5px hsl(154 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"8\"]) {\n    background-color: hsl(176 90 50);\n    box-shadow: 0px 0px 5px hsl(176 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"9\"]) {\n    background-color: hsl(198 90 50);\n    box-shadow: 0px 0px 5px hsl(198 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"10\"]) {\n    background-color: hsl(220 90 50);\n    box-shadow: 0px 0px 5px hsl(220 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"11\"]) {\n    background-color: hsl(242 90 50);\n    box-shadow: 0px 0px 5px hsl(242 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"12\"]) {\n    background-color: hsl(264 90 50);\n    box-shadow: 0px 0px 5px hsl(264 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"13\"]) {\n    background-color: hsl(286 90 50);\n    box-shadow: 0px 0px 5px hsl(286 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"14\"]) {\n    background-color: hsl(308 90 50);\n    box-shadow: 0px 0px 5px hsl(308 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"15\"]) {\n    background-color: hsl(330 90 50);\n    box-shadow: 0px 0px 5px hsl(330 90 50);\n}\n\n@media screen and (max-width: 650px) {\n    .instrument {\n        grid-template-columns: repeat(4, 1fr);\n    }\n}");
 
@@ -1486,5 +1652,5 @@ TunePadIcon.ELEMENT = "tunepad-icon";
 
 customElements.define(Dial.ELEMENT, Dial);
 
-export { ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, TunePadIcon, toInt, toNum };
+export { CircleOfFifths, ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, TunePadIcon, toInt, toNum };
 //# sourceMappingURL=index.js.map
