@@ -99,6 +99,7 @@
 
 .felt {
     fill: #a00;
+    fill: #0009;
 }
 
 .animated-slide {
@@ -118,16 +119,12 @@
     background-color: transparent;
     border: none;
     outline: none;
-    color: #fffc;
-    font-size: 14px;
+    color: #fffa;
+    font-size: 20px;
     user-select: none;
-    width: 12px;
+    width: 15px;
     padding: 0;
-    height: 100%;
-    position: absolute;
-    top: 0;
+    min-height: 100%;
 }
-.octave-button:hover { color: #fff; }
+.octave-button:hover { color: white; }
 .octave-button:active { color: rgb(121, 216, 245); }
-#down-octave { left: 0; }
-#up-octave { right: 0; }
