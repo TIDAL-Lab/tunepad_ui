@@ -16,14 +16,18 @@ import iconCheck from './icon-check.svg';
 import iconCopy from './icon-copy.svg';
 import iconCrossCircle from './icon-cross-circle.svg'
 import iconError from './icon-error.svg';
+import iconGear from './icon-gear.svg';
 import iconHistory from './icon-history.svg';
 import iconLock from './icon-lock.svg';
 import iconMidiRoll from './icon-midiroll.svg'
 import iconMinus from './icon-minus.svg';
 import iconMusic from './icon-music.svg';
+import iconPause from './icon-pause.svg';
 import iconPiano from './icon-piano.svg';
 import iconPlay from './icon-play.svg';
+import iconPlus from './icon-plus.svg';
 import iconRecompile from './icon-recompile.svg';
+import iconStop from './icon-stop.svg';
 import iconTrash from './icon-trash.svg';
 import iconWaveform from './icon-waveform.svg';
 
@@ -36,16 +40,20 @@ import iconWaveform from './icon-waveform.svg';
  * * copy
  * * cross-circle
  * * error
+ * * gear
  * * history
  * * lock
  * * midi
  * * midiroll
  * * minus
  * * music
+ * * pause
  * * piano
  * * play
+ * * plus
  * * recompile
  * * score
+ * * stop
  * * trash
  * * waveform
  */
@@ -74,20 +82,26 @@ export class TunePadIcon extends HTMLElement {
                 case 'copy': this.div.innerHTML = iconCopy; break;
                 case 'cross-circle': this.div.innerHTML = iconCrossCircle; break;
                 case 'error': this.div.innerHTML = iconError; break;
+                case 'gear': this.div.innerHTML = iconGear; break;
                 case 'history': this.div.innerHTML = iconHistory; break;
                 case 'lock': this.div.innerHTML = iconLock; break;
                 case 'midi': this.div.innerHTML = iconMidiRoll; break;
                 case 'midiroll': this.div.innerHTML = iconMidiRoll; break;
                 case 'minus': this.div.innerHTML = iconMinus; break;
                 case 'music': this.div.innerHTML = iconMusic; break;
+                case 'pause' : this.div.innerHTML = iconPause; break;
                 case 'piano' : this.div.innerHTML = iconPiano; break;
                 case 'play': this.div.innerHTML = iconPlay; break;
+                case 'plus': this.div.innerHTML = iconPlus; break;
                 case 'recompile': this.div.innerHTML = iconRecompile; break;
                 case 'score': this.div.innerHTML = iconMusic; break;
+                case 'stop': this.div.innerHTML = iconStop; break;
                 case 'trash': this.div.innerHTML = iconTrash; break;
                 case 'waveform': this.div.innerHTML = iconWaveform; break;
                 default: this.div.innerHTML = '';
             }
+            const svg = this.div.querySelector('svg');
+            if (svg) svg.style.width = '100%';
         }
     }
 }
