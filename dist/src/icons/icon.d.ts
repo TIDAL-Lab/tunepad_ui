@@ -7,16 +7,20 @@
  * * copy
  * * cross-circle
  * * error
+ * * gear
  * * history
  * * lock
  * * midi
  * * midiroll
  * * minus
  * * music
+ * * pause
  * * piano
  * * play
+ * * plus
  * * recompile
  * * score
+ * * stop
  * * trash
  * * waveform
  */

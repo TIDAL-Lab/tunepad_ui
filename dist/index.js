@@ -306,7 +306,7 @@ class ContextMenuItem extends HTMLElement {
 ContextMenuItem.ELEMENT = "context-menu-item";
 ContextMenuItem.observedAttributes = ["name", "icon", "action", "disabled", "checked"];
 
-const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync(":host {\n    width: 370px;\n    height: 370px;\n    display: block;\n}\n\n.container svg {\n    width: 100%;\n    height: auto;\n}\n\ncircle {\n    stroke-width: 3;\n    stroke: black;\n    fill: none;\n}\n\ncircle.center {\n    fill: white;\n}\n\ncircle.major {\n    fill: #eee;\n}\n\ncircle.minor {\n    fill: white;\n}\n\nline.arc {\n    stroke-width: 3;\n    stroke: black;\n}\n\ntext {\n    text-anchor: middle;\n    dominant-baseline: central;\n    font-family: sans-serif;\n    font-size: 34px;\n    font-weight: bold;\n    user-select: none;\n    pointer-events: none;\n}\n\ntext.minor {\n    font-size: 25px;\n    font-weight: bold;\n}\n\ntext.selection {\n    font-size: 34px;\n}\n\n.accidental {\n    font-size: 60%;\n}\n\npath {\n    fill: rgba(255, 255, 255, 0);\n    stroke: none;\n}\n\npath:hover {\n    fill: rgba(0, 200, 255, 0.5);\n}\n\npath:active {\n    fill: rgba(0, 200, 255, 1.0);\n}\n\npath.minor:hover {\n    fill: rgba(255, 165, 0, 0.5);    \n}\n\npath.minor:active {\n    fill: orange  \n}");
+const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync(":host {\n    width: 370px;\n    height: 370px;\n    display: block;\n}\n\n.container svg {\n    width: 100%;\n    height: auto;\n}\n\ncircle {\n    stroke-width: 3;\n    stroke: black;\n    fill: none;\n}\n\ncircle.center {\n    fill: white;\n}\n\ncircle.major {\n    fill: #eee;\n}\n\ncircle.minor {\n    fill: white;\n}\n\nline.arc {\n    stroke-width: 3;\n    stroke: black;\n}\n\ntext {\n    text-anchor: middle;\n    dominant-baseline: central;\n    font-family: sans-serif;\n    font-size: 34px;\n    font-weight: bold;\n    user-select: none;\n    pointer-events: none;\n}\n\ntext.minor {\n    font-size: 25px;\n    font-weight: bold;\n}\n\ntext.selection {\n    font-size: 34px;\n}\n\n.accidental {\n    font-size: 60%;\n}\n\npath {\n    fill: rgba(255, 255, 255, 0);\n    stroke: none;\n}\n\npath:hover {\n    fill: rgba(0, 200, 255, 0.5);\n}\n\npath:active, path.highlight {\n    fill: rgba(0, 200, 255, 1.0);\n}\n\npath.minor:hover {\n    fill: rgba(255, 165, 0, 0.5);    \n}\n\npath.minor:active, path.minor.highlight {\n    fill: orange  \n}\n\n");
 
 var html$4 = "<div class=\"container\">\n    <svg version=\"1.1\" viewBox=\"-250 -250 500 500\" xmlns=\"http://www.w3.org/2000/svg\">\n    </svg>\n</div>\n";
 
@@ -325,7 +325,7 @@ var html$4 = "<div class=\"container\">\n    <svg version=\"1.1\" viewBox=\"-250
 /**
  * Circle of fifths selection component:
  *
- * <circle-of-fifths selected="C"></circle-of-fifths>
+ * <circle-of-fifths selected="C major"></circle-of-fifths>
  */
 const MAJOR_KEYS = ['C', 'F', 'B♭', 'E♭', 'A♭', 'C♯/D♭', 'F♯/G♭', 'B/C♭', 'E', 'A', 'D', 'G'];
 const MINOR_KEYS = ['A', 'D', 'G', 'C', 'F', 'A♯/B♭', 'D♯/E♭', 'A♭/G♯', 'C♯', 'F♯', 'B', 'E'];
@@ -363,6 +363,7 @@ class CircleOfFifths extends HTMLElement {
     _redraw() {
         this.svg.append(this.circle(0, 0, R1, 'major'));
         this.svg.append(this.circle(0, 0, R2, 'minor'));
+        let current = this.getAttribute('selected') || '';
         const selection = this.text(0, 0, '', 'selection');
         const arc = Math.PI / 6;
         let theta = Math.PI / -2;
@@ -373,20 +374,30 @@ class CircleOfFifths extends HTMLElement {
             const minSelector = this.arc(theta + arc / 2, theta - arc / 2, R2, R3, 'minor');
             this.svg.append(majSelector);
             this.svg.append(minSelector);
+            majSelector.classList.add('selector');
+            minSelector.classList.add('selector');
             majSelector.addEventListener('click', e => {
-                this.emitEvent('selected', majorKey + " major");
+                current = MAJOR_KEYS[i] + " major";
+                this.emitEvent('selected', current);
+                this.setAttribute('selected', current);
+                this.root.querySelectorAll('.selector').forEach(s => s.classList.remove('highlight'));
+                majSelector.classList.add('highlight');
             });
             minSelector.addEventListener('click', e => {
-                this.emitEvent('selected', MINOR_KEYS[i] + " minor");
+                current = MINOR_KEYS[i] + " minor";
+                this.emitEvent('selected', current);
+                this.setAttribute('selected', current);
+                this.root.querySelectorAll('.selector').forEach(s => s.classList.remove('highlight'));
+                minSelector.classList.add('highlight');
             });
             majSelector.addEventListener('pointerenter', e => {
-                selection.innerHTML = majorKey.split('/')[0] + "  Major";
+                selection.innerHTML = majorKey.split('/')[0] + " Major";
             });
             majSelector.addEventListener('pointerleave', e => {
                 selection.innerHTML = '';
             });
             minSelector.addEventListener('pointerenter', e => {
-                selection.innerHTML = minorKey + "  minor";
+                selection.innerHTML = minorKey + " minor";
             });
             minSelector.addEventListener('pointerleave', e => {
                 selection.innerHTML = '';
@@ -1529,21 +1540,29 @@ var iconCrossCircle = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 5
 
 var iconError = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <circle cx=\"256\" cy=\"256\" r=\"250\" fill=\"white\"/>\n    <path d=\"M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z\"/>\n</svg>";
 
+var iconGear = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->\n    <path d=\"M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z\"/>\n</svg>";
+
 var iconHistory = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M10.5,17c-.7,0-1.29-.24-1.78-.73s-.73-1.08-.73-1.78.24-1.29.73-1.78,1.08-.73,1.78-.73c.28,0,.55.04.8.13s.48.21.7.38v-5.5h4v2h-3v5.5c0,.7-.24,1.29-.73,1.78s-1.08.73-1.78.73ZM12,22c-1.38,0-2.68-.26-3.9-.79s-2.28-1.24-3.18-2.14-1.61-1.96-2.14-3.18-.79-2.52-.79-3.9h2c0,1.1.21,2.14.63,3.11s.99,1.83,1.71,2.55,1.58,1.3,2.55,1.73,2.01.64,3.11.64c2.23,0,4.13-.78,5.68-2.33s2.33-3.44,2.33-5.68-.78-4.13-2.33-5.68-3.44-2.33-5.68-2.33c-1.48,0-2.83.36-4.04,1.09s-2.16,1.69-2.86,2.89h2.9v2H2V4h2v2c.92-1.22,2.07-2.19,3.45-2.91,1.38-.73,2.9-1.09,4.55-1.09,1.38,0,2.68.26,3.9.79s2.28,1.24,3.18,2.14,1.61,1.96,2.14,3.18.79,2.52.79,3.9-.26,2.68-.79,3.9-1.24,2.28-2.14,3.18-1.96,1.61-3.18,2.14-2.52.79-3.9.79Z\"/>\n</svg>";
 
 var iconLock = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M180.11,149.75v45.54h151.79v-45.54c0-41.93-33.96-75.89-75.89-75.89s-75.89,33.96-75.89,75.89ZM119.39,195.29v-45.54c0-75.42,61.19-136.61,136.61-136.61s136.61,61.19,136.61,136.61v45.54h15.18c33.49,0,60.71,27.23,60.71,60.71v182.14c0,33.49-27.23,60.71-60.71,60.71H104.21c-33.49,0-60.71-27.23-60.71-60.71v-182.14c0-33.49,27.23-60.71,60.71-60.71h15.18Z\"/>\n</svg>";
 
 var iconMidiRoll = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M412,223\"/>\n  <rect y=\"8\" width=\"510.85\" height=\"68.04\"/>\n  <rect y=\"150.42\" width=\"398.17\" height=\"68.04\"/>\n  <rect x=\"212.7\" y=\"292.84\" width=\"298.15\" height=\"68.04\"/>\n  <rect y=\"435.26\" width=\"510.85\" height=\"68.04\"/>\n</svg>";
 
-var iconMinus = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\">\n<path d=\"M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z\"/>\n</svg>";
+var iconMinus = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M502,256c0,21.06-17.02,38.08-38.08,38.08H45.08c-21.06,0-38.08-17.02-38.08-38.08s17.02-38.08,38.08-38.08h418.85c21.06,0,38.08,17.02,38.08,38.08Z\"/>\n</svg>";
 
 var iconMusic = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->\n    <path d=\"M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z\"/>\n</svg>";
 
+var iconPause = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M106.67,0C71.33,0,42.67,28.67,42.67,64v384c0,35.33,28.67,64,64,64h42.67c35.33,0,64-28.67,64-64V64C213.33,28.67,184.67,0,149.33,0h-42.67ZM362.67,0c-35.33,0-64,28.67-64,64v384c0,35.33,28.67,64,64,64h42.67c35.33,0,64-28.67,64-64V64c0-35.33-28.67-64-64-64h-42.67Z\"/>\n</svg>";
+
 var iconPiano = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"svg2\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" version=\"1.1\" viewBox=\"0 0 100 100\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <defs>\n    <style>\n      .st0 {\n        fill: #fff;\n      }\n\n      .st1 {\n        display: none;\n      }\n    </style>\n  </defs>\n  <sodipodi:namedview id=\"namedview12\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg2\" inkscape:cx=\"57.141381\" inkscape:cy=\"50\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"480\" inkscape:window-maximized=\"0\" inkscape:window-width=\"770\" inkscape:window-x=\"43\" inkscape:window-y=\"1\" inkscape:zoom=\"2.6457812\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"/>\n  <g id=\"g4\" class=\"st1\">\n    <rect id=\"rect6\" x=\"-728\" y=\"-227\" width=\"1158\" height=\"397\"/>\n  </g>\n  <path id=\"path4506\" class=\"st0\" d=\"M93.4,94h0V5.55h-18.43v52.87h-7.16v35.59h25.59ZM64.64,94v-35.59h-8.29V5.55h-11.23v52.87h-7.2v35.59h26.73ZM34.78,94h0v-35.59h-8.29V5.55H8.06v88.45h26.72Z\" inkscape:connector-curvature=\"0\" sodipodi:nodetypes=\"ccccccccccccccccccccccccc\"/>\n</svg>";
 
-var iconPlay = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M142,39c-14.8-9.1-33.4-9.4-48.5-.9-15.1,8.5-24.5,24.5-24.5,41.9v352c0,17.4,9.4,33.4,24.5,41.9,15.1,8.5,33.7,8.1,48.5-.9l288-176c14.3-8.7,23-24.2,23-41s-8.7-32.2-23-41L142,39Z\"/>\n</svg>";
+var iconPlay = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M120.02,8.06c-16.91-10.4-38.16-10.74-55.42-1.03-17.25,9.71-28,28-28,47.88v402.21c0,19.88,10.74,38.16,28,47.88s38.51,9.26,55.42-1.03l329.08-201.11c16.34-9.94,26.28-27.65,26.28-46.85s-9.94-36.79-26.28-46.85L120.02,8.06Z\"/>\n</svg>";
 
-var iconRecompile = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n    <path d=\"M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z\"/>\n</svg>";
+var iconPlus = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M463.92,217.92h-175.85V46.58c0-21.06-17.02-38.08-38.08-38.08s-38.08,17.02-38.08,38.08v171.35H45.08c-21.06,0-38.08,17.02-38.08,38.08s17.02,38.08,38.08,38.08h166.85v171.35c0,21.06,17.02,38.08,38.08,38.08s38.08-17.02,38.08-38.08v-171.35h175.85c21.06,0,38.08-17.02,38.08-38.08s-17.02-38.08-38.08-38.08Z\"/>\n</svg>";
+
+var iconRecompile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M95.87,199.35c8.17-23.14,21.44-44.9,40.13-63.48,66.35-66.35,173.88-66.35,240.23,0l18.15,18.26h-36.41c-18.79,0-33.97,15.18-33.97,33.97s15.18,33.97,33.97,33.97h118.79c18.79,0,33.97-15.18,33.97-33.97v-118.89c0-18.79-15.18-33.97-33.97-33.97s-33.97,15.18-33.97,33.97v37.37l-18.58-18.68C331.32-4.99,180.79-4.99,87.91,87.89c-25.9,25.9-44.58,56.37-56.05,88.96-6.26,17.73,3.08,37.05,20.7,43.31,17.62,6.26,37.05-3.08,43.31-20.7v-.11ZM25.7,291.39c-5.31,1.59-10.4,4.46-14.54,8.7-4.25,4.25-7.11,9.34-8.6,14.86-.32,1.27-.64,2.65-.85,4.03-.32,1.8-.42,3.61-.42,5.41v118.47c0,18.79,15.18,33.97,33.97,33.97s33.97-15.18,33.97-33.97v-37.26l18.68,18.58h0c92.88,92.78,243.41,92.78,336.19,0,25.9-25.9,44.69-56.37,56.16-88.85,6.26-17.73-3.08-37.05-20.7-43.31-17.62-6.26-37.05,3.08-43.31,20.7-8.17,23.14-21.44,44.9-40.13,63.48-66.35,66.35-173.88,66.35-240.23,0l-.11-.11-18.15-18.15h36.52c18.79,0,33.97-15.18,33.97-33.97s-15.18-33.97-33.97-33.97H35.68c-1.7,0-3.4.11-5.1.32s-3.29.53-4.88,1.06Z\"/>\n</svg>";
+
+var iconStop = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <rect x=\"13.82\" y=\"13.82\" width=\"484.36\" height=\"484.36\" rx=\"29.9\" ry=\"29.9\"/>\n</svg>";
 
 var iconTrash = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M174.93,38.44l-6.57,13.06h-87.64c-16.16,0-29.21,13.06-29.21,29.21s13.06,29.21,29.21,29.21h350.57c16.16,0,29.21-13.06,29.21-29.21s-13.06-29.21-29.21-29.21h-87.64l-6.57-13.06c-4.93-9.95-15.06-16.16-26.11-16.16h-109.92c-11.05,0-21.18,6.21-26.11,16.16ZM431.29,139.14H80.71l19.35,309.49c1.46,23.1,20.63,41.08,43.73,41.08h224.4c23.1,0,42.27-17.99,43.73-41.08l19.35-309.49Z\"/>\n</svg>";
 
@@ -1570,16 +1589,20 @@ var iconWaveform = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_
  * * copy
  * * cross-circle
  * * error
+ * * gear
  * * history
  * * lock
  * * midi
  * * midiroll
  * * minus
  * * music
+ * * pause
  * * piano
  * * play
+ * * plus
  * * recompile
  * * score
+ * * stop
  * * trash
  * * waveform
  */
@@ -1606,6 +1629,9 @@ class TunePadIcon extends HTMLElement {
                 case 'error':
                     this.div.innerHTML = iconError;
                     break;
+                case 'gear':
+                    this.div.innerHTML = iconGear;
+                    break;
                 case 'history':
                     this.div.innerHTML = iconHistory;
                     break;
@@ -1624,17 +1650,26 @@ class TunePadIcon extends HTMLElement {
                 case 'music':
                     this.div.innerHTML = iconMusic;
                     break;
+                case 'pause':
+                    this.div.innerHTML = iconPause;
+                    break;
                 case 'piano':
                     this.div.innerHTML = iconPiano;
                     break;
                 case 'play':
                     this.div.innerHTML = iconPlay;
                     break;
+                case 'plus':
+                    this.div.innerHTML = iconPlus;
+                    break;
                 case 'recompile':
                     this.div.innerHTML = iconRecompile;
                     break;
                 case 'score':
                     this.div.innerHTML = iconMusic;
+                    break;
+                case 'stop':
+                    this.div.innerHTML = iconStop;
                     break;
                 case 'trash':
                     this.div.innerHTML = iconTrash;
@@ -1644,6 +1679,9 @@ class TunePadIcon extends HTMLElement {
                     break;
                 default: this.div.innerHTML = '';
             }
+            const svg = this.div.querySelector('svg');
+            if (svg)
+                svg.style.width = '100%';
         }
     }
 }
