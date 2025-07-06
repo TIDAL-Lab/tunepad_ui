@@ -64,7 +64,7 @@ path:hover {
     fill: rgba(0, 200, 255, 0.5);
 }
 
-path:active {
+path:active, path.highlight {
     fill: rgba(0, 200, 255, 1.0);
 }
 
@@ -72,6 +72,7 @@ path.minor:hover {
     fill: rgba(255, 165, 0, 0.5);    
 }
 
-path.minor:active {
+path.minor:active, path.minor.highlight {
     fill: orange  
 }
+

@@ -16,7 +16,7 @@ import html from './fifths.module.html';
 /**
  * Circle of fifths selection component:
  * 
- * <circle-of-fifths selected="C"></circle-of-fifths>
+ * <circle-of-fifths selected="C major"></circle-of-fifths>
  */
 
 const MAJOR_KEYS = [ 'C', 'F', 'B♭', 'E♭', 'A♭', 'C♯/D♭', 'F♯/G♭', 'B/C♭',  'E',  'A',  'D', 'G' ];
@@ -55,10 +55,7 @@ export class CircleOfFifths extends HTMLElement {
     /**
      * When an attribute is changed on our custom component, this gets fired...
      */
-    attributeChangedCallback(name : string, oldValue : string, newValue : string) {
-        if (name === 'selected') {
-        }
-    }
+    attributeChangedCallback(name : string, oldValue : string, newValue : string) { }
 
     /**
      * Fire custom events whenever the value is changed by the user
@@ -77,6 +74,7 @@ export class CircleOfFifths extends HTMLElement {
     _redraw() {
         this.svg.append(this.circle(0, 0, R1, 'major'));
         this.svg.append(this.circle(0, 0, R2, 'minor'));
+        let current = this.getAttribute('selected') || '';
         const selection = this.text(0, 0, '', 'selection');
         const arc = Math.PI / 6;
         let theta = Math.PI / -2;
@@ -88,21 +86,33 @@ export class CircleOfFifths extends HTMLElement {
             const minSelector = this.arc(theta + arc/2, theta - arc/2, R2, R3, 'minor');
             this.svg.append(majSelector);
             this.svg.append(minSelector);
+            majSelector.classList.add('selector');
+            minSelector.classList.add('selector');
+            if ((MAJOR_KEYS[i] + " major") === current) majSelector.classList.add('highlight');
+            if ((MINOR_KEYS[i] + " minor") === current) minSelector.classList.add('highlight');
 
             majSelector.addEventListener('click', e => {
-                this.emitEvent('selected', majorKey + " major")
+                current = MAJOR_KEYS[i] + " major";
+                this.emitEvent('selected', current);
+                this.setAttribute('selected', current);
+                this.root.querySelectorAll('.selector').forEach(s => s.classList.remove('highlight'));
+                majSelector.classList.add('highlight');
             });
             minSelector.addEventListener('click', e => {
-                this.emitEvent('selected', MINOR_KEYS[i] + " minor");
+                current = MINOR_KEYS[i] + " minor";
+                this.emitEvent('selected', current);
+                this.setAttribute('selected', current);
+                this.root.querySelectorAll('.selector').forEach(s => s.classList.remove('highlight'));
+                minSelector.classList.add('highlight');
             });
             majSelector.addEventListener('pointerenter', e => {
-                selection.innerHTML = majorKey.split('/')[0] + "  Major";
+                selection.innerHTML = majorKey.split('/')[0] + " Major";
             });
             majSelector.addEventListener('pointerleave', e => {
                 selection.innerHTML = '';
             });
             minSelector.addEventListener('pointerenter', e => {
-                selection.innerHTML = minorKey + "  minor";
+                selection.innerHTML = minorKey + " minor";
             });
             minSelector.addEventListener('pointerleave', e => {
                 selection.innerHTML = '';
