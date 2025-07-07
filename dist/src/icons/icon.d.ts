@@ -3,6 +3,7 @@
  * <tunepad-icon icon="trash"></tunepad-icon>
  * ```
  * ### Available Icons
+ * * autocompile
  * * checkmark
  * * copy
  * * cross-circle
