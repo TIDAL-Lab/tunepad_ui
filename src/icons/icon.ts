@@ -12,6 +12,7 @@
  */
 import html from './icon.module.html';
 
+import iconAutocompile from './icon-autocompile.svg';
 import iconCheck from './icon-check.svg';
 import iconCopy from './icon-copy.svg';
 import iconCrossCircle from './icon-cross-circle.svg'
@@ -36,6 +37,7 @@ import iconWaveform from './icon-waveform.svg';
  * <tunepad-icon icon="trash"></tunepad-icon>
  * ```
  * ### Available Icons
+ * * autocompile
  * * checkmark
  * * copy
  * * cross-circle
@@ -78,6 +80,7 @@ export class TunePadIcon extends HTMLElement {
     attributeChangedCallback(name : string, oldValue : string, newValue : string) {
         if (name === 'icon' && newValue != oldValue) {
             switch (newValue) {
+                case 'autocompile': this.div.innerHTML = iconAutocompile; break;
                 case 'checkmark': this.div.innerHTML = iconCheck; break;
                 case 'copy': this.div.innerHTML = iconCopy; break;
                 case 'cross-circle': this.div.innerHTML = iconCrossCircle; break;
