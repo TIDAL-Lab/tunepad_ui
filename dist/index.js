@@ -1,6 +1,6 @@
-const sheet$5 = new CSSStyleSheet();sheet$5.replaceSync("#ring {\n    fill: #3e3e3c;\n    stroke: none;\n}\n.track {\n    fill: #181818;\n    stroke: black;\n    stroke-width: 1.5;\n}\n#arc {\n    stroke: #7ff;\n    stroke-width: 7;\n    fill: none;\n}\n.active #arc {\n    stroke: white;\n}\n#pointer {\n    stroke: #ddd;\n    stroke-width: 6;\n    pointer-events: none;\n}\n#container {\n    max-width: 100px;\n    user-select: none;\n}\n.tick {\n    fill: #999;\n}\n.cover {\n    fill: #fff2;\n    stroke: #fff1;\n    stroke-width: 4;\n    pointer-events: none;\n}");
+const sheet$6 = new CSSStyleSheet();sheet$6.replaceSync("#ring {\n    fill: #3e3e3c;\n    stroke: none;\n}\n.track {\n    fill: #181818;\n    stroke: black;\n    stroke-width: 1.5;\n}\n#arc {\n    stroke: #7ff;\n    stroke-width: 7;\n    fill: none;\n}\n.active #arc {\n    stroke: white;\n}\n#pointer {\n    stroke: #ddd;\n    stroke-width: 6;\n    pointer-events: none;\n}\n#container {\n    max-width: 100px;\n    user-select: none;\n}\n.tick {\n    fill: #999;\n}\n.cover {\n    fill: #fff2;\n    stroke: #fff1;\n    stroke-width: 4;\n    pointer-events: none;\n}");
 
-var html$5 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
+var html$6 = "<div id=\"container\">\n    <svg version=\"1.1\" viewBox=\"-50 -50 100 100\">\n        <g transform=\"rotate(135, 0, 0)\">\n            <circle class=\"track\" cx=\"0\" cy=\"0\" r=\"49\"/>\n            <path id=\"arc\" d=\"\"/>\n            <circle id=\"ring\" cx=\"0\" cy=\"0\" r=\"36\"/>\n            <line id=\"pointer\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"46\"/>\n            <circle class=\"cover\" cx=\"0\" cy=\"0\" r=\"27\"/>\n            <circle class=\"tick\" cx=\"55\" cy=\"0\" r=\"4\"/>\n            <circle class=\"tick\" cx=\"0\" cy=\"-55\" r=\"4\"/>\n        </g>\n    </svg>\n</div>\n";
 
 /*
  * TunePad
@@ -46,8 +46,8 @@ class Dial extends HTMLElement {
         this._value = 0.0;
         this._startVal = 0.0;
         this.root = this.attachShadow({ mode: 'open' });
-        this.root.adoptedStyleSheets.push(sheet$5);
-        this.root.innerHTML = html$5;
+        this.root.adoptedStyleSheets.push(sheet$6);
+        this.root.innerHTML = html$6;
         this.container = this.root.querySelector('#container');
         this.ring = this.root.querySelector('#ring');
         this.line = this.root.querySelector('#pointer');
@@ -143,7 +143,7 @@ Dial.observedAttributes = [
     'value'
 ];
 
-const sheet$4 = new CSSStyleSheet();sheet$4.replaceSync(".menu-container {\n  position: relative;\n}\n\ncontext-menu {\n    position: absolute;\n    background-color: white;\n    border: 1px solid #0001;\n    border-radius: 8px;\n    padding: 8px 0;\n    z-index: 100;\n    display: flex;\n    flex-direction: column;\n    min-width: 200px;\n    box-shadow: 0px 3px 5px #0005;\n    -webkit-touch-callout: none;\n    user-select: none;\n    margin: 0;\n}\ncontext-menu.hidden { display: none; }\ncontext-menu:hover { cursor: pointer; }\ncontext-menu.terminal {\n    max-height: 70vh;\n    overflow-y: auto !important;\n}\ncontext-menu.open-up {\n  bottom: 30px;\n}\ncontext-menu-item {\n    line-height: 140%;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    font-weight: normal;\n    color: #3C4E60;\n    outline: none;\n    border: none;\n    padding: 5px 20px 5px 10px;\n    white-space: nowrap;\n    position: relative;\n    text-align: left;\n}\ncontext-menu-item:hover { background: rgba(0, 0, 0, 0.15); }\ncontext-menu-item:active { background: rgba(0, 0, 0, 0.2); }\ncontext-menu-item.highlight { background: rgba(0, 0, 0, 0.085); }\ncontext-menu-item.disabled { color: #aaa; }\ncontext-menu-item.disabled:hover { background-color: transparent; }\ncontext-menu-item.disabled:active { background-color: transparent; }\ncontext-menu-item.disabled .icon { opacity: 0.3; }\ncontext-menu-item.hidden { display: none; }\ncontext-menu-item > context-menu { left: 98%; top: -10px; }\n\ncontext-menu-item .icon {\n    width: 1.1rem;\n    height: 1.1rem;\n    margin: 0 1rem 0 0.1rem;\n    opacity: 1.0;\n}\ncontext-menu-item .expand {\n  text-align: right;\n  position: relative;\n  left: 5px;\n  font-size: 90%;\n  width: 2em;\n  flex: 1;\n}\ncontext-menu-item .checkmark {\n  width: 1.1rem;\n  height: 1.1rem;\n  margin: 0;\n  display: none;\n}\ncontext-menu-item[checked=\"true\"] .checkmark {\n  display: block;\n}\ncontext-menu-item:has(context-menu-item[checked=\"true\"]) {\n  background-color: #0002;\n}\ncontext-menu-item .name {\n  flex: 1;\n}\ncontext-menu-item .expand::before {\n  content: \"▸\";\n  font-size: 17px;\n  color: rgba(0,0,0,0.6);\n  font-weight: 600;\n}\n.menu-separator {\n    border-top: 1px solid #0005;\n    margin: 10px;\n    height: 2px;\n}");
+const sheet$5 = new CSSStyleSheet();sheet$5.replaceSync(".menu-container {\n  position: relative;\n}\n\ncontext-menu {\n    position: absolute;\n    background-color: white;\n    border: 1px solid #0001;\n    border-radius: 8px;\n    padding: 8px 0;\n    z-index: 100;\n    display: flex;\n    flex-direction: column;\n    min-width: 200px;\n    box-shadow: 0px 3px 5px #0005;\n    -webkit-touch-callout: none;\n    user-select: none;\n    margin: 0;\n}\ncontext-menu.hidden { display: none; }\ncontext-menu:hover { cursor: pointer; }\ncontext-menu.terminal {\n    max-height: 70vh;\n    overflow-y: auto !important;\n}\ncontext-menu.open-up {\n  bottom: 30px;\n}\ncontext-menu-item {\n    line-height: 140%;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    font-weight: normal;\n    color: #3C4E60;\n    outline: none;\n    border: none;\n    padding: 5px 20px 5px 10px;\n    white-space: nowrap;\n    position: relative;\n    text-align: left;\n}\ncontext-menu-item:hover { background: rgba(0, 0, 0, 0.15); }\ncontext-menu-item:active { background: rgba(0, 0, 0, 0.2); }\ncontext-menu-item.highlight { background: rgba(0, 0, 0, 0.085); }\ncontext-menu-item.disabled { color: #aaa; }\ncontext-menu-item.disabled:hover { background-color: transparent; }\ncontext-menu-item.disabled:active { background-color: transparent; }\ncontext-menu-item.disabled .icon { opacity: 0.3; }\ncontext-menu-item.hidden { display: none; }\ncontext-menu-item > context-menu { left: 98%; top: -10px; }\n\ncontext-menu-item .icon {\n    width: 1.1rem;\n    height: 1.1rem;\n    margin: 0 1rem 0 0.1rem;\n    opacity: 1.0;\n}\ncontext-menu-item .expand {\n  text-align: right;\n  position: relative;\n  left: 5px;\n  font-size: 90%;\n  width: 2em;\n  flex: 1;\n}\ncontext-menu-item .checkmark {\n  width: 1.1rem;\n  height: 1.1rem;\n  margin: 0;\n  display: none;\n}\ncontext-menu-item[checked=\"true\"] .checkmark {\n  display: block;\n}\ncontext-menu-item:has(context-menu-item[checked=\"true\"]) {\n  background-color: #0002;\n}\ncontext-menu-item .name {\n  flex: 1;\n}\ncontext-menu-item .expand::before {\n  content: \"▸\";\n  font-size: 17px;\n  color: rgba(0,0,0,0.6);\n  font-weight: 600;\n}\n.menu-separator {\n    border-top: 1px solid #0005;\n    margin: 10px;\n    height: 2px;\n}");
 
 var iconCheck = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z\"/></svg>";
 
@@ -179,7 +179,7 @@ var iconCheck = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512
  * </context-menu>
  * ```
  */
-const ContextMenuStyles = sheet$4;
+const ContextMenuStyles = sheet$5;
 class ContextMenu extends HTMLElement {
     constructor() {
         super();
@@ -306,9 +306,9 @@ class ContextMenuItem extends HTMLElement {
 ContextMenuItem.ELEMENT = "context-menu-item";
 ContextMenuItem.observedAttributes = ["name", "icon", "action", "disabled", "checked"];
 
-const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync(":host {\n    width: 370px;\n    height: 370px;\n    display: block;\n}\n\n.container svg {\n    width: 100%;\n    height: auto;\n}\n\ncircle {\n    stroke-width: 3;\n    stroke: black;\n    fill: none;\n}\n\ncircle.center {\n    fill: white;\n}\n\ncircle.major {\n    fill: #eee;\n}\n\ncircle.minor {\n    fill: white;\n}\n\nline.arc {\n    stroke-width: 3;\n    stroke: black;\n}\n\ntext {\n    text-anchor: middle;\n    dominant-baseline: central;\n    font-family: sans-serif;\n    font-size: 34px;\n    font-weight: bold;\n    user-select: none;\n    pointer-events: none;\n}\n\ntext.minor {\n    font-size: 25px;\n    font-weight: bold;\n}\n\ntext.selection {\n    font-size: 34px;\n}\n\n.accidental {\n    font-size: 60%;\n}\n\npath {\n    fill: rgba(255, 255, 255, 0);\n    stroke: none;\n}\n\npath:hover {\n    fill: rgba(0, 200, 255, 0.5);\n}\n\npath:active, path.highlight {\n    fill: rgba(0, 200, 255, 1.0);\n}\n\npath.minor:hover {\n    fill: rgba(255, 165, 0, 0.5);    \n}\n\npath.minor:active, path.minor.highlight {\n    fill: orange  \n}\n\n");
+const sheet$4 = new CSSStyleSheet();sheet$4.replaceSync(":host {\n    width: 370px;\n    height: 370px;\n    display: block;\n}\n\n.container svg {\n    width: 100%;\n    height: auto;\n}\n\ncircle {\n    stroke-width: 3;\n    stroke: black;\n    fill: none;\n}\n\ncircle.center {\n    fill: white;\n}\n\ncircle.major {\n    fill: #eee;\n}\n\ncircle.minor {\n    fill: white;\n}\n\nline.arc {\n    stroke-width: 3;\n    stroke: black;\n}\n\ntext {\n    text-anchor: middle;\n    dominant-baseline: central;\n    font-family: sans-serif;\n    font-size: 34px;\n    font-weight: bold;\n    user-select: none;\n    pointer-events: none;\n}\n\ntext.minor {\n    font-size: 25px;\n    font-weight: bold;\n}\n\ntext.selection {\n    font-size: 34px;\n}\n\n.accidental {\n    font-size: 60%;\n}\n\npath {\n    fill: rgba(255, 255, 255, 0);\n    stroke: none;\n}\n\npath:hover {\n    fill: rgba(0, 200, 255, 0.5);\n}\n\npath:active, path.highlight {\n    fill: rgba(0, 200, 255, 1.0);\n}\n\npath.minor:hover {\n    fill: rgba(255, 165, 0, 0.5);    \n}\n\npath.minor:active, path.minor.highlight {\n    fill: orange  \n}\n\n");
 
-var html$4 = "<div class=\"container\">\n    <svg version=\"1.1\" viewBox=\"-250 -250 500 500\" xmlns=\"http://www.w3.org/2000/svg\">\n    </svg>\n</div>\n";
+var html$5 = "<div class=\"container\">\n    <svg version=\"1.1\" viewBox=\"-250 -250 500 500\" xmlns=\"http://www.w3.org/2000/svg\">\n    </svg>\n</div>\n";
 
 /*
  * TunePad
@@ -336,8 +336,8 @@ class CircleOfFifths extends HTMLElement {
     constructor() {
         super();
         this.root = this.attachShadow({ mode: 'open' });
-        this.root.adoptedStyleSheets.push(sheet$3);
-        this.root.innerHTML = html$4;
+        this.root.adoptedStyleSheets.push(sheet$4);
+        this.root.innerHTML = html$5;
         this.svg = this.root.querySelector('svg');
     }
     connectedCallback() {
@@ -485,6 +485,10 @@ class CircleOfFifths extends HTMLElement {
 }
 CircleOfFifths.ELEMENT = "circle-of-fifths";
 CircleOfFifths.observedAttributes = ["selected"];
+
+const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync("dialog[is=\"pass-phrase\"] {\n    width: fit-content;\n    height: 350px;\n    padding: 1em;\n    font-size: 30px;\n    outline: none;\n    border: none;\n    box-shadow: 3px 3px 3px 3px #0003;\n    border-radius: 8px;\n    position: relative;\n}\n\ndialog[is=\"pass-phrase\"] h1 {\n    font-family: sans-serif;\n    margin: 0.5em;\n    font-size: 25px;\n}\n\ndialog[is=\"pass-phrase\"] .digits {\n    display: flex;\n}\n\ndialog[is=\"pass-phrase\"] .digit {\n    width: 80px;\n    height: 80px;\n    border-radius: 8px;\n    border: 2px solid rgb(210, 210, 210);\n    margin: 0.5em;\n    box-shadow: inset 3px 3px 3px #0003;\n    background-color: #eee;\n    color: #bbb;\n    font-family: sans-serif;\n    font-weight: bold;\n    text-align: center;\n    line-height: 80px;\n    font-size: 200%;\n    user-select: none;\n}\n\ndialog[is=\"pass-phrase\"] .digit:hover {\n    background-color: #aaa;\n    animation: blinky 1s linear infinite;\n}\n\ndialog[is=\"pass-phrase\"] .digit.active {\n    border: 2px solid black;\n    background-color: white;\n    animation: blinky 1s linear infinite;\n    filter: grayscale(85%);\n}\n\ndialog[is=\"pass-phrase\"] .emojis {\n    display: flex;\n    flex-direction: column;\n    margin: 0 auto;\n    border: 1px solid #888;\n    width: fit-content;\n    border-radius: 20px;\n    padding: 10px;\n    box-sizing: border-box;\n    box-shadow: 2px 2px 4px #0003;\n    user-select: none;\n}\n\ndialog[is=\"pass-phrase\"] .row { display: flex; }\n\ndialog[is=\"pass-phrase\"] .emoji {\n    margin: 0 0.5rem 1rem 0.5rem;\n    padding: 0.4rem;\n    font-size: 150%;\n    width: 54px;\n    height: 54px;\n    box-sizing: border-box;\n    transition: font-size 100ms;\n    text-align: center;\n}\ndialog[is=\"pass-phrase\"] .emoji:hover { font-size: 200%; }\n\ndialog[is=\"pass-phrase\"] #success,\ndialog[is=\"pass-phrase\"] #fail {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    text-align: center;\n    background-color: white;\n    line-height: 300px;\n    font-size: 80px;\n    z-index: 100;\n    display: none;\n}\n\ndialog[is=\"pass-phrase\"] .container.success #success { display: block; }\ndialog[is=\"pass-phrase\"] .container.fail #fail { display: block; }\n\n@keyframes blinky {\n  0% {\n    color: transparent;\n  }\n  50% {\n    color: #bbb;\n  }\n  100% {\n    color: transparent;\n  }\n}");
+
+var html$4 = "<h1>Enter Passphrase</h1>\n<div class=\"container\">\n    <div id=\"success\">✅</div>\n    <div id=\"fail\">❌</div>\n    <div class=\"digits\"></div>\n    <div class=\"emojis\"></div>\n</div>\n";
 
 const sheet$2 = new CSSStyleSheet();sheet$2.replaceSync("* {\n    box-sizing: border-box;\n}\n\n.instrument {\n    display: grid;\n    grid-template-columns: repeat(8, 1fr);\n}\n\n.wrapper {\n    margin: 0 3px 3px 0;\n    color: white;\n    flex: 1;\n    border-radius: 4px;\n    border: 2px solid #fff1;\n    box-shadow: 3px 3px 3px #0002;\n}\n\n.drum-pad {\n    min-width: 58px;\n    height: 72px;\n    text-align: center;\n    border-radius: 1px;\n    background-color: #fff2;\n    display: flex;\n    flex-direction: column;\n    border: 1px solid #fff5;\n    position: relative;\n}\n.drum-pad:hover { \n    background-color: #fff5;\n    border: 1px solid #fff7;\n}\n.drum-pad.pressed {\n    background-color: #fff7;\n    border: 1px solid #fff7;\n}\n.drum-name {\n    color: #fffa;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-size: 10px;\n    user-select: none;\n    flex: 1;\n    align-content: center;\n}\n.drum-pad:hover .drum-name { color: white; }\n\n.pad-name, .key-hint {\n    font-size: 10px;\n    pointer-events: none;\n    user-select: none;\n    position: absolute;\n    bottom: 3px;\n    color: #fff6;\n}\n.pad-name {\n    font-weight: bold;\n    color: #fffd;\n    left: 3px;\n}\n.key-hint { \n    right: 3px;\n    display: none;\n}\n.key-hint.show {\n    display: block;\n}\n\n.wrapper:has(.drum-pad.pressed[data-note=\"0\"]) {\n    background-color: hsl(0 90 50);\n    box-shadow: 0px 0px 5px hsl(0 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"1\"]) {\n    background-color: hsl(22 90 50);\n    box-shadow: 0px 0px 5px hsl(22 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"2\"]) {\n    background-color: hsl(44 90 50);\n    box-shadow: 0px 0px 5px hsl(44 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"3\"]) {\n    background-color: hsl(66 90 50);\n    box-shadow: 0px 0px 5px hsl(66 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"4\"]) {\n    background-color: hsl(88 90 50);\n    box-shadow: 0px 0px 5px hsl(88 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"5\"]) {\n    background-color: hsl(110 90 50);\n    box-shadow: 0px 0px 5px hsl(110 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"6\"]) {\n    background-color: hsl(132 90 50);\n    box-shadow: 0px 0px 5px hsl(132 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"7\"]) {\n    background-color: hsl(154 90 50);\n    box-shadow: 0px 0px 5px hsl(154 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"8\"]) {\n    background-color: hsl(176 90 50);\n    box-shadow: 0px 0px 5px hsl(176 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"9\"]) {\n    background-color: hsl(198 90 50);\n    box-shadow: 0px 0px 5px hsl(198 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"10\"]) {\n    background-color: hsl(220 90 50);\n    box-shadow: 0px 0px 5px hsl(220 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"11\"]) {\n    background-color: hsl(242 90 50);\n    box-shadow: 0px 0px 5px hsl(242 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"12\"]) {\n    background-color: hsl(264 90 50);\n    box-shadow: 0px 0px 5px hsl(264 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"13\"]) {\n    background-color: hsl(286 90 50);\n    box-shadow: 0px 0px 5px hsl(286 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"14\"]) {\n    background-color: hsl(308 90 50);\n    box-shadow: 0px 0px 5px hsl(308 90 50);\n}\n.wrapper:has(.drum-pad.pressed[data-note=\"15\"]) {\n    background-color: hsl(330 90 50);\n    box-shadow: 0px 0px 5px hsl(330 90 50);\n}\n\n@media screen and (max-width: 650px) {\n    .instrument {\n        grid-template-columns: repeat(4, 1fr);\n    }\n}");
 
@@ -1535,6 +1539,174 @@ function toNum(d, defaultValue = 0) {
     return isNaN(n) ? defaultValue : n;
 }
 
+/*
+ * TunePad
+ *
+ * Michael S. Horn
+ * Northwestern University
+ * michael-horn@northwestern.edu
+ *
+ * This project was funded by the National Science Foundation (grant DRL-1612619).
+ * Any opinions, findings and conclusions or recommendations expressed in this
+ * material are those of the author(s) and do not necessarily reflect the views
+ * of the National Science Foundation (NSF).
+ */
+/**
+ * Passphrase authenticator using emoji selections. Extends HTML dialog element
+ * ```html
+ * <pass-phrase hash="xyz" digits="5"></pass-phrase>
+ * ```
+ * Javascript will need to call passphrase.openModal();
+ */
+const EMOJIS = [
+    '😀', '🦕', '🤩', '🥶', '🐷', '🐶', '🌹', '🌎',
+    '😈', '🔥', '👽', '🤖', '🦊', '🐼', '🌻', '☃️'
+];
+class Passphrase extends HTMLDialogElement {
+    constructor() {
+        super();
+        this.ROWS = 5;
+        this.COLS = 5;
+        this.digits = 5;
+        this.innerHTML = html$4;
+        document.adoptedStyleSheets.push(sheet$3);
+    }
+    connectedCallback() {
+        this.render();
+    }
+    disconnectedCallback() { }
+    /**
+     * When an attribute is changed on our custom component, this gets fired...
+     */
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'digits') {
+            this.digits = toInt(newValue, this.digits);
+        }
+    }
+    render() {
+        const container = this.querySelector('.digits');
+        container.innerHTML = '';
+        for (let i = 0; i < this.digits; i++) {
+            const digit = document.createElement('div');
+            digit.classList.add('digit');
+            digit.setAttribute('tabindex', `${i}`);
+            digit.addEventListener('click', e => { this.setFocus(i); });
+            digit.innerHTML = '?';
+            container.append(digit);
+            if (i === 0)
+                digit.classList.add('active');
+        }
+        const emojis = this.querySelector('.emojis');
+        let row = document.createElement('div');
+        row.classList.add('row');
+        for (let i = 0; i < 16; i++) {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.addEventListener('pointerenter', e => {
+                this.setHTML('.digit.active', EMOJIS[i]);
+            });
+            emoji.addEventListener('pointerleave', e => {
+                this.setHTML('.digit.active', '?');
+            });
+            emoji.addEventListener('click', e => {
+                this.advanceFocus();
+            });
+            emoji.innerHTML = EMOJIS[i];
+            row.append(emoji);
+            if (i === 7 || i === 15)
+                emojis.append(row);
+            if (i === 7) {
+                row = document.createElement('div');
+                row.classList.add('row');
+            }
+        }
+    }
+    reset() {
+        this.querySelectorAll('.digit').forEach(d => d.innerHTML = '?');
+        this.setFocus(0);
+    }
+    async advanceFocus() {
+        const el = this.querySelector('.digit.active');
+        const index = toInt(el?.getAttribute('tabindex'), 0);
+        if (this.isComplete()) {
+            const success = await this.success();
+            if (success) {
+                this.emitEvent('passed', 'true');
+                this.querySelector('.container')?.classList.add('success');
+            }
+            else {
+                this.emitEvent('passed', 'false');
+                this.querySelector('.container')?.classList.add('fail');
+            }
+            setTimeout(() => {
+                this.querySelector('.container')?.classList.remove('success', 'fail');
+                this.reset();
+                if (success)
+                    this.close();
+            }, 700);
+        }
+        (index + 1 >= this.digits) ? this.setFocus(0) : this.setFocus(index + 1);
+    }
+    setFocus(index) {
+        this.querySelectorAll('.digit').forEach(d => { d.classList.remove('active'); });
+        const el = this.querySelector(`.digit[tabindex="${index}"]`);
+        el?.classList.add('active');
+        if (el)
+            el.innerHTML = '?';
+    }
+    setHTML(selector, content) {
+        const el = this.querySelector(selector);
+        if (el)
+            el.innerHTML = content;
+    }
+    isComplete() {
+        let complete = true;
+        this.querySelectorAll('.digit').forEach(d => {
+            if (d.innerHTML === '?') {
+                complete = false;
+                return;
+            }
+        });
+        return complete;
+    }
+    async success() {
+        let digits = [];
+        for (let i = 0; i < this.digits; i++) {
+            const el = this.querySelector(`.digit[tabindex="${i}"]`);
+            if (el) {
+                const emoji = el.innerHTML;
+                let digit = EMOJIS.indexOf(emoji);
+                digits.push(digit);
+            }
+        }
+        const hash = await this.hash(digits.join('-'));
+        //console.log(hash);
+        return (hash === this.getAttribute('hash'));
+    }
+    async hash(key) {
+        /*
+        const encoded = new TextEncoder().encode(key);
+        const buffer = await crypto.subtle.digest("SHA-384", encoded);
+        const array = Array.from(new Uint8Array(buffer));
+        const hash = array.map((b) => b.toString(16).padStart(2, '0')).join('');
+        return hash;
+        */
+        return key;
+    }
+    /**
+     * Fire custom events whenever the value is changed by the user
+     */
+    emitEvent(name, value) {
+        this.dispatchEvent(new CustomEvent(name, {
+            bubbles: true,
+            composed: true,
+            detail: { origin: this, value: value }
+        }));
+    }
+}
+Passphrase.ELEMENT = "pass-phrase";
+Passphrase.observedAttributes = ["phrase", "digits"];
+
 var html = "<div class=\"icon\"></div>";
 
 var iconAutocompile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M95.87,199.35c8.17-23.14,21.44-44.9,40.13-63.48,66.35-66.35,173.88-66.35,240.23,0l18.15,18.26h-36.41c-18.79,0-33.97,15.18-33.97,33.97s15.18,33.97,33.97,33.97h118.79c18.79,0,33.97-15.18,33.97-33.97v-118.89c0-18.79-15.18-33.97-33.97-33.97s-33.97,15.18-33.97,33.97v37.37l-18.58-18.68C331.32-4.99,180.79-4.99,87.91,87.89c-25.9,25.9-44.58,56.37-56.05,88.96-6.26,17.73,3.08,37.05,20.7,43.31,17.62,6.26,37.05-3.08,43.31-20.7v-.11ZM25.7,291.39c-5.31,1.59-10.4,4.46-14.54,8.7-4.25,4.25-7.11,9.34-8.6,14.86-.32,1.27-.64,2.65-.85,4.03-.32,1.8-.42,3.61-.42,5.41v118.47c0,18.79,15.18,33.97,33.97,33.97s33.97-15.18,33.97-33.97v-37.26l18.68,18.58h0c92.88,92.78,243.41,92.78,336.19,0,25.9-25.9,44.69-56.37,56.16-88.85,6.26-17.73-3.08-37.05-20.7-43.31-17.62-6.26-37.05,3.08-43.31,20.7-8.17,23.14-21.44,44.9-40.13,63.48-66.35,66.35-173.88,66.35-240.23,0l-.11-.11-18.15-18.15h36.52c18.79,0,33.97-15.18,33.97-33.97s-15.18-33.97-33.97-33.97H35.68c-1.7,0-3.4.11-5.1.32s-3.29.53-4.88,1.06Z\"/>\n  <circle cx=\"256\" cy=\"256\" r=\"68.18\"/>\n</svg>";
@@ -1698,6 +1870,7 @@ TunePadIcon.observedAttributes = ["icon"];
 TunePadIcon.ELEMENT = "tunepad-icon";
 
 customElements.define(Dial.ELEMENT, Dial);
+customElements.define(Passphrase.ELEMENT, Passphrase, { extends: 'dialog' });
 
-export { CircleOfFifths, ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Piano, TunePadIcon, toInt, toNum };
+export { CircleOfFifths, ContextMenu, ContextMenuItem, ContextMenuStyles, Dial, DrumPad, Marimba, Passphrase, Piano, TunePadIcon, toInt, toNum };
 //# sourceMappingURL=index.js.map
