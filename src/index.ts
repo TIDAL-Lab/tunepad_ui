@@ -1,4 +1,4 @@
-import { Dial } from './components';
+import { Dial, Passphrase } from './components';
 
 export * from './components';
 export * from './instruments';

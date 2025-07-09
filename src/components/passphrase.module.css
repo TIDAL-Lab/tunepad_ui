@@ -1,6 +1,10 @@
+dialog[is="pass-phrase"]::backdrop {
+    background-color: #000a;
+}
+
 dialog[is="pass-phrase"] {
     width: fit-content;
-    height: 350px;
+    height: 430px;
     padding: 1em;
     font-size: 30px;
     outline: none;

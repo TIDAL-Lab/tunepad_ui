@@ -97,6 +97,7 @@ export class Passphrase extends HTMLDialogElement {
                 this.setHTML('.digit.active', '?')
             });
             emoji.addEventListener('click', e => {
+                this.setHTML('.digit.active', EMOJIS[i]);
                 this.advanceFocus();
             });
             emoji.innerHTML = EMOJIS[i];
