@@ -1,0 +1,107 @@
+dialog[is="pass-phrase"] {
+    width: fit-content;
+    height: 350px;
+    padding: 1em;
+    font-size: 30px;
+    outline: none;
+    border: none;
+    box-shadow: 3px 3px 3px 3px #0003;
+    border-radius: 8px;
+    position: relative;
+}
+
+dialog[is="pass-phrase"] h1 {
+    font-family: sans-serif;
+    margin: 0.5em;
+    font-size: 25px;
+}
+
+dialog[is="pass-phrase"] .digits {
+    display: flex;
+}
+
+dialog[is="pass-phrase"] .digit {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    border: 2px solid rgb(210, 210, 210);
+    margin: 0.5em;
+    box-shadow: inset 3px 3px 3px #0003;
+    background-color: #eee;
+    color: #bbb;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    line-height: 80px;
+    font-size: 200%;
+    user-select: none;
+}
+
+dialog[is="pass-phrase"] .digit:hover {
+    background-color: #aaa;
+    animation: blinky 1s linear infinite;
+}
+
+dialog[is="pass-phrase"] .digit.active {
+    border: 2px solid black;
+    background-color: white;
+    animation: blinky 1s linear infinite;
+    filter: grayscale(85%);
+}
+
+dialog[is="pass-phrase"] .emojis {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border: 1px solid #888;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 4px #0003;
+    user-select: none;
+}
+
+dialog[is="pass-phrase"] .row { display: flex; }
+
+dialog[is="pass-phrase"] .emoji {
+    margin: 0 0.5rem 1rem 0.5rem;
+    padding: 0.4rem;
+    font-size: 150%;
+    width: 54px;
+    height: 54px;
+    box-sizing: border-box;
+    transition: font-size 100ms;
+    text-align: center;
+}
+dialog[is="pass-phrase"] .emoji:hover { font-size: 200%; }
+
+dialog[is="pass-phrase"] #success,
+dialog[is="pass-phrase"] #fail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: white;
+    line-height: 300px;
+    font-size: 80px;
+    z-index: 100;
+    display: none;
+}
+
+dialog[is="pass-phrase"] .container.success #success { display: block; }
+dialog[is="pass-phrase"] .container.fail #fail { display: block; }
+
+@keyframes blinky {
+  0% {
+    color: transparent;
+  }
+  50% {
+    color: #bbb;
+  }
+  100% {
+    color: transparent;
+  }
+}
