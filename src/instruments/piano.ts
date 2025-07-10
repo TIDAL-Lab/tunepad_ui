@@ -25,7 +25,7 @@ import Instrument from './instrument';
  *      max-octave = "7"      // highest octave available
  *      min-note = "21"       // (optional) overrides min-octave
  *      max-note = "108"      // (optional) overrides max-octave
- *      key-range = "17"      // how many white keys to show at one time
+ *      key-range = "21"      // how many white keys to show at one time
  *      focus-octave = "2">   // focus (left-most) octave showing 
  * </piano-instrument>
  * 
@@ -65,7 +65,7 @@ export class Piano extends HTMLElement implements Instrument {
         armed: false,
         minNote: 12,
         maxNote: 107,
-        keyRange: 17,
+        keyRange: 21,
         focusOctave: 2
     };
 
