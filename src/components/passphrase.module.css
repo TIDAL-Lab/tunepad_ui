@@ -21,15 +21,16 @@ dialog[is="pass-phrase"] h1 {
 }
 
 dialog[is="pass-phrase"] .digits {
-    display: flex;
+    text-align: center;
 }
 
 dialog[is="pass-phrase"] .digit {
+    display: inline-block;
     width: 80px;
     height: 80px;
     border-radius: 8px;
     border: 2px solid rgb(210, 210, 210);
-    margin: 0.5rem;
+    margin: 1rem;
     box-shadow: inset 3px 3px 3px #0003;
     background-color: #eee;
     color: #bbb;

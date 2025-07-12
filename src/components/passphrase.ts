@@ -18,7 +18,7 @@ import { toInt } from '../instruments';
 /**
  * Passphrase authenticator using emoji selections. Extends HTML dialog element
  * ```html
- * <pass-phrase hash="xyz" digits="5"></pass-phrase>
+ * <pass-phrase auth_token="f39ae0" digits="5"></pass-phrase>
  * ```
  * Javascript will need to call passphrase.openModal();
  */
@@ -160,31 +160,18 @@ export class Passphrase extends HTMLDialogElement {
     }
 
     private async success() : Promise<boolean> {
-        let digits = [];
+        let code = '';
+
         for (let i=0; i<this.digits; i++) {
             const el = this.querySelector(`.digit[tabindex="${i}"]`);
             if (el) {
                 const emoji = el.innerHTML;
                 let digit = EMOJIS.indexOf(emoji);
-                digits.push(digit);
+                code += digit.toString(16);
             }
         }
-        const hash = await this.hash(digits.join('-'));
-        //console.log(hash);
-        return (hash === this.getAttribute('hash'));
+        return (code === this.getAttribute('auth_token'));
     }
-
-    private async hash(key : string) : Promise<string> {
-        /*
-        const encoded = new TextEncoder().encode(key);
-        const buffer = await crypto.subtle.digest("SHA-384", encoded);
-        const array = Array.from(new Uint8Array(buffer));
-        const hash = array.map((b) => b.toString(16).padStart(2, '0')).join('');
-        return hash;
-        */
-       return key;
-    }
-
 
     /**
      * Fire custom events whenever the value is changed by the user
