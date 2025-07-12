@@ -3,7 +3,6 @@ export declare class Passphrase extends HTMLDialogElement {
     static observedAttributes: string[];
     private readonly ROWS;
     private readonly COLS;
-    private digits;
     constructor();
     connectedCallback(): void;
     disconnectedCallback(): void;
