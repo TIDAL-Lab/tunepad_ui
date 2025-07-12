@@ -18,7 +18,7 @@ import { toInt } from '../instruments';
 /**
  * Passphrase authenticator using emoji selections. Extends HTML dialog element
  * ```html
- * <pass-phrase auth_token="f39ae0" username="blueberry" digits="5"></pass-phrase>
+ * <dialog is="pass-phrase" digits="5" auth_token="fe9a3" username="blueberry"></dialog>
  * ```
  * Javascript will need to call passphrase.openModal();
  */
@@ -42,9 +42,6 @@ export class Passphrase extends HTMLDialogElement {
     static readonly ELEMENT = "pass-phrase";
 
     static observedAttributes = [ "auth_token", "username", "digits" ];
-
-    private readonly ROWS = 5;
-    private readonly COLS = 5;
 
 
     constructor() {
