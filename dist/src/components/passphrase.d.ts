@@ -1,8 +1,6 @@
 export declare class Passphrase extends HTMLDialogElement {
     static readonly ELEMENT = "pass-phrase";
     static observedAttributes: string[];
-    private readonly ROWS;
-    private readonly COLS;
     constructor();
     connectedCallback(): void;
     disconnectedCallback(): void;
