@@ -18,7 +18,7 @@ import { toInt } from '../instruments';
 /**
  * Passphrase authenticator using emoji selections. Extends HTML dialog element
  * ```html
- * <pass-phrase auth_token="f39ae0" digits="5"></pass-phrase>
+ * <pass-phrase auth_token="f39ae0" username="blueberry" digits="5"></pass-phrase>
  * ```
  * Javascript will need to call passphrase.openModal();
  */
@@ -41,12 +41,10 @@ export class Passphrase extends HTMLDialogElement {
 
     static readonly ELEMENT = "pass-phrase";
 
-    static observedAttributes = [ "phrase", "digits" ];
+    static observedAttributes = [ "auth_token", "username", "digits" ];
 
     private readonly ROWS = 5;
     private readonly COLS = 5;
-
-    private digits = 5;
 
 
     constructor() {
@@ -64,17 +62,17 @@ export class Passphrase extends HTMLDialogElement {
     /**
      * When an attribute is changed on our custom component, this gets fired...
      */
-    attributeChangedCallback(name : string, oldValue : string, newValue : string) {
-        if (name === 'digits') {
-            this.digits = toInt(newValue, this.digits);
-        }
-    }
+    attributeChangedCallback(name : string, oldValue : string, newValue : string) { }
 
 
     private render() {
+        const digits = toInt(this.getAttribute('digits'), 5);
+        const message = this.querySelector('h1.welcome') as HTMLElement;
+        //message.innerHTML = message.innerHTML.replace('{{username}}', this.getAttribute('username') || 'back');
+
         const container = this.querySelector('.digits')!;
         container.innerHTML = '';
-        for (let i=0; i<this.digits; i++) {
+        for (let i=0; i<digits; i++) {
             const digit = document.createElement('div');
             digit.classList.add('digit');
             digit.setAttribute('tabindex', `${i}`);
@@ -116,6 +114,7 @@ export class Passphrase extends HTMLDialogElement {
     }
 
     private async advanceFocus() {
+        const digits = this.querySelectorAll('.digit').length;
         const el = this.querySelector('.digit.active');
         const index = toInt(el?.getAttribute('tabindex'), 0);
         if (this.isComplete()) {
@@ -133,7 +132,7 @@ export class Passphrase extends HTMLDialogElement {
                 if (success) this.close();
             }, 700);
         }
-        (index + 1 >= this.digits) ? this.setFocus(0) : this.setFocus(index + 1);
+        (index + 1 >= digits) ? this.setFocus(0) : this.setFocus(index + 1);
     }
 
     private setFocus(index : number) {
@@ -162,14 +161,11 @@ export class Passphrase extends HTMLDialogElement {
     private async success() : Promise<boolean> {
         let code = '';
 
-        for (let i=0; i<this.digits; i++) {
-            const el = this.querySelector(`.digit[tabindex="${i}"]`);
-            if (el) {
-                const emoji = el.innerHTML;
-                let digit = EMOJIS.indexOf(emoji);
-                code += digit.toString(16);
-            }
-        }
+        this.querySelectorAll('.digit').forEach(el => {
+            const emoji = el.innerHTML;
+            let digit = EMOJIS.indexOf(emoji);
+            code += digit.toString(16);
+        })
         return (code === this.getAttribute('auth_token'));
     }
 

@@ -1,5 +1,5 @@
 dialog[is="pass-phrase"]::backdrop {
-    background-color: #000a;
+    background-color: #eee;
 }
 
 dialog[is="pass-phrase"] {
@@ -17,7 +17,7 @@ dialog[is="pass-phrase"] {
 dialog[is="pass-phrase"] h1 {
     font-family: sans-serif;
     margin: 0.5em;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 dialog[is="pass-phrase"] .digits {
@@ -31,7 +31,7 @@ dialog[is="pass-phrase"] .digit {
     border-radius: 8px;
     border: 2px solid rgb(210, 210, 210);
     margin: 1rem;
-    box-shadow: inset 3px 3px 3px #0003;
+    box-shadow: inset 0px 3px 3px #0001;
     background-color: #eee;
     color: #bbb;
     font-family: sans-serif;
