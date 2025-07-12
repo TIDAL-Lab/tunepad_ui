@@ -486,7 +486,7 @@ class CircleOfFifths extends HTMLElement {
 CircleOfFifths.ELEMENT = "circle-of-fifths";
 CircleOfFifths.observedAttributes = ["selected"];
 
-const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync("dialog[is=\"pass-phrase\"]::backdrop {\n    background-color: #000a;\n}\n\ndialog[is=\"pass-phrase\"] {\n    width: fit-content;\n    height: 430px;\n    padding: 1em;\n    font-size: 30px;\n    outline: none;\n    border: none;\n    box-shadow: 3px 3px 3px 3px #0003;\n    border-radius: 8px;\n    position: relative;\n}\n\ndialog[is=\"pass-phrase\"] h1 {\n    font-family: sans-serif;\n    margin: 0.5em;\n    font-size: 25px;\n}\n\ndialog[is=\"pass-phrase\"] .digits {\n    display: flex;\n}\n\ndialog[is=\"pass-phrase\"] .digit {\n    width: 80px;\n    height: 80px;\n    border-radius: 8px;\n    border: 2px solid rgb(210, 210, 210);\n    margin: 0.5rem;\n    box-shadow: inset 3px 3px 3px #0003;\n    background-color: #eee;\n    color: #bbb;\n    font-family: sans-serif;\n    font-weight: bold;\n    text-align: center;\n    line-height: 80px;\n    font-size: 200%;\n    user-select: none;\n}\n\ndialog[is=\"pass-phrase\"] .digit:hover {\n    background-color: #aaa;\n    animation: blinky 1s linear infinite;\n}\n\ndialog[is=\"pass-phrase\"] .digit.active {\n    border: 2px solid black;\n    background-color: white;\n    animation: blinky 1s linear infinite;\n    filter: grayscale(85%);\n}\n\ndialog[is=\"pass-phrase\"] .emojis {\n    display: flex;\n    flex-direction: column;\n    margin: 0 auto;\n    border: 1px solid #888;\n    width: fit-content;\n    border-radius: 20px;\n    padding: 10px;\n    box-sizing: border-box;\n    box-shadow: 2px 2px 4px #0003;\n    user-select: none;\n}\n\ndialog[is=\"pass-phrase\"] .row { display: flex; }\n\ndialog[is=\"pass-phrase\"] .emoji {\n    margin: 0 0.5rem 1rem 0.5rem;\n    padding: 0.4rem;\n    font-size: 150%;\n    width: 54px;\n    height: 54px;\n    box-sizing: border-box;\n    transition: font-size 100ms;\n    text-align: center;\n}\ndialog[is=\"pass-phrase\"] .emoji:hover { font-size: 200%; }\n\ndialog[is=\"pass-phrase\"] #success,\ndialog[is=\"pass-phrase\"] #fail {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    text-align: center;\n    background-color: white;\n    line-height: 300px;\n    font-size: 80px;\n    z-index: 100;\n    display: none;\n}\n\ndialog[is=\"pass-phrase\"] .container.success #success { display: block; }\ndialog[is=\"pass-phrase\"] .container.fail #fail { display: block; }\n\n@keyframes blinky {\n  0% {\n    color: transparent;\n  }\n  50% {\n    color: #bbb;\n  }\n  100% {\n    color: transparent;\n  }\n}");
+const sheet$3 = new CSSStyleSheet();sheet$3.replaceSync("dialog[is=\"pass-phrase\"]::backdrop {\n    background-color: #000a;\n}\n\ndialog[is=\"pass-phrase\"] {\n    width: fit-content;\n    height: 430px;\n    padding: 1em;\n    font-size: 30px;\n    outline: none;\n    border: none;\n    box-shadow: 3px 3px 3px 3px #0003;\n    border-radius: 8px;\n    position: relative;\n}\n\ndialog[is=\"pass-phrase\"] h1 {\n    font-family: sans-serif;\n    margin: 0.5em;\n    font-size: 25px;\n}\n\ndialog[is=\"pass-phrase\"] .digits {\n    text-align: center;\n}\n\ndialog[is=\"pass-phrase\"] .digit {\n    display: inline-block;\n    width: 80px;\n    height: 80px;\n    border-radius: 8px;\n    border: 2px solid rgb(210, 210, 210);\n    margin: 1rem;\n    box-shadow: inset 3px 3px 3px #0003;\n    background-color: #eee;\n    color: #bbb;\n    font-family: sans-serif;\n    font-weight: bold;\n    text-align: center;\n    line-height: 80px;\n    font-size: 200%;\n    user-select: none;\n}\n\ndialog[is=\"pass-phrase\"] .digit:hover {\n    background-color: #aaa;\n    animation: blinky 1s linear infinite;\n}\n\ndialog[is=\"pass-phrase\"] .digit.active {\n    border: 2px solid black;\n    background-color: white;\n    animation: blinky 1s linear infinite;\n    filter: grayscale(85%);\n}\n\ndialog[is=\"pass-phrase\"] .emojis {\n    display: flex;\n    flex-direction: column;\n    margin: 0 auto;\n    border: 1px solid #888;\n    width: fit-content;\n    border-radius: 20px;\n    padding: 10px;\n    box-sizing: border-box;\n    box-shadow: 2px 2px 4px #0003;\n    user-select: none;\n}\n\ndialog[is=\"pass-phrase\"] .row { display: flex; }\n\ndialog[is=\"pass-phrase\"] .emoji {\n    margin: 0 0.5rem 1rem 0.5rem;\n    padding: 0.4rem;\n    font-size: 150%;\n    width: 54px;\n    height: 54px;\n    box-sizing: border-box;\n    transition: font-size 100ms;\n    text-align: center;\n}\ndialog[is=\"pass-phrase\"] .emoji:hover { font-size: 200%; }\n\ndialog[is=\"pass-phrase\"] #success,\ndialog[is=\"pass-phrase\"] #fail {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    text-align: center;\n    background-color: white;\n    line-height: 300px;\n    font-size: 80px;\n    z-index: 100;\n    display: none;\n}\n\ndialog[is=\"pass-phrase\"] .container.success #success { display: block; }\ndialog[is=\"pass-phrase\"] .container.fail #fail { display: block; }\n\n@keyframes blinky {\n  0% {\n    color: transparent;\n  }\n  50% {\n    color: #bbb;\n  }\n  100% {\n    color: transparent;\n  }\n}");
 
 var html$4 = "<h1>Enter Passphrase</h1>\n<div class=\"container\">\n    <div id=\"success\">✅</div>\n    <div id=\"fail\">❌</div>\n    <div class=\"digits\"></div>\n    <div class=\"emojis\"></div>\n</div>\n";
 
@@ -1554,7 +1554,7 @@ function toNum(d, defaultValue = 0) {
 /**
  * Passphrase authenticator using emoji selections. Extends HTML dialog element
  * ```html
- * <pass-phrase hash="xyz" digits="5"></pass-phrase>
+ * <pass-phrase auth_token="f39ae0" digits="5"></pass-phrase>
  * ```
  * Javascript will need to call passphrase.openModal();
  */
@@ -1671,28 +1671,16 @@ class Passphrase extends HTMLDialogElement {
         return complete;
     }
     async success() {
-        let digits = [];
+        let code = '';
         for (let i = 0; i < this.digits; i++) {
             const el = this.querySelector(`.digit[tabindex="${i}"]`);
             if (el) {
                 const emoji = el.innerHTML;
                 let digit = EMOJIS.indexOf(emoji);
-                digits.push(digit);
+                code += digit.toString(16);
             }
         }
-        const hash = await this.hash(digits.join('-'));
-        //console.log(hash);
-        return (hash === this.getAttribute('hash'));
-    }
-    async hash(key) {
-        /*
-        const encoded = new TextEncoder().encode(key);
-        const buffer = await crypto.subtle.digest("SHA-384", encoded);
-        const array = Array.from(new Uint8Array(buffer));
-        const hash = array.map((b) => b.toString(16).padStart(2, '0')).join('');
-        return hash;
-        */
-        return key;
+        return (code === this.getAttribute('auth_token'));
     }
     /**
      * Fire custom events whenever the value is changed by the user

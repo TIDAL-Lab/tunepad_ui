@@ -18,7 +18,6 @@ export declare class Passphrase extends HTMLDialogElement {
     private setHTML;
     private isComplete;
     private success;
-    private hash;
     /**
      * Fire custom events whenever the value is changed by the user
      */
