@@ -1704,6 +1704,8 @@ var iconGear = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\
 
 var iconHistory = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <path d=\"M10.5,17c-.7,0-1.29-.24-1.78-.73s-.73-1.08-.73-1.78.24-1.29.73-1.78,1.08-.73,1.78-.73c.28,0,.55.04.8.13s.48.21.7.38v-5.5h4v2h-3v5.5c0,.7-.24,1.29-.73,1.78s-1.08.73-1.78.73ZM12,22c-1.38,0-2.68-.26-3.9-.79s-2.28-1.24-3.18-2.14-1.61-1.96-2.14-3.18-.79-2.52-.79-3.9h2c0,1.1.21,2.14.63,3.11s.99,1.83,1.71,2.55,1.58,1.3,2.55,1.73,2.01.64,3.11.64c2.23,0,4.13-.78,5.68-2.33s2.33-3.44,2.33-5.68-.78-4.13-2.33-5.68-3.44-2.33-5.68-2.33c-1.48,0-2.83.36-4.04,1.09s-2.16,1.69-2.86,2.89h2.9v2H2V4h2v2c.92-1.22,2.07-2.19,3.45-2.91,1.38-.73,2.9-1.09,4.55-1.09,1.38,0,2.68.26,3.9.79s2.28,1.24,3.18,2.14,1.61,1.96,2.14,3.18.79,2.52.79,3.9-.26,2.68-.79,3.9-1.24,2.28-2.14,3.18-1.96,1.61-3.18,2.14-2.52.79-3.9.79Z\"/>\n</svg>";
 
+var iconInsert = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M246.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L224 109.3 361.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160zm160 352l-160-160c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L224 301.3 361.4 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3z\"/></svg>";
+
 var iconLock = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M180.11,149.75v45.54h151.79v-45.54c0-41.93-33.96-75.89-75.89-75.89s-75.89,33.96-75.89,75.89ZM119.39,195.29v-45.54c0-75.42,61.19-136.61,136.61-136.61s136.61,61.19,136.61,136.61v45.54h15.18c33.49,0,60.71,27.23,60.71,60.71v182.14c0,33.49-27.23,60.71-60.71,60.71H104.21c-33.49,0-60.71-27.23-60.71-60.71v-182.14c0-33.49,27.23-60.71,60.71-60.71h15.18Z\"/>\n</svg>";
 
 var iconMidiRoll = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M412,223\"/>\n  <rect y=\"8\" width=\"510.85\" height=\"68.04\"/>\n  <rect y=\"150.42\" width=\"398.17\" height=\"68.04\"/>\n  <rect x=\"212.7\" y=\"292.84\" width=\"298.15\" height=\"68.04\"/>\n  <rect y=\"435.26\" width=\"510.85\" height=\"68.04\"/>\n</svg>";
@@ -1751,6 +1753,7 @@ var iconWaveform = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_
  * * cross-circle
  * * error
  * * gear
+ * * insert
  * * history
  * * lock
  * * midi
@@ -1798,6 +1801,9 @@ class TunePadIcon extends HTMLElement {
                     break;
                 case 'history':
                     this.div.innerHTML = iconHistory;
+                    break;
+                case 'insert':
+                    this.div.innerHTML = iconInsert;
                     break;
                 case 'lock':
                     this.div.innerHTML = iconLock;

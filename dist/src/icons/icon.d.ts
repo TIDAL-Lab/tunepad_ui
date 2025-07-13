@@ -9,6 +9,7 @@
  * * cross-circle
  * * error
  * * gear
+ * * insert
  * * history
  * * lock
  * * midi
