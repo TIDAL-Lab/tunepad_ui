@@ -573,13 +573,16 @@ class DrumPad extends HTMLElement {
     emitNoteOn(note, source, velocity = 90) {
         if (note < 0)
             return;
+        const nameEl = this.root.querySelector(`.drum-pad[data-note="${note}"] .drum-name`);
+        const name = nameEl ? nameEl.innerHTML : '';
         const e = new CustomEvent('note-on', {
             bubbles: true,
             composed: true,
             detail: {
                 note: note,
                 source: source,
-                velocity: velocity
+                velocity: velocity,
+                drum: name
             }
         });
         this.dispatchEvent(e);
