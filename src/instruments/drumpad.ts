@@ -100,13 +100,16 @@ export class DrumPad extends HTMLElement implements Instrument {
 
     emitNoteOn(note : number, source : string, velocity : number = 90) {
         if (note < 0) return;
+        const nameEl = this.root.querySelector(`.drum-pad[data-note="${note}"] .drum-name`);
+        const name = nameEl ? nameEl.innerHTML : '';
         const e = new CustomEvent('note-on', { 
             bubbles: true,
             composed: true,
             detail: { 
                 note : note,
                 source : source,
-                velocity : velocity
+                velocity : velocity,
+                drum : name
             }
         })
         this.dispatchEvent(e);
