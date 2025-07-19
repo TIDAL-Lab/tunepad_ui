@@ -20,6 +20,7 @@ import iconError from './icon-error.svg';
 import iconGear from './icon-gear.svg';
 import iconHistory from './icon-history.svg';
 import iconInsert from './icon-insert.svg';
+import iconLibrary from './icon-library.svg';
 import iconLock from './icon-lock.svg';
 import iconMidiRoll from './icon-midiroll.svg'
 import iconMinus from './icon-minus.svg';
@@ -46,6 +47,7 @@ import iconWaveform from './icon-waveform.svg';
  * * gear
  * * insert
  * * history
+ * * library
  * * lock
  * * midi
  * * midiroll
@@ -90,6 +92,7 @@ export class TunePadIcon extends HTMLElement {
                 case 'gear': this.div.innerHTML = iconGear; break;
                 case 'history': this.div.innerHTML = iconHistory; break;
                 case 'insert': this.div.innerHTML = iconInsert; break;
+                case 'library': this.div.innerHTML = iconLibrary; break;
                 case 'lock': this.div.innerHTML = iconLock; break;
                 case 'midi': this.div.innerHTML = iconMidiRoll; break;
                 case 'midiroll': this.div.innerHTML = iconMidiRoll; break;
