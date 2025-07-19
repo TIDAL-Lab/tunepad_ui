@@ -1709,6 +1709,8 @@ var iconHistory = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1
 
 var iconInsert = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M246.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L224 109.3 361.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160zm160 352l-160-160c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L224 301.3 361.4 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3z\"/></svg>";
 
+var iconLibrary = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"svg8\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" version=\"1.1\" viewBox=\"0 0 100 100\">\n  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->\n  <sodipodi:namedview id=\"namedview6\" bordercolor=\"#666666\" borderopacity=\"1\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:current-layer=\"svg8\" inkscape:cx=\"44.144952\" inkscape:cy=\"27.876892\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-height=\"643\" inkscape:window-maximized=\"0\" inkscape:window-width=\"1002\" inkscape:window-x=\"332\" inkscape:window-y=\"43\" inkscape:zoom=\"2.5781733\" objecttolerance=\"10\" pagecolor=\"#ffffff\" showgrid=\"false\"/>\n  <path id=\"path2\" d=\"M16.64.49v9.95h66.4V.49H16.64ZM5.61,14.97l3.08,14.29h25.51c4.34-2.89,9.59-4.52,15.56-4.52s11.22,1.81,15.56,4.52h25.51l3.08-14.29H5.61ZM0,33.6l16.28,66.4h66.94l16.28-66.4H0ZM49.75,43.37c18.64,0,31.3,13.03,28.95,26.78-2.17,11.94-15.02,20.26-28.95,20.26s-26.78-8.32-28.95-20.26c-2.53-13.75,10.31-26.78,28.95-26.78Z\" inkscape:connector-curvature=\"0\" sodipodi:nodetypes=\"ccccccccscccccccccscscs\"/>\n  <g id=\"flowRoot812\">\n    <path id=\"path820\" d=\"M43.86,54.49l16.22-5.05v22.57c.12,2.75-.91,3.72-2.83,5.09-1.02.56-2.17.84-3.46.84-2.62-.19-4.84-1.67-4.87-4,0-1.36.52-2.25,1.57-3.22,1.05-.99,2.4-1.49,4.05-1.49.54,0,1.02.05,1.43.14.42.1,1.1.34,2.04.73v-14.75l-12.12,3.77v17.03c.11,2.79-.92,3.53-2.89,4.91-1.06.54-2.21.81-3.46.81-2.39-.19-4.78-1.96-4.81-3.82,0-1.43.52-2.2,1.55-3.17,1.03-.98,2.38-1.47,4.05-1.47,1.06,0,2.24.31,3.54.94v-19.86Z\" inkscape:connector-curvature=\"0\" sodipodi:nodetypes=\"cccccccscccccccccscc\"/>\n  </g>\n</svg>";
+
 var iconLock = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M180.11,149.75v45.54h151.79v-45.54c0-41.93-33.96-75.89-75.89-75.89s-75.89,33.96-75.89,75.89ZM119.39,195.29v-45.54c0-75.42,61.19-136.61,136.61-136.61s136.61,61.19,136.61,136.61v45.54h15.18c33.49,0,60.71,27.23,60.71,60.71v182.14c0,33.49-27.23,60.71-60.71,60.71H104.21c-33.49,0-60.71-27.23-60.71-60.71v-182.14c0-33.49,27.23-60.71,60.71-60.71h15.18Z\"/>\n</svg>";
 
 var iconMidiRoll = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 512 512\">\n  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->\n  <path d=\"M412,223\"/>\n  <rect y=\"8\" width=\"510.85\" height=\"68.04\"/>\n  <rect y=\"150.42\" width=\"398.17\" height=\"68.04\"/>\n  <rect x=\"212.7\" y=\"292.84\" width=\"298.15\" height=\"68.04\"/>\n  <rect y=\"435.26\" width=\"510.85\" height=\"68.04\"/>\n</svg>";
@@ -1758,6 +1760,7 @@ var iconWaveform = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg id=\"Layer_
  * * gear
  * * insert
  * * history
+ * * library
  * * lock
  * * midi
  * * midiroll
@@ -1807,6 +1810,9 @@ class TunePadIcon extends HTMLElement {
                     break;
                 case 'insert':
                     this.div.innerHTML = iconInsert;
+                    break;
+                case 'library':
+                    this.div.innerHTML = iconLibrary;
                     break;
                 case 'lock':
                     this.div.innerHTML = iconLock;

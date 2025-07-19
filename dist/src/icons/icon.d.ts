@@ -11,6 +11,7 @@
  * * gear
  * * insert
  * * history
+ * * library
  * * lock
  * * midi
  * * midiroll
