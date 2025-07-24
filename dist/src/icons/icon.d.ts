@@ -23,6 +23,7 @@
  * * plus
  * * recompile
  * * score
+ * * spinner
  * * stop
  * * trash
  * * waveform
