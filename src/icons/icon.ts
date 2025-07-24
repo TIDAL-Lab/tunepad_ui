@@ -30,6 +30,7 @@ import iconPiano from './icon-piano.svg';
 import iconPlay from './icon-play.svg';
 import iconPlus from './icon-plus.svg';
 import iconRecompile from './icon-recompile.svg';
+import iconSpinner from './icon-spinner.svg';
 import iconStop from './icon-stop.svg';
 import iconTrash from './icon-trash.svg';
 import iconWaveform from './icon-waveform.svg';
@@ -59,6 +60,7 @@ import iconWaveform from './icon-waveform.svg';
  * * plus
  * * recompile
  * * score
+ * * spinner
  * * stop
  * * trash
  * * waveform
@@ -104,6 +106,7 @@ export class TunePadIcon extends HTMLElement {
                 case 'plus': this.div.innerHTML = iconPlus; break;
                 case 'recompile': this.div.innerHTML = iconRecompile; break;
                 case 'score': this.div.innerHTML = iconMusic; break;
+                case 'spinner': this.div.innerHTML = iconSpinner; break;
                 case 'stop': this.div.innerHTML = iconStop; break;
                 case 'trash': this.div.innerHTML = iconTrash; break;
                 case 'waveform': this.div.innerHTML = iconWaveform; break;
