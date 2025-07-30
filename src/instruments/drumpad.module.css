@@ -52,11 +52,10 @@
     user-select: none;
     position: absolute;
     bottom: 3px;
-    color: #fff6;
+    color: #fffd;
 }
 .pad-name {
     font-weight: bold;
-    color: #fffd;
     left: 3px;
 }
 .key-hint { 
